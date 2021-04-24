@@ -270,6 +270,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c22ae28135e13ea4281b8a659bed5de0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterController: {fileID: 6091213573708431092}
   pivotPoint: {fileID: 357275874515495603}
 --- !u!1 &7150210304639652937
 GameObject:
