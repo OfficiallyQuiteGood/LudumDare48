@@ -17,8 +17,8 @@ TagManager:
   - Rope
   - Pivot
   - Player
-  - 
-  - 
+  - Enemy
+  - Projectile
   - 
   - 
   - 

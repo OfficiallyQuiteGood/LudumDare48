@@ -94,7 +94,7 @@ public class Hammer : Enemy
         isShooting = false;
         setAnimatorParameter("IsShooting", isShooting);
         setAnimatorParameter("ShouldMove", true);
-        PauseMovement();
+        //PauseMovement();
     }
 
     
