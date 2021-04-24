@@ -6,23 +6,26 @@ public class MouseMotion : MonoBehaviour
 {
     // Variables
 
+    // Hold a reference to the character controller
+    public CharacterController2D characterController;
+
     // Take the character controller as an object
     public Transform pivotPoint;
 
     // Keep a variable for the distance between player and mouse
     private float mouseDist;
 
-    // Store reference to sprite
-    private SpriteRenderer spriteRenderer;
+    // Forward vector
+    private Vector3 forwardVector;
  
     // Start is called before the first frame update
     void Start()
     {
-        // Get sprite
-        spriteRenderer = GetComponent<SpriteRenderer>();
-
         // Calculate the mouse dist as the magnitude of the vector from player to mouse
         mouseDist = transform.localPosition.magnitude;
+
+        // Initial vec
+        forwardVector = new Vector3(1.0f, 0.0f, 0.0f);
     }
 
     // Update is called once per frame
@@ -35,6 +38,9 @@ public class MouseMotion : MonoBehaviour
 
         // Basic update
         CalculateNewPositionInLocal(worldMouse);
+
+        // Check for mouse slip
+        CheckForMouseFlip(worldMouse);
     }
 
     // Calculate new position
@@ -44,8 +50,6 @@ public class MouseMotion : MonoBehaviour
         Vector3 origPos = transform.localPosition;
         Vector3 relMouse = pivotPoint.InverseTransformPoint(worldMouse);
         relMouse.z = 0;
-
-        //Debug.Log("Original position = " + origPos + ", relative mouse = " + relMouse);
 
         // First, translate object by -position
         transform.localPosition -= origPos;
@@ -67,10 +71,21 @@ public class MouseMotion : MonoBehaviour
         Vector3 normMouse = Vector3.Normalize(relMouse);
         newPos += mouseDist * normMouse;
 
-        Debug.Log("norm mouse = " + normMouse + ", newPos = " + newPos);
-
         transform.localPosition += newPos;
+    }
 
-        //Debug.Log("Final position " + transform.position);
+    // Check for a flip
+    void CheckForMouseFlip(Vector3 worldMouse)
+    {
+        // Compare mouse with forward vector
+        worldMouse = pivotPoint.InverseTransformPoint(worldMouse);
+        worldMouse.z = 0;
+        float cosTheta = Vector3.Dot(forwardVector, worldMouse);
+
+        // If smaller, need to flip
+        if (cosTheta < 0)
+        {
+            characterController.Flip();
+        }
     }
 }
