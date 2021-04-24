@@ -81,7 +81,7 @@
     },
 <<<<<<< HEAD
     "com.unity.connect.share": {
-      "version": "4.2.2",
+      "version": "4.1.1",
       "depth": 0,
       "source": "registry",
       "dependencies": {
