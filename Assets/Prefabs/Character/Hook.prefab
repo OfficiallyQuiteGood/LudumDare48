@@ -161,10 +161,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   endPoint: {x: 0, y: 0}
-  speed: 0.05
-  distance: 0.2
+  speed: 0.075
+  distance: 0.15
   nodePrefab: {fileID: 8671166810273839891, guid: 2ecf807fca770c74fa75bf1f26c2e46a, type: 3}
-  lineRenderer: {fileID: 0}
 --- !u!120 &3106521402576254612
 LineRenderer:
   m_ObjectHideFlags: 0
