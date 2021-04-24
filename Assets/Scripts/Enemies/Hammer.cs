@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BigMush : Enemy
+public class Hammer : Enemy
 {
     public float timeInterval = 1f;
      
@@ -13,7 +13,6 @@ public class BigMush : Enemy
     int direction = 1;
     int playerDirection = 1;
     public float agroDistance = 2f;
-    public float chargeSpeed = 3f;
 
     bool playerNear = false;
     // Start is called before the first frame update
@@ -68,8 +67,13 @@ public class BigMush : Enemy
     {
         if(playerNear && shouldMove)
         {
-            transform.position+=new Vector3(playerDirection * movementSpeed*chargeSpeed * Time.fixedDeltaTime,0,0);
+            HammerSwing();
         }
         else if(shouldMove) transform.position+=new Vector3(direction * movementSpeed * Time.fixedDeltaTime,0,0);
+    }
+
+    void HammerSwing()
+    {
+
     }
 }
