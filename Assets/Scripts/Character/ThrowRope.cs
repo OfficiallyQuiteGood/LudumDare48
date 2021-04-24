@@ -12,6 +12,7 @@ public class ThrowRope : MonoBehaviour
     public float ropeMaxCastDistance = 2f;
     public LayerMask ropeLayerMask;
     private bool ropeWasCast = false;
+    public CharacterController2D characterController;
 
     // Start is called before the first frame update
     void Start()
@@ -51,6 +52,7 @@ public class ThrowRope : MonoBehaviour
             {
                 // Endpoint
                 ropeWasCast = true;
+                characterController.isSwinging = true;
                 Vector2 endPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 currHook = (GameObject) Instantiate(hook, transform.position, Quaternion.identity);
                 currHook.GetComponent<Rope>().endPoint = endPoint;
@@ -64,6 +66,7 @@ public class ThrowRope : MonoBehaviour
             {
                 // Rope was cast is false now
                 ropeWasCast = false;
+                characterController.isSwinging = false;
 
                 // Clear stuff
                 currHook.GetComponent<Rope>().ClearRope();

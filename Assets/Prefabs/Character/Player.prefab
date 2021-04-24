@@ -157,7 +157,8 @@ MonoBehaviour:
   m_GroundCheck: {fileID: 7885339859749318122}
   isSwinging: 0
   ropeHook: {x: 0, y: 0}
-  swingForce: 10
+  swingForce: 20
+  moveForce: 10
   OnLandEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -327,6 +328,7 @@ MonoBehaviour:
   ropeLayerMask:
     serializedVersion: 2
     m_Bits: 769
+  characterController: {fileID: 6091213573708431092}
 --- !u!58 &3579516565413295200
 CircleCollider2D:
   m_ObjectHideFlags: 0
