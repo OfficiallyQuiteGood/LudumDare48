@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class Enemy : MonoBehaviour
 {
@@ -11,6 +12,14 @@ public class Enemy : MonoBehaviour
     public GameObject deathEffect;
     public bool shouldMove = true;
     public Animator animator;
+    public float timeInterval = 1f;
+    public int direction = 1;
+    protected int playerDirection = 1;
+    public float agroDistance = 2f;
+    protected bool playerNear = false;
+
+    private bool m_FacingRight = true;  // For determining which way the Enemy is currently facing.
+
     void Start()
     {
         
@@ -20,6 +29,31 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void changeDirection()
+    {
+        direction = -direction;
+        Flip();
+    }
+
+    protected IEnumerator DealDamage()
+    {
+        yield return new WaitForSeconds(4);
+        Debug.Log("take damage");
+        TakeDamage(1);
+    }
+
+    protected IEnumerator PauseMovement()
+    {
+
+        shouldMove = false;
+        setAnimatorParameter("ShouldMove", shouldMove);
+        yield return new WaitForSeconds(timeInterval);
+        //body.velocity = new Vector2(-speed, 0);
+        //Move();
+        shouldMove = true;
+        setAnimatorParameter("ShouldMove", shouldMove);
     }
 
     // Take damage function
@@ -45,22 +79,20 @@ public class Enemy : MonoBehaviour
         else return 1;
     }
 
+    public void Flip()
+	{
+		// Switch the way the player is labelled as facing.
+		m_FacingRight = !m_FacingRight;
+
+		// Multiply the player's x local scale by -1.
+		Vector3 theScale = transform.localScale;
+		theScale.x *= -1;
+		transform.localScale = theScale;
+	}
+
     // Die (virtual) function
     virtual protected void Die()
     {
-        //Debug.Log("dead: " + gameObject);
-        // Update the game controller that this person has died
-        // if (controller != null)
-        // {
-        //     TopDownController ControllerScript = Controller.GetComponent<TopDownController>();
-        //     if (ControllerScript != null && ControllerScript.numEnemiesLeft != 0)
-        //     {
-        //         ControllerScript.numEnemiesLeft--;
-        //         //Debug.Log(ControllerScript.numOfEnemiesInStage - ControllerScript.numEnemiesLeft);
-        //     }
-        // }
-
-        // Create death effect and destroy this object
         Instantiate(deathEffect, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
@@ -89,5 +121,22 @@ public class Enemy : MonoBehaviour
         {
             animator.SetInteger(parameterName, val);
         }
+    }
+
+    //Change Enemy Direction when they reach an edge
+    void OnTriggerExit2D(Collider2D other)
+    {
+        //Debug.Log("Edge");
+        if(other is TilemapCollider2D)
+        {
+            //Debug.Log("edge reached");
+            changeDirection();
+        }
+        
+    }
+
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        StartCoroutine(PauseMovement());
     }
 }
