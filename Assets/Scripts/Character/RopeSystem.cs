@@ -18,7 +18,7 @@ public class RopeSystem : MonoBehaviour
     private SpriteRenderer ropeHingeAnchorSprite;
     public LineRenderer ropeRenderer;
     public LayerMask ropeLayerMask;
-    private float ropeMaxCastDistance = 20f;
+    public float ropeMaxCastDistance = 2f;
     private List<Vector2> ropePositions = new List<Vector2>();
     private bool distanceSet;
 
@@ -80,7 +80,7 @@ public class RopeSystem : MonoBehaviour
     // 1
     private void HandleInput(Vector2 aimDirection)
     {
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButtonDown(0))
         {
             // 2
             if (ropeAttached) return;
@@ -112,7 +112,7 @@ public class RopeSystem : MonoBehaviour
             }
         }
 
-        if (Input.GetMouseButton(1))
+        if (Input.GetMouseButtonUp(0))
         {
             ResetRope();
         }
