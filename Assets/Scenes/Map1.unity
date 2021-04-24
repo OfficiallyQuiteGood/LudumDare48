@@ -50087,6 +50087,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3551828524513338750, guid: 1e699d1c8f520c149999b894d7d71f4d, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.b
+      value: 0.07075471
+      objectReference: {fileID: 0}
+    - target: {fileID: 3551828524513338750, guid: 1e699d1c8f520c149999b894d7d71f4d, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.g
+      value: 0.07075471
+      objectReference: {fileID: 0}
+    - target: {fileID: 3551828524513338750, guid: 1e699d1c8f520c149999b894d7d71f4d, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4223416743461697165, guid: 1e699d1c8f520c149999b894d7d71f4d, type: 3}
       propertyPath: m_Name
       value: Player

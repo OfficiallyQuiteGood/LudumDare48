@@ -247,6 +247,7 @@ MonoBehaviour:
   ropeLayerMask:
     serializedVersion: 2
     m_Bits: 769
+  ropeMaxCastDistance: 2
 --- !u!120 &3551828524513338750
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -292,7 +293,7 @@ LineRenderer:
   - {x: 0, y: 0, z: 0}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.075
+    widthMultiplier: 0.02
     widthCurve:
       serializedVersion: 2
       m_Curve:
