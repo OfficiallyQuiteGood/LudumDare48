@@ -15,7 +15,7 @@ public class Rope : MonoBehaviour
     private List<GameObject> Nodes = new List<GameObject>();
     int vertexCount = 2;
     bool done = false;
-    public LineRenderer lineRenderer;
+    private LineRenderer lineRenderer;
 
     // Start is called before the first frame update
     void Start()

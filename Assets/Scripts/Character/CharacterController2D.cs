@@ -18,6 +18,7 @@ public class CharacterController2D : MonoBehaviour
 	public bool isSwinging;
 	public Vector2 ropeHook;
 	public float swingForce = 20f;
+	public float moveForce = 10f;
 
 
 	[Header("Events")]
@@ -61,8 +62,11 @@ public class CharacterController2D : MonoBehaviour
 		//only control the player if grounded or airControl is turned on
 		if (m_Grounded || m_AirControl)
 		{
+			// Determine force
+			float addForce = isSwinging ? swingForce : moveForce;
+
 			// Move the character by finding the target velocity
-			Vector3 targetVelocity = new Vector2(move * swingForce, m_Rigidbody2D.velocity.y);
+			Vector3 targetVelocity = new Vector2(move * addForce, m_Rigidbody2D.velocity.y);
 
 			// And then smoothing it out and applying it to the character
 			m_Rigidbody2D.velocity = Vector3.SmoothDamp(m_Rigidbody2D.velocity, targetVelocity, ref m_Velocity, m_MovementSmoothing);
