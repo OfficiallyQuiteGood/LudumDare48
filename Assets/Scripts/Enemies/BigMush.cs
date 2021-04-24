@@ -4,22 +4,20 @@ using UnityEngine;
 
 public class BigMush : Enemy
 {
-    public float timeInterval = 1f;
      
-
     Vector3 startingPosition;
 
 	bool jump = false;
-    int direction = 1;
-    int playerDirection = 1;
-    public float agroDistance = 2f;
     public float chargeSpeed = 3f;
 
-    bool playerNear = false;
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(MoveAtInterval());
+        //test death animations
+        //StartCoroutine(DealDamage());
+
+        //StartCoroutine(MoveAtInterval());
+        setAnimatorParameter("ShouldMove", shouldMove);
         startingPosition = transform.position;
     }
 
@@ -27,6 +25,8 @@ public class BigMush : Enemy
     {
         return startingPosition + new Vector3(10*Enemy.getRandomHorizontalDirection(), 0, 0);
     }
+
+    
 
     protected IEnumerator MoveAtInterval()
     {
@@ -37,7 +37,7 @@ public class BigMush : Enemy
             //body.velocity = new Vector2(-speed, 0);
             //Move();
             shouldMove = !shouldMove;
-            setAnimatorParameter("ShouldMove", shouldMove);;
+            setAnimatorParameter("ShouldMove", shouldMove);
             direction = Enemy.getRandomHorizontalDirection();
         }
     }
@@ -66,8 +66,10 @@ public class BigMush : Enemy
 
     void FixedUpdate()
     {
+        //flip the player
         if(playerNear && shouldMove)
         {
+            if(playerDirection != direction) changeDirection();
             transform.position+=new Vector3(playerDirection * movementSpeed*chargeSpeed * Time.fixedDeltaTime,0,0);
         }
         else if(shouldMove) transform.position+=new Vector3(direction * movementSpeed * Time.fixedDeltaTime,0,0);
