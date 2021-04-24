@@ -12,6 +12,7 @@ public class Follow : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        transform.position = new Vector3(player.transform.position.x, player.transform.position.y, -10);
         transform.position += offset;
         //transform.SetParent(player.transform);
     }
