@@ -5,7 +5,7 @@ using UnityEngine;
 public class BigMush : Enemy
 {
     public float timeInterval = 1f;
-    public Animator animator; 
+     
 
     Vector3 startingPosition;
 
@@ -33,7 +33,7 @@ public class BigMush : Enemy
             //body.velocity = new Vector2(-speed, 0);
             //Move();
             shouldMove = !shouldMove;
-            animator.SetBool("ShouldMove", shouldMove);
+            setAnimatorParameter("ShouldMove", shouldMove);;
             direction = Enemy.getRandomHorizontalDirection();
         }
     }
@@ -45,16 +45,16 @@ public class BigMush : Enemy
         if(player!=null)
         {
             float distance = Mathf.Abs(Vector3.Distance(player.transform.position, transform.position));
-            if(distance<5 && playerNear == false)
+            if(distance<5)
             {
                 playerNear = true;
-                animator.SetBool("PlayerNear", true);
             }
-            else if(playerNear == true)
+            else
             {
                 playerNear = false;
-                animator.SetBool("PlayerNear", false);
             }
+
+            setAnimatorParameter("PlayerNear", playerNear);
         }
         
     }
