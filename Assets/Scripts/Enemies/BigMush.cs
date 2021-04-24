@@ -5,12 +5,13 @@ using UnityEngine;
 public class BigMush : Enemy
 {
     public float timeInterval = 1f;
-    public Animator animator;
+    public Animator animator; 
 
     Vector3 startingPosition;
 
 	bool jump = false;
     int direction = 1;
+    bool playerNear = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +33,7 @@ public class BigMush : Enemy
             //body.velocity = new Vector2(-speed, 0);
             //Move();
             shouldMove = !shouldMove;
+            animator.SetBool("ShouldMove", shouldMove);
             direction = Enemy.getRandomHorizontalDirection();
         }
     }
@@ -39,12 +41,31 @@ public class BigMush : Enemy
     // Update is called once per frame
     void Update()
     {
+        GameObject player = GameObject.Find("Player");
+        if(player!=null)
+        {
+            float distance = Mathf.Abs(Vector3.Distance(player.transform.position, transform.position));
+            if(distance<5 && playerNear == false)
+            {
+                playerNear = true;
+                animator.SetBool("PlayerNear", true);
+            }
+            else if(playerNear == true)
+            {
+                playerNear = false;
+                animator.SetBool("PlayerNear", false);
+            }
+        }
         
     }
 
     void FixedUpdate()
     {
-        if(shouldMove) transform.position+=new Vector3(direction * movementSpeed * Time.fixedDeltaTime,0,0);
+        if(playerNear && shouldMove)
+        {
+            transform.position+=new Vector3(direction * movementSpeed*2 * Time.fixedDeltaTime,0,0);
+        }
+        else if(shouldMove) transform.position+=new Vector3(direction * movementSpeed * Time.fixedDeltaTime,0,0);
     }
 
     virtual public void Move()
