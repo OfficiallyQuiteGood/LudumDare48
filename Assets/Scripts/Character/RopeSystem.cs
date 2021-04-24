@@ -21,6 +21,8 @@ public class RopeSystem : MonoBehaviour
     public float ropeMaxCastDistance = 2f;
     private List<Vector2> ropePositions = new List<Vector2>();
     private bool distanceSet;
+    private Dictionary<Vector2, int> wrapPointsLookup = new Dictionary<Vector2, int>();
+
 
     // When first created
     void Awake()
@@ -129,6 +131,7 @@ public class RopeSystem : MonoBehaviour
         ropeRenderer.SetPosition(1, transform.position);
         ropePositions.Clear();
         ropeHingeAnchorSprite.enabled = false;
+        wrapPointsLookup.Clear();
     }
 
     private void UpdateRopePositions()
@@ -178,6 +181,19 @@ public class RopeSystem : MonoBehaviour
                 ropeRenderer.SetPosition(i, transform.position);
             }
         }
+    }
+
+    // 1
+    private Vector2 GetClosestColliderPointFromRaycastHit(RaycastHit2D hit, PolygonCollider2D polyCollider)
+    {
+        // 2
+        var distanceDictionary = polyCollider.points.ToDictionary<Vector2, float, Vector2>(
+            position => Vector2.Distance(hit.point, polyCollider.transform.TransformPoint(position)), 
+            position => polyCollider.transform.TransformPoint(position));
+
+        // 3
+        var orderedDictionary = distanceDictionary.OrderBy(e => e.Key);
+        return orderedDictionary.Any() ? orderedDictionary.First().Value : Vector2.zero;
     }
 
 }
