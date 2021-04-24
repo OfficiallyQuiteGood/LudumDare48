@@ -15,6 +15,7 @@ public class ThrowRope : MonoBehaviour
     public CharacterController2D characterController;
     public SpriteRenderer crossHair;
     public SpriteRenderer crossHairHit;
+    public float checkFrequency = 0.25f;
 
     // Start is called before the first frame update
     void Start()
@@ -34,7 +35,7 @@ public class ThrowRope : MonoBehaviour
     {
         while (gameObject)
         {
-            yield return new WaitForSeconds(0.25f);
+            yield return new WaitForSeconds(checkFrequency);
 
             // Calculate aim direction
             if (!ropeWasCast)
