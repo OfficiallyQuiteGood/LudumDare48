@@ -7,7 +7,7 @@ public class MouseMotion : MonoBehaviour
     // Variables
 
     // Take the character controller as an object
-    public GameObject player;
+    public Transform pivotPoint;
 
     // Keep a variable for the distance between player and mouse
     private float mouseDist;
@@ -42,7 +42,7 @@ public class MouseMotion : MonoBehaviour
     {
         // Create temp vec
         Vector3 origPos = transform.localPosition;
-        Vector3 relMouse = player.transform.InverseTransformPoint(worldMouse);
+        Vector3 relMouse = pivotPoint.InverseTransformPoint(worldMouse);
         relMouse.z = 0;
 
         //Debug.Log("Original position = " + origPos + ", relative mouse = " + relMouse);
