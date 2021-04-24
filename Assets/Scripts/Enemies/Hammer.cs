@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BigMush : Enemy
+public class Hammer : Enemy
 {
-     
     Vector3 startingPosition;
+    public Transform FirePoint;
+    public GameObject hammerProjectile;
 
 	bool jump = false;
-    public float chargeSpeed = 3f;
-
+    bool isShooting = false;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -17,7 +18,7 @@ public class BigMush : Enemy
         //StartCoroutine(DealDamage());
 
         //StartCoroutine(MoveAtInterval());
-        setAnimatorParameter("ShouldMove", shouldMove);
+        shouldMove = true;
         startingPosition = transform.position;
     }
 
@@ -26,16 +27,12 @@ public class BigMush : Enemy
         return startingPosition + new Vector3(10*Enemy.getRandomHorizontalDirection(), 0, 0);
     }
 
-    
-
     protected IEnumerator MoveAtInterval()
     {
         
         while (true)
         {
             yield return new WaitForSeconds(timeInterval);
-            //body.velocity = new Vector2(-speed, 0);
-            //Move();
             shouldMove = !shouldMove;
             setAnimatorParameter("ShouldMove", shouldMove);
             direction = Enemy.getRandomHorizontalDirection();
@@ -48,9 +45,14 @@ public class BigMush : Enemy
         GameObject player = GameObject.Find("Player");
         if(player!=null)
         {
+            
             float distance = Mathf.Abs(Vector3.Distance(player.transform.position, transform.position));
+
+            //change enemy direction if player in range           
             playerDirection = player.transform.position.x < transform.position.x ? -1: 1;
-            if(distance<=agroDistance)
+            if(playerDirection != direction) changeDirection();
+
+            if(distance <= agroDistance)
             {
                 playerNear = true;
             }
@@ -66,12 +68,34 @@ public class BigMush : Enemy
 
     void FixedUpdate()
     {
-        //flip the player
-        if(playerNear && shouldMove)
+        if(playerNear && shouldMove && !isShooting)
         {
-            if(playerDirection != direction) changeDirection();
-            transform.position+=new Vector3(playerDirection * movementSpeed*chargeSpeed * Time.fixedDeltaTime,0,0);
+            
+            StartCoroutine(HammerSwing());
+            
         }
-        else if(shouldMove) transform.position+=new Vector3(direction * movementSpeed * Time.fixedDeltaTime,0,0);
+        else if(shouldMove && !isShooting) 
+        {
+            transform.position+=new Vector3(direction * movementSpeed * Time.fixedDeltaTime,0,0);
+        }
     }
+
+    protected IEnumerator HammerSwing()
+    {
+        
+        isShooting = true;
+        setAnimatorParameter("IsShooting", isShooting);
+        setAnimatorParameter("ShouldMove", false);
+        yield return new WaitForSeconds(0.3f); 
+        
+        GameObject hammerBullet = Instantiate(hammerProjectile, FirePoint.position, FirePoint.rotation);
+        hammerBullet.GetComponent<HammerProjectile>().changeDirection(direction);
+        yield return new WaitForSeconds(2f);
+        isShooting = false;
+        setAnimatorParameter("IsShooting", isShooting);
+        setAnimatorParameter("ShouldMove", true);
+        //PauseMovement();
+    }
+
+    
 }
