@@ -51,8 +51,6 @@ public class MouseMotion : MonoBehaviour
         Vector3 relMouse = pivotPoint.InverseTransformPoint(worldMouse);
         relMouse.z = 0;
 
-        //Debug.Log("Original position = " + origPos + ", relative mouse = " + relMouse);
-
         // First, translate object by -position
         transform.localPosition -= origPos;
 
@@ -73,11 +71,7 @@ public class MouseMotion : MonoBehaviour
         Vector3 normMouse = Vector3.Normalize(relMouse);
         newPos += mouseDist * normMouse;
 
-        Debug.Log("norm mouse = " + normMouse + ", newPos = " + newPos);
-
         transform.localPosition += newPos;
-
-        //Debug.Log("Final position " + transform.position);
     }
 
     // Check for a flip
