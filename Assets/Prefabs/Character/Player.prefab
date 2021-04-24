@@ -45,9 +45,9 @@ GameObject:
   - component: {fileID: 6091213573708431092}
   - component: {fileID: 403052094679174794}
   - component: {fileID: 3551828524513338750}
-  - component: {fileID: 6128273798497013172}
   - component: {fileID: 2083245713504057070}
   - component: {fileID: 4488948187720201018}
+  - component: {fileID: 3579516565413295200}
   m_Layer: 10
   m_Name: Player
   m_TagString: Player
@@ -281,21 +281,6 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4223416743461697165}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.010000005, y: -0.37026972}
-  serializedVersion: 2
-  m_Radius: 0.12789959
 --- !u!68 &2083245713504057070
 EdgeCollider2D:
   m_ObjectHideFlags: 0
@@ -343,6 +328,22 @@ MonoBehaviour:
   ropeLayerMask:
     serializedVersion: 2
     m_Bits: 769
+--- !u!58 &3579516565413295200
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4223416743461697165}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.01, y: -0.36}
+  serializedVersion: 2
+  m_Radius: 0.14
 --- !u!1 &5640754815917605913
 GameObject:
   m_ObjectHideFlags: 0
