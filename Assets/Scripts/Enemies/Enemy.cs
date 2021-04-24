@@ -10,7 +10,7 @@ public class Enemy : MonoBehaviour
     public int jumpForce = 150;
     public GameObject deathEffect;
     public bool shouldMove = true;
-    public CharacterController2D controller;
+    public Animator animator;
     void Start()
     {
         
@@ -63,5 +63,31 @@ public class Enemy : MonoBehaviour
         // Create death effect and destroy this object
         Instantiate(deathEffect, transform.position, Quaternion.identity);
         Destroy(gameObject);
+    }
+
+    protected void setAnimatorParameter(string parameterName, bool val)
+    {
+        if(animator.GetBool(parameterName) != val)
+        {
+            animator.SetBool(parameterName, val);
+            Debug.Log("parameter changed: "+parameterName);
+        }
+    }
+
+    protected void setAnimatorParameter(string parameterName, float val)
+    {
+        if(animator.GetFloat(parameterName) != val)
+        {
+            animator.SetFloat(parameterName, val);
+            Debug.Log("parameter changed: "+parameterName);
+        }
+    }
+
+    protected void setAnimatorParameter(string parameterName, int val)
+    {
+        if(animator.GetInteger(parameterName) != val)
+        {
+            animator.SetInteger(parameterName, val);
+        }
     }
 }
