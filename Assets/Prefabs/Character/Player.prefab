@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 357275874515495603}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: PivotPoint
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -44,11 +44,10 @@ GameObject:
   - component: {fileID: 6225368444297322146}
   - component: {fileID: 6091213573708431092}
   - component: {fileID: 403052094679174794}
-  - component: {fileID: 4694237636319876956}
-  - component: {fileID: 449016434863368229}
-  - component: {fileID: 8796230663821695803}
   - component: {fileID: 3551828524513338750}
-  - component: {fileID: 1302802270628945079}
+  - component: {fileID: 6128273798497013172}
+  - component: {fileID: 2083245713504057070}
+  - component: {fileID: 4488948187720201018}
   m_Layer: 10
   m_Name: Player
   m_TagString: Player
@@ -137,7 +136,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 6091213573708431092}
-  runSpeed: 4
+  runSpeed: 20
 --- !u!114 &6091213573708431092
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -158,6 +157,8 @@ MonoBehaviour:
     m_Bits: 4294967295
   m_GroundCheck: {fileID: 7885339859749318122}
   isSwinging: 0
+  ropeHook: {x: 0, y: 0}
+  swingForce: 10
   OnLandEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -180,75 +181,8 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
---- !u!61 &4694237636319876956
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4223416743461697165}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.0006807819, y: -0.3976841}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 0.32, y: 0.32}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.27033257, y: 0.21938396}
-  m_EdgeRadius: 0
---- !u!232 &449016434863368229
-DistanceJoint2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4223416743461697165}
-  m_Enabled: 1
-  serializedVersion: 4
-  m_EnableCollision: 0
-  m_ConnectedRigidBody: {fileID: 1077010181610421795}
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_AutoConfigureConnectedAnchor: 0
-  m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0, y: 0}
-  m_AutoConfigureDistance: 0
-  m_Distance: 0.005
-  m_MaxDistanceOnly: 0
---- !u!114 &8796230663821695803
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4223416743461697165}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b78777ebe9ce8df4ebc44178d0412f08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ropeHingeAnchor: {fileID: 5640754815917605913}
-  ropeJoint: {fileID: 449016434863368229}
-  crosshair: {fileID: 5162593451740831874}
-  crosshairSprite: {fileID: 662493837640617281}
-  playerMovement: {fileID: 6091213573708431092}
-  ropeRenderer: {fileID: 3551828524513338750}
-  ropeLayerMask:
-    serializedVersion: 2
-    m_Bits: 769
-  ropeMaxCastDistance: 2
 --- !u!120 &3551828524513338750
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -347,7 +281,6 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
---- !u!58 &1302802270628945079
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -360,9 +293,56 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.04780084, y: -0.11352706}
+  m_Offset: {x: -0.010000005, y: -0.37026972}
   serializedVersion: 2
-  m_Radius: 0.3386721
+  m_Radius: 0.12789959
+--- !u!68 &2083245713504057070
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4223416743461697165}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: -0.14449883, y: -0.39915848}
+  - {x: -0.122961044, y: -0.25676537}
+  - {x: 0.033498764, y: -0.2063675}
+  - {x: 0.16172409, y: -0.34068584}
+  - {x: 0.277174, y: -0.18745375}
+  - {x: -0.07690811, y: 0.18075895}
+  - {x: -0.21873093, y: 0.1785078}
+  - {x: -0.36974525, y: -0.22277069}
+  - {x: -0.24767113, y: -0.40636826}
+  - {x: -0.14239502, y: -0.40539455}
+  m_AdjacentStartPoint: {x: 0, y: 0}
+  m_AdjacentEndPoint: {x: 0, y: 0}
+  m_UseAdjacentStartPoint: 0
+  m_UseAdjacentEndPoint: 0
+--- !u!114 &4488948187720201018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4223416743461697165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14b330037f19dae40b19b94303da4366, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hook: {fileID: 8247493491165763851, guid: 62ca95016497d924fb5bad1262d0b427, type: 3}
+  ropeMaxCastDistance: 2
+  ropeLayerMask:
+    serializedVersion: 2
+    m_Bits: 769
 --- !u!1 &5640754815917605913
 GameObject:
   m_ObjectHideFlags: 0
@@ -374,7 +354,7 @@ GameObject:
   - component: {fileID: 9030015007337229167}
   - component: {fileID: 4793661206145098641}
   - component: {fileID: 1077010181610421795}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: RopeHingeAnchor
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -478,7 +458,7 @@ GameObject:
   - component: {fileID: 5162593451740831874}
   - component: {fileID: 662493837640617281}
   - component: {fileID: 1598383050923422208}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: Mouse
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -493,7 +473,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5688530940386352209}
   m_LocalRotation: {x: -0, y: -0, z: -0.38268343, w: 0.92387956}
-  m_LocalPosition: {x: 0.15, y: 0, z: 0}
+  m_LocalPosition: {x: 0.52, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 357275874515495603}
@@ -573,7 +553,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7885339859749318122}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: GroundCheck
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -588,7 +568,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7150210304639652937}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.53, z: 0}
+  m_LocalPosition: {x: 0, y: -0.503, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6339658937684537148}
