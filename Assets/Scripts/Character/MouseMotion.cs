@@ -9,45 +9,68 @@ public class MouseMotion : MonoBehaviour
     // Take the character controller as an object
     public GameObject player;
 
-    // Keep a variable for the world mouse position
-    private Vector3 worldMouse;
-
     // Keep a variable for the distance between player and mouse
     private float mouseDist;
+
+    // Store reference to sprite
+    private SpriteRenderer spriteRenderer;
  
     // Start is called before the first frame update
     void Start()
     {
+        // Get sprite
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
         // Calculate the mouse dist as the magnitude of the vector from player to mouse
-        mouseDist = transform.position.magnitude;
+        mouseDist = transform.localPosition.magnitude;
     }
 
     // Update is called once per frame
     void Update()
     {
         // Store world position of mouse
-        worldMouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 mousePos = Input.mousePosition;
+        Vector3 worldMouse = Camera.main.ScreenToWorldPoint(mousePos);
+        worldMouse.z = 0;
+
+        // Basic update
+        CalculateNewPositionInLocal(worldMouse);
     }
 
     // Calculate new position
-    Vector2 CalculateNewPosition(Vector3 mouse)
+    void CalculateNewPositionInLocal(Vector3 worldMouse)
     {
         // Create temp vec
-        Transform final = transform;
-        Vector3 origPos = transform.position;
+        Vector3 origPos = transform.localPosition;
+        Vector3 relMouse = player.transform.InverseTransformPoint(worldMouse);
+        relMouse.z = 0;
+
+        //Debug.Log("Original position = " + origPos + ", relative mouse = " + relMouse);
 
         // First, translate object by -position
-        final.position -= transform.position;
+        transform.localPosition -= origPos;
 
         // Then rotate by a calculated amount based on vector of original position and mouse pos
-        float cosTheta = Vector3.Dot(origPos, mouse);
+        /*
+        Debug.Log("origPos = " + Vector3.Normalize(origPos) + ", relMouse = " + Vector3.Normalize(relMouse));
+        float cosTheta = Vector3.Dot(Vector3.Normalize(origPos), Vector3.Normalize(relMouse));
         float theta = Mathf.Acos(cosTheta);
-        final.Rotate(new Vector3(0.0f, 0.0f, 1.0f), theta);
+        Debug.Log("cosTheta = " + cosTheta + ", theta = " + theta);
+        if (!float.IsNaN(theta))
+        {
+            transform.Rotate(0.0f, 0.0f, theta);
+        }
+        */
 
         // Rotate back to new location which is magnitude of original position (mouseDist) * unit vector in direction of mouse
-        final.position += mouseDist * Vector3.Normalize(mouse);
+        Vector3 newPos = new Vector3(0.0f, 0.0f, 0.0f);
+        Vector3 normMouse = Vector3.Normalize(relMouse);
+        newPos += mouseDist * normMouse;
 
-        // Return temp
-        return final.position;
+        Debug.Log("norm mouse = " + normMouse + ", newPos = " + newPos);
+
+        transform.localPosition += newPos;
+
+        //Debug.Log("Final position " + transform.position);
     }
 }
