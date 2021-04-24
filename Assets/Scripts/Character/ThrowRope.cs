@@ -37,11 +37,11 @@ public class ThrowRope : MonoBehaviour
                 Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0f));
             var facingDirection = worldMousePosition - transform.position;
             var aimAngle = Mathf.Atan2(facingDirection.y, facingDirection.x);
-            // var cosTheta = Vector3.Dot(facingDirection, new Vector3(0.0f, 1.0f, 0.0f));
-            // if (cosTheta < 0)
-            // {
-            //     return;
-            // }
+            var cosTheta = Vector3.Dot(facingDirection, new Vector3(0.0f, 1.0f, 0.0f));
+            if (cosTheta < 0)
+            {
+                return;
+            }
             if (aimAngle < 0f)
             {
                 aimAngle = Mathf.PI * 2 + aimAngle;

@@ -329,6 +329,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 769
   characterController: {fileID: 6091213573708431092}
+  crossHair: {fileID: 662493837640617281}
 --- !u!58 &3579516565413295200
 CircleCollider2D:
   m_ObjectHideFlags: 0
