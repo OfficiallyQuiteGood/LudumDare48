@@ -10,10 +10,20 @@ public class WorldSettings : MonoBehaviour
     public GameObject playerPrefab;
     public CheckpointList CheckpointList;
 
+    public AudioSource audioSource;
+    public AudioClip[] audioClipArray;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        audioSource.PlayOneShot(RandomClip());
+        Debug.Log("started");
+
+    }
+
+    AudioClip RandomClip()
+    {
+        return audioClipArray[Random.Range(0, audioClipArray.Length)];
     }
 
     // Update is called once per frame
