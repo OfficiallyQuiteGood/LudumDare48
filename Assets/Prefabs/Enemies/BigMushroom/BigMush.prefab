@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 4777158542274042378}
   - component: {fileID: 1331990085232040849}
   - component: {fileID: 4226261137152559290}
+  - component: {fileID: 1542507652494963160}
   m_Layer: 11
   m_Name: BigMush
   m_TagString: Untagged
@@ -109,7 +110,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &4777158542274042377
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -123,7 +124,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.04947853, y: -0.1715262}
+  m_Offset: {x: -0.0767827, y: -0.1715262}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -134,7 +135,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.70923233, y: 0.6630523}
+  m_Size: {x: 0.654624, y: 0.6630523}
   m_EdgeRadius: 0
 --- !u!114 &4777158542274042378
 MonoBehaviour:
@@ -148,7 +149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f7f54de2febc8645aa6b19bd4b9fcf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 1
+  health: 3
   movementSpeed: 2
   jumpForce: 150
   deathEffect: {fileID: 1569254283426463652, guid: fee0262040065254a93aee3ac47908b4, type: 3}
@@ -203,6 +204,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.14566755, y: 0.6701416}
   m_EdgeRadius: 0
+--- !u!58 &1542507652494963160
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4777158542274042391}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.0147021115, y: 0.13587797}
+  serializedVersion: 2
+  m_Radius: 0.35653612
 --- !u!1 &7247016267356923971
 GameObject:
   m_ObjectHideFlags: 0

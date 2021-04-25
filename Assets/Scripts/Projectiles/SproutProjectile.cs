@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class SproutProjectile : MonoBehaviour
+public class SproutProjectile : Projectile
 {
     Vector3 startingPosition;
     //TileMap tilemap;

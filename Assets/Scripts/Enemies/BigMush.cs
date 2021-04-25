@@ -53,7 +53,11 @@ public class BigMush : Enemy
     void FixedUpdate()
     {
         //flip the player
-        if(playerNear && shouldMove && !charging)
+        if(isBouncing)
+        {
+            transform.position += new Vector3(0.05f*-playerDirection,0.05f,0);
+        }
+        else if(playerNear && shouldMove && !charging)
         {
             StartCoroutine(Charge());
         }

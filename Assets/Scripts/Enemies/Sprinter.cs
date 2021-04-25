@@ -55,6 +55,10 @@ public class Sprinter : Enemy
         //     transform.position+=new Vector3(playerDirection * movementSpeed*chargeSpeed * Time.fixedDeltaTime,0,0);
         // }
         // else if(shouldMove) 
-        transform.position+=new Vector3(direction * movementSpeed * Time.fixedDeltaTime,0,0);
+        if(isBouncing)
+        {
+            transform.position += new Vector3(0.01f*-playerDirection,0.01f,0);
+        }
+        else {transform.position+=new Vector3(direction * movementSpeed * Time.fixedDeltaTime,0,0);}
     }
 }

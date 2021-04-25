@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class HammerProjectile : MonoBehaviour
+public class HammerProjectile : Projectile
 {
     public GameObject projectileBreak;
     public float projectileSpeed;
