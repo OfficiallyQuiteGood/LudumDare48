@@ -46,22 +46,7 @@ public class BigMush : Enemy
     // Update is called once per frame
     void Update()
     {
-        GameObject player = GameObject.Find("Player");
-        if(player!=null)
-        {
-            float distance = Mathf.Abs(Vector3.Distance(player.transform.position, transform.position));
-            playerDirection = player.transform.position.x < transform.position.x ? -1: 1;
-            if(distance<=agroDistance)
-            {
-                playerNear = true;
-            }
-            else
-            {
-                playerNear = false;
-            }
-
-            setAnimatorParameter("PlayerNear", playerNear);
-        }
+        CheckAgro(false);
         
     }
 

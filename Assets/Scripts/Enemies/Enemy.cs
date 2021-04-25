@@ -82,6 +82,7 @@ public class Enemy : MonoBehaviour
 
     public void Flip()
 	{
+        Debug.Log("Flip");
 		// Switch the way the player is labelled as facing.
 		m_FacingRight = !m_FacingRight;
 
@@ -140,5 +141,34 @@ public class Enemy : MonoBehaviour
     void OnCollisionEnter2D(Collision2D other)
     {
         StartCoroutine(PauseMovement());
+    }
+
+    //see if player is nearby and change direction accordingly
+    protected void CheckAgro(bool shouldFlip)
+    {
+        GameObject player = GameObject.Find("Player");
+        if (player != null)
+        {
+            
+            float distance = Mathf.Abs(Vector3.Distance(player.transform.position, transform.position));
+
+            //change enemy direction if player in range           
+            playerDirection = player.transform.position.x < transform.position.x ? -1: 1;
+            if (playerNear && playerDirection != direction && shouldFlip)
+            {
+                changeDirection();
+            }
+
+            if(distance <= agroDistance)
+            {
+                playerNear = true;
+            }
+            else
+            {
+                playerNear = false;
+            }
+
+            setAnimatorParameter("PlayerNear", playerNear);
+        }
     }
 }
