@@ -43,7 +43,7 @@ public class Lobber : Enemy
         
         isShooting = true;
         setAnimatorParameter("IsShooting", isShooting);
-        yield return new WaitForSeconds(0.6f); 
+        yield return new WaitForSeconds(0.66f); 
         
         GameObject b1 = Instantiate(LobProjectile, FirePoint.position, FirePoint.rotation);
         b1.GetComponent<LobberProjectile>().changeDirection(direction);

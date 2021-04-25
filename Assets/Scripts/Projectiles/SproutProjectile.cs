@@ -16,11 +16,13 @@ public class SproutProjectile : MonoBehaviour
     Rigidbody2D m_Rigidbody;
 
     public GameObject projectileDeath;
+    Vector3 prevPos;
     
     // Start is called before the first frame update
     void Start()
     {
         startingPosition = transform.position;
+        prevPos = startingPosition;
         //Fetch the Rigidbody from the GameObject with this script attached
         m_Rigidbody = GetComponent<Rigidbody2D>();
         //StartCoroutine(destroyAfterInterval());
@@ -39,6 +41,16 @@ public class SproutProjectile : MonoBehaviour
     {
         
         TrailPlayer();
+        
+         
+        Vector3 moveDirection = gameObject.transform.position - prevPos; 
+        if (moveDirection != Vector3.zero) 
+        {
+           float angle = Mathf.Atan2(moveDirection.y, moveDirection.x) * Mathf.Rad2Deg;
+           transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        }
+
+        prevPos = gameObject.transform.position;
     }
 
     void TrailPlayer()
