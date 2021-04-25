@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2785400703743526348}
   - component: {fileID: 5539518994786734953}
   - component: {fileID: 5205019912638239116}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: FlatSurfaceSave
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,7 +101,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 357275874515495603}
-  m_Layer: 11
+  m_Layer: 10
   m_Name: PivotPoint
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -260,6 +260,8 @@ MonoBehaviour:
   ropeHook: {x: 0, y: 0}
   swingForce: 20
   moveForce: 10
+  playerWinPrefab: {fileID: 8837617121168820465, guid: 8071f7f11a017904eb85750ff0710d50, type: 3}
+  playerWon: 0
   OnLandEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -500,7 +502,7 @@ GameObject:
   - component: {fileID: 5162593451740831874}
   - component: {fileID: 662493837640617281}
   - component: {fileID: 1598383050923422208}
-  m_Layer: 11
+  m_Layer: 10
   m_Name: Mouse
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -595,7 +597,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7885339859749318122}
-  m_Layer: 11
+  m_Layer: 10
   m_Name: GroundCheck
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -626,7 +628,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6387913251868560989}
   - component: {fileID: 9223127692598381316}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Point Light 2D (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -698,7 +700,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4921170434362941255}
   - component: {fileID: 6191860533722040396}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Point Light 2D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
