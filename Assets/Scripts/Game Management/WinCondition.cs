@@ -17,8 +17,18 @@ public class WinCondition : MonoBehaviour
     }
 
     // This is the main function for handling the win condition
-    void OnWin()
+    protected IEnumerator OnWin(GameObject go)
     {
+        // Wait a frame (this makes sure you die properly if landed badly)
+        yield return null;
+
+        // Check if player is still alive
+        HealthSystem hs = go.GetComponent<HealthSystem>();
+        if (hs && hs.GetHealth() <= 0)
+        {
+            yield return;
+        }
+
         // First, destroy all objects
         Object[] enemies = GameObject.FindObjectsOfType(typeof(Enemy));
         foreach (Object obj in enemies)
@@ -32,10 +42,12 @@ public class WinCondition : MonoBehaviour
     // On trigger entered
     void OnTriggerEntered2D(Collider2D collider)
     {
+
         if (collider.tag == "Player")
         {
             // Call on win
-            OnWin();
+            GameObject go = (GameObject) collider.transform.gameObject;
+            StartCoroutine(OnWin(go));
         }
     }
 }
