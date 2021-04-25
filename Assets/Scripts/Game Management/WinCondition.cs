@@ -24,19 +24,17 @@ public class WinCondition : MonoBehaviour
 
         // Check if player is still alive
         HealthSystem hs = go.GetComponent<HealthSystem>();
-        if (hs && hs.GetHealth() <= 0)
+        if (hs && hs.GetHealth() > 0)
         {
-            yield return;
-        }
+            // First, destroy all objects
+            Object[] enemies = GameObject.FindObjectsOfType(typeof(Enemy));
+            foreach (Object obj in enemies)
+            {
+                Destroy(obj);
+            }
 
-        // First, destroy all objects
-        Object[] enemies = GameObject.FindObjectsOfType(typeof(Enemy));
-        foreach (Object obj in enemies)
-        {
-            Destroy(obj);
+            // Play animation and stuff...
         }
-
-        // Play animation and stuff...
     }
 
     // On trigger entered
