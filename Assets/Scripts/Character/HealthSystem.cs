@@ -45,10 +45,10 @@ public class HealthSystem : MonoBehaviour
         {
             // Decrease health and die if necessary
             currHealth -= damage;
-            healthUI.OnHealthChanged(currHealth);
+            //healthUI.OnHealthChanged(currHealth);
             if (currHealth <= 0)
             {
-                healthUI.OnHealthChanged(0);
+                //healthUI.OnHealthChanged(0);
                 Die();
             }
             
@@ -57,11 +57,21 @@ public class HealthSystem : MonoBehaviour
         }
     }
 
+    //reset player and lose 1 health
+    // public void FallFar(Vector3 lastPos)
+    // {
+    //     // Switch animations?
+        
+    //     GameObject.Find("World Settings").GetComponent<WorldSettings>().InstantiatePlayer(lastPos, currHealth-1);
+    //     Instantiate(deathPrefab, transform.position, Quaternion.identity);
+    //     Destroy(gameObject);
+    // }
     // Die function
     private void Die()
     {
         // Switch animations?
         Instantiate(deathPrefab, transform.position, Quaternion.identity);
+        GameObject.Find("World Settings").GetComponent<WorldSettings>().GameOver();
         Destroy(gameObject);
 
         // Reload entire scene?
@@ -72,12 +82,27 @@ public class HealthSystem : MonoBehaviour
     {
         // Set able to be damaged to false
         bCanBeDamaged = false;
+        //to get blinker duration: iframduration/frames/2
+        StartCoroutine(CharacterBlinker(20, 0.05f));
 
         // Wait a certain amount of time
         yield return new WaitForSeconds(iFrameDuration);
 
         // Now set it back to true
         bCanBeDamaged = true;
+    }
+
+    //display IFrames as character blinking in and out of view
+    protected IEnumerator CharacterBlinker(int numFrames, float frameDuration)
+    {
+        for(int i = 0; i<numFrames; i++)
+        {
+            Debug.Log("Blink");
+            GameObject.Find("Player").GetComponent<Renderer>().enabled = false;
+            yield return new WaitForSeconds(frameDuration);
+            GameObject.Find("Player").GetComponent<Renderer>().enabled = true;
+            yield return new WaitForSeconds(frameDuration);
+        }
     }
 
     // On trigger will simply increase health on the player

@@ -21,7 +21,6 @@ public class WallCollision : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D colliderInfo)
     {
-        Debug.Log("wall collide");
         if(colliderInfo is TilemapCollider2D)
         {
             enemy.changeDirection();

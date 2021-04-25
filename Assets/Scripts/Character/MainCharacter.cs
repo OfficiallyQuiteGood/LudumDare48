@@ -13,7 +13,12 @@ public class MainCharacter : MonoBehaviour
 	public float verticalSpeed;
 	Vector3 prevPos;
 	float prevVertical = 0.0f;
+	public Vector3 lastPosition;
 
+	void Start()
+	{
+		
+	}
 	
 	// Update is called once per frame
 	void Update () {
@@ -36,8 +41,20 @@ public class MainCharacter : MonoBehaviour
 		animator.SetBool("IsAttacking", true);
 	}
 
+	public void SetLastPosition()
+	{
+		if(verticalSpeed>=0) lastPosition = gameObject.transform.position;
+	}
+
+	void resetPlayerPosition()
+	{
+		gameObject.GetComponent<HealthSystem>().TakeDamage(1);
+		transform.position = lastPosition;
+	}
+
 	void FixedUpdate ()
 	{
+		//if(controller.m_Grounded) SetLastPosition();
 		// Move our character
 		controller.Move(horizontalMove * Time.fixedDeltaTime, false, jump);
 		jump = false;
@@ -49,11 +66,12 @@ public class MainCharacter : MonoBehaviour
 		prevVertical = verticalSpeed;
 		verticalSpeed = (transform.position - prevPos).y*50;
 		prevPos = transform.position;
+		animator.SetFloat("VerticalSpeed", verticalSpeed);
 
 		//set verticalSpeed;;
 		//fall speed limit
-		if(verticalSpeed<-20) gameObject.GetComponent<HealthSystem>().TakeDamage(3);
-		animator.SetFloat("VerticalSpeed", verticalSpeed);
+		if(verticalSpeed<-15) resetPlayerPosition();
+		
 
 		//take damage on fall
 		if(prevVertical<0 && controller.m_Grounded) DealFallDamage();
@@ -66,8 +84,7 @@ public class MainCharacter : MonoBehaviour
 
 	void DealFallDamage()
 	{
-		Debug.Log("Deal Fall Damage");
-		if(prevVertical < -15) gameObject.GetComponent<HealthSystem>().TakeDamage(2);
-		else if(prevVertical < -12) gameObject.GetComponent<HealthSystem>().TakeDamage(1);
+		//Debug.Log("Deal Fall Damage");
+		if(prevVertical < -12) gameObject.GetComponent<HealthSystem>().TakeDamage(1);
 	}
 }

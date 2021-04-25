@@ -6296,6 +6296,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sprinter (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 6733047532052823037, guid: 39704509d34a9ea469a5b8aac3462ffb, type: 3}
+      propertyPath: playerPrefab
+      value: 
+      objectReference: {fileID: 4223416743461697165, guid: 1e699d1c8f520c149999b894d7d71f4d, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5b5a00b7e7289a3439abccf0fe86301b, type: 3}
 --- !u!1001 &840957142
@@ -31901,7 +31905,7 @@ Tilemap:
     m_Data: {fileID: 21300000, guid: 67f4ef397dd0b477b9253bfa45bd7034, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: 21300000, guid: f2ad1d2a93c754665bdf5de01f7fe40f, type: 3}
-  - m_RefCount: 3
+  - m_RefCount: 1
     m_Data: {fileID: 21300000, guid: b11ca89ab57b84b03a906eec9e8b8422, type: 3}
   - m_RefCount: 3
     m_Data: {fileID: 21300000, guid: ac24d0b666fed492f813a0e1b960c897, type: 3}

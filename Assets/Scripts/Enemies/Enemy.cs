@@ -82,7 +82,6 @@ public class Enemy : MonoBehaviour
 
     public void Flip()
 	{
-        Debug.Log("Flip");
 		// Switch the way the player is labelled as facing.
 		m_FacingRight = !m_FacingRight;
 
@@ -104,7 +103,6 @@ public class Enemy : MonoBehaviour
         if(animator.GetBool(parameterName) != val)
         {
             animator.SetBool(parameterName, val);
-            Debug.Log("parameter changed: "+parameterName);
         }
     }
 
@@ -113,7 +111,6 @@ public class Enemy : MonoBehaviour
         if(animator.GetFloat(parameterName) != val)
         {
             animator.SetFloat(parameterName, val);
-            Debug.Log("parameter changed: "+parameterName);
         }
     }
 
@@ -133,7 +130,6 @@ public class Enemy : MonoBehaviour
         {
             //Debug.Log("edge reached");
             changeDirection();
-            Debug.Log("changeDirection enemy");
         }
         
     }
