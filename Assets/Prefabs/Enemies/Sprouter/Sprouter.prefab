@@ -197,7 +197,7 @@ MonoBehaviour:
   health: 1
   movementSpeed: 1
   jumpForce: 150
-  deathEffect: {fileID: 0}
+  deathEffect: {fileID: 5078257019854210621, guid: 9ff290b59a385d545bc219778c5a7667, type: 3}
   shouldMove: 1
   animator: {fileID: 246159801815195472}
   timeInterval: 1

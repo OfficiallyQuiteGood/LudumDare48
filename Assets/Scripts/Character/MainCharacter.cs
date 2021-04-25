@@ -13,11 +13,13 @@ public class MainCharacter : MonoBehaviour
 	public float verticalSpeed;
 	Vector3 prevPos;
 	float prevVertical = 0.0f;
-	public Vector3 lastPosition;
+	//legal position for respawn
+	public Vector3 lastLegalPosition;
 
 	void Start()
 	{
-		
+		lastLegalPosition = transform.position;
+		prevPos = transform.position;
 	}
 	
 	// Update is called once per frame
@@ -41,31 +43,42 @@ public class MainCharacter : MonoBehaviour
 		animator.SetBool("IsAttacking", true);
 	}
 
-	public void SetLastPosition()
+	//set legal position if valid
+	public void SetLastLegalPosition()
 	{
-		if(verticalSpeed>=0) lastPosition = gameObject.transform.position;
+		if(verticalSpeed>=0) lastLegalPosition = gameObject.transform.position;
 	}
 
+	//reset position (if player falls too fast)
 	void resetPlayerPosition()
 	{
+		GameObject.Find("Follow Camera").GetComponent<Follow>().PausePan(1f);
 		gameObject.GetComponent<HealthSystem>().TakeDamage(1);
-		transform.position = lastPosition;
+		StartCoroutine(resetPositionWithDelay(1f));
+	}
+
+	//set position and start iframes with delay
+	IEnumerator resetPositionWithDelay(float delay)
+	{
+		yield return new WaitForSeconds(delay);
+		transform.position = lastLegalPosition;
 	}
 
 	void FixedUpdate ()
 	{
-		//if(controller.m_Grounded) SetLastPosition();
 		// Move our character
 		controller.Move(horizontalMove * Time.fixedDeltaTime, false, jump);
 		jump = false;
 
-		//animator.SetFloat("VerticalSpeed", verticalMove);
-		animator.SetFloat("HorizontalSpeed", Mathf.Abs(horizontalMove));
+		
 
 		//get vertical speed
 		prevVertical = verticalSpeed;
 		verticalSpeed = (transform.position - prevPos).y*50;
 		prevPos = transform.position;
+
+		//set animator params
+		animator.SetFloat("HorizontalSpeed", Mathf.Abs(horizontalMove));
 		animator.SetFloat("VerticalSpeed", verticalSpeed);
 
 		//set verticalSpeed;;

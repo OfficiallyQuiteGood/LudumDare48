@@ -86,7 +86,7 @@ GameObject:
   - component: {fileID: 1938507747851712051}
   - component: {fileID: 5379085971956378259}
   - component: {fileID: 3729188319620935649}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: LobberProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}

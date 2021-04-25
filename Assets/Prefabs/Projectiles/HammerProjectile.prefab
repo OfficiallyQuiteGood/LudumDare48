@@ -123,8 +123,9 @@ MonoBehaviour:
   projectileBreak: {fileID: 6217963693807722197, guid: 2d857a4f11afa074e91b58f23c775955, type: 3}
   projectileSpeed: 0
   direction: 1
-  movementSpeed: 3
+  movementSpeed: 1
   timeInterval: 4
+  shouldFlip: 1
 --- !u!50 &335680953676288215
 Rigidbody2D:
   serializedVersion: 4
