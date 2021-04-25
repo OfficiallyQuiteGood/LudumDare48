@@ -15,7 +15,7 @@ public class Parallax : MonoBehaviour
     void Update()
     {
         this.transform.position = new Vector3(
-            (16f + (player.transform.position.x * 0.4f)) * 0.5f,
+            (18f - (17 - player.transform.position.x)  * 0.8f) * 1f,
             (-35f + (player.transform.position.y * 0.8f)) * 0.2f,
             this.transform.position.z
         );
