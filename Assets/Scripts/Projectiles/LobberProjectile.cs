@@ -45,6 +45,11 @@ public class LobberProjectile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+    }
+
+    void FixedUpdate()
+    {
         // Compute the next position, with arc added in
 		float x0 = startPos.x;
 		float x1 = target.x;

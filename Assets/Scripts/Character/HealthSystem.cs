@@ -74,6 +74,10 @@ public class HealthSystem : MonoBehaviour
     // Die function
     private void Die()
     {
+        //fade to black
+        GameObject.Find("Canvas").GetComponent<UIController>().FadeScreen();
+
+
         // Switch animations?
         Instantiate(deathPrefab, transform.position, Quaternion.identity);
         GameObject.Find("World Settings").GetComponent<WorldSettings>().GameOver();

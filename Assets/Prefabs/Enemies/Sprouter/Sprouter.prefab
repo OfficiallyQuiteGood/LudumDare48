@@ -318,6 +318,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: WallDetection
       objectReference: {fileID: 0}
+    - target: {fileID: 240917734072291558, guid: 4f6f1d2b3199a15489f3fba41a397b80, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 2332645372592166598, guid: 4f6f1d2b3199a15489f3fba41a397b80, type: 3}
       propertyPath: m_Size.x
       value: 0.7952135
