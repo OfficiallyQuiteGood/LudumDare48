@@ -36,8 +36,11 @@ public class MouseMotion : MonoBehaviour
         Vector3 worldMouse = Camera.main.ScreenToWorldPoint(mousePos);
         worldMouse.z = 0;
 
+        // Simply set position
+        transform.position = worldMouse;
+
         // Basic update
-        CalculateNewPositionInLocal(worldMouse);
+        //CalculateNewPositionInLocal(worldMouse);
 
         // Check for mouse slip
         CheckForMouseFlip(worldMouse);
