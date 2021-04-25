@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Parallax : MonoBehaviour
 {
-    public GameObject player;
+    public GameObject camera;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,17 +14,10 @@ public class Parallax : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(player != null)
-        {
-            this.transform.position = new Vector3(
-                (16f + (player.transform.position.x * 0.4f)) * 0.5f,
-                (-35f + (player.transform.position.y * 0.8f)) * 0.2f,
-                this.transform.position.z
-            );
-        }
-        else
-        {
-            player = GameObject.Find("Player");
-        }
+        this.transform.position = new Vector3(
+            camera.transform.position.x * 8f / 9f + 1f,
+            camera.transform.position.y * 1f / 2f - 15f,
+            this.transform.position.z
+        );
     }
 }
