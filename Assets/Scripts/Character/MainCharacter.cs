@@ -4,15 +4,12 @@ using UnityEngine;
 
 public class MainCharacter : MonoBehaviour
 {
-public CharacterController2D controller;
-
-	public GameObject deathEffect;
+	public CharacterController2D controller;
 	public Animator animator;
-	public float Health = 1;
 	public float runSpeed = 40f;
-
 	float horizontalMove = 0f;
 	bool jump = false;
+
 	
 	// Update is called once per frame
 	void Update () {
@@ -25,25 +22,6 @@ public CharacterController2D controller;
 		{
 			jump = true;
 		}
-	}
-
-	public void TakeDamage()
-	{
-		if(Health <= 0)
-		{
-			Die();
-		}
-	}
-
-	public void Die()
-	{
-		Instantiate(deathEffect, transform.position, transform.rotation);
-		Destroy(gameObject);
-	}
-
-	public void FillHeart()
-	{
-
 	}
 
 	public void Attack()
