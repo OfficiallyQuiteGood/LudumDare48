@@ -46,7 +46,7 @@ public class Lobber : Enemy
         yield return new WaitForSeconds(0.6f); 
         
         GameObject b1 = Instantiate(LobProjectile, FirePoint.position, FirePoint.rotation);
-        //b1.GetComponent<LobberProjectile>().changeDirection(direction);
+        b1.GetComponent<LobberProjectile>().changeDirection(direction);
 
         yield return new WaitForSeconds(1f);
         isShooting = false;
