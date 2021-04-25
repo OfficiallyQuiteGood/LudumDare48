@@ -54,6 +54,7 @@ public class MainCharacter : MonoBehaviour
 	{
 		GameObject.Find("Follow Camera").GetComponent<Follow>().PausePan(1f);
 		gameObject.GetComponent<HealthSystem>().TakeDamage(1);
+		gameObject.GetComponent<CharacterController2D>().playerWon = false;
 		StartCoroutine(resetPositionWithDelay(1f));
 	}
 

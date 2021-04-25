@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.Events;
 
 public class CharacterController2D : MonoBehaviour
@@ -19,6 +21,10 @@ public class CharacterController2D : MonoBehaviour
 	public Vector2 ropeHook;
 	public float swingForce = 20f;
 	public float moveForce = 10f;
+
+	// Player win prefab
+	public GameObject playerWinPrefab;
+	public bool playerWon;
 
 
 	[Header("Events")]
@@ -103,5 +109,39 @@ public class CharacterController2D : MonoBehaviour
 		Vector3 theScale = transform.localScale;
 		theScale.x *= -1;
 		transform.localScale = theScale;
+	}
+
+	void OnCollisionEnter2D(Collision2D collider)
+	{
+		if (collider.gameObject.layer == LayerMask.NameToLayer("Ground") && !playerWon)
+		{
+			playerWon = true;
+			StartCoroutine(OnWin());
+			Debug.Log("Entering collision! (in player)");
+		}
+	}
+
+	protected IEnumerator OnWin()
+	{
+		// Wait one frame
+		yield return null;
+
+		// Check health
+		HealthSystem hs = gameObject.GetComponent<HealthSystem>();
+		if (hs && hs.GetHealth() > 0)
+		{
+			Debug.Log("Player survived, winning");
+
+            // First, destroy all objects
+            Object[] enemies = GameObject.FindObjectsOfType(typeof(Enemy));
+            foreach (Object obj in enemies)
+            {
+                Destroy(obj);
+            }
+
+            // Destroy player and start win
+            Instantiate(playerWinPrefab, transform.position, Quaternion.identity);
+            Destroy(gameObject);
+		}
 	}
 }

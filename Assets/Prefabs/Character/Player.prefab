@@ -260,6 +260,8 @@ MonoBehaviour:
   ropeHook: {x: 0, y: 0}
   swingForce: 20
   moveForce: 10
+  playerWinPrefab: {fileID: 8837617121168820465, guid: 8071f7f11a017904eb85750ff0710d50, type: 3}
+  playerWon: 0
   OnLandEvent:
     m_PersistentCalls:
       m_Calls: []
