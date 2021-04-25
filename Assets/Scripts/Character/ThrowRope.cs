@@ -102,7 +102,7 @@ public class ThrowRope : MonoBehaviour
                 crossHair.enabled = false;
                 ropeWasCast = true;
                 characterController.isSwinging = true;
-                Vector2 endPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                Vector2 endPoint = hit.point;
                 currHook = (GameObject) Instantiate(hook, transform.position, Quaternion.identity);
                 currHook.GetComponent<Rope>().endPoint = endPoint;
                 //currHook.GetComponent<Rope>().CreateRope();
