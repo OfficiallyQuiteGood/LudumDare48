@@ -32,7 +32,11 @@ public class Lobber : Enemy
 
     void FixedUpdate()
     {
-        if(playerNear && !isShooting)
+        if(isBouncing)
+        {
+            transform.position += new Vector3(0.01f*-playerDirection,0.01f,0);
+        }
+        else if(playerNear && !isShooting)
         {
             StartCoroutine(ShootLob());
         }

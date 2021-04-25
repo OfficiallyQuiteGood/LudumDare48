@@ -45,10 +45,10 @@ public class HealthSystem : MonoBehaviour
         {
             // Decrease health and die if necessary
             currHealth -= damage;
-            //healthUI.OnHealthChanged(currHealth);
+            healthUI.OnHealthChanged(currHealth);
             if (currHealth <= 0)
             {
-                //healthUI.OnHealthChanged(0);
+                healthUI.OnHealthChanged(0);
                 Die();
             }
             
