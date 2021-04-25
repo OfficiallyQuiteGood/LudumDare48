@@ -9,7 +9,8 @@ public class WinSystem : MonoBehaviour
     // Minimush prefab
     public GameObject miniMushPrefab;
     public int maxNumMiniMush = 20;
-    public float spawnFreq = 2.0f;
+    public float spawnFreqMin = 1.5f;
+    public float spawnFreqMax = 3.0f;
     public float spawnDelay = 1.5f;
     public float minDistX = 0.5f;
     public float maxDistX = 1.0f;
@@ -64,6 +65,9 @@ public class WinSystem : MonoBehaviour
             // Instantiate new mush
             Instantiate(miniMushPrefab, GetRandomLocationInRadius(transform.position, true, true, currNum), Quaternion.identity);
 
+            // Calculate freq in range
+            float spawnFreq = Random.Range(spawnFreqMin, spawnFreqMax);
+            Debug.Log("Spawn freq = " + spawnFreq);
             // Wait for x amount of seconds before spawning anew
             yield return new WaitForSeconds(spawnFreq);
 
@@ -123,8 +127,8 @@ public class WinSystem : MonoBehaviour
         }
 
         // Debug.Log
-        Debug.Log("minDistX = " + minDistX + " maxDistX = " + maxDistX + " minDistXNeg = " + minDistXNeg + " maxDistXNeg = " + maxDistXNeg);
-        Debug.Log("distX = " + distX + " distXNeg = " + distXNeg);
+        //Debug.Log("minDistX = " + minDistX + " maxDistX = " + maxDistX + " minDistXNeg = " + minDistXNeg + " maxDistXNeg = " + maxDistXNeg);
+        //Debug.Log("distX = " + distX + " distXNeg = " + distXNeg);
 
         // return vector at that dist
         return temp + new Vector3(dirX > 0 ? distX : distXNeg, clampY ? -0.3f : distY * dirY, clampZ ? 0 : distZ * dirZ);
