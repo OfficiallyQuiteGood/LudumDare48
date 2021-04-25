@@ -34,6 +34,7 @@ public class Enemy : MonoBehaviour
     public void changeDirection()
     {
         direction = -direction;
+        StartCoroutine(PauseMovement());
         Flip();
     }
 

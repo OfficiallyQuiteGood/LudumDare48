@@ -231,7 +231,7 @@ MonoBehaviour:
   shouldMove: 1
   animator: {fileID: 7737658093102459731}
   timeInterval: 1
-  direction: 1
+  direction: -1
   agroDistance: 10
   FirePoint: {fileID: 985154839422833592}
   hammerProjectile: {fileID: 335680953676288208, guid: 1770fed11da50c041a20beb999bbfdbd, type: 3}
@@ -271,6 +271,14 @@ PrefabInstance:
     - target: {fileID: 240917734072291558, guid: 4f6f1d2b3199a15489f3fba41a397b80, type: 3}
       propertyPath: m_Name
       value: WallDetection
+      objectReference: {fileID: 0}
+    - target: {fileID: 2332645372592166598, guid: 4f6f1d2b3199a15489f3fba41a397b80, type: 3}
+      propertyPath: m_Size.x
+      value: 0.69653493
+      objectReference: {fileID: 0}
+    - target: {fileID: 2332645372592166598, guid: 4f6f1d2b3199a15489f3fba41a397b80, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.15398607
       objectReference: {fileID: 0}
     - target: {fileID: 2332645372592166598, guid: 4f6f1d2b3199a15489f3fba41a397b80, type: 3}
       propertyPath: m_IsTrigger
