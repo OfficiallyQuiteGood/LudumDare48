@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class HealthSystem : MonoBehaviour
 {
@@ -21,6 +22,9 @@ public class HealthSystem : MonoBehaviour
     
     // Animator
     public Animator animator;
+
+    // Lost condition object
+    public LoseCondition loseCondition;
 
     // Start is called before the first frame update
     void Start()
@@ -60,6 +64,9 @@ public class HealthSystem : MonoBehaviour
         Instantiate(deathPrefab, transform.position, Quaternion.identity);
         GameObject.Find("World Settings").GetComponent<WorldSettings>().InstantiatePlayer();
         Destroy(gameObject);
+
+        // Reload entire scene?
+        loseCondition.ReloadGame();
     }
 
     protected IEnumerator PlayIFrames()
