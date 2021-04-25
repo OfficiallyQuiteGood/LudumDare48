@@ -63,6 +63,7 @@ public class MainCharacter : MonoBehaviour
 	{
 		GameObject.Find("Follow Camera").GetComponent<Follow>().PausePan(1f);
 		gameObject.GetComponent<HealthSystem>().TakeDamage(1);
+		gameObject.GetComponent<CharacterController2D>().playerWon = false;
 		StartCoroutine(resetPositionWithDelay(1f));
 	}
 
@@ -102,7 +103,7 @@ public class MainCharacter : MonoBehaviour
 	}
 	void OnTriggerEnter2D(Collider2D collider)
 	{
-		Debug.Log("PLAYER COLLISION: "+collider);
+		//Debug.Log("PLAYER COLLISION: "+collider);
 		if (collider.transform.gameObject.layer == LayerMask.NameToLayer("Projectile"))
         {
             Projectile projectile = collider.transform.gameObject.GetComponent<Projectile>();
@@ -115,7 +116,7 @@ public class MainCharacter : MonoBehaviour
 	void OnCollisionEnter2D(Collision2D collision)
 	{
 		Collider2D collider = collision.collider;
-		Debug.Log("PLAYER COLLISION: "+collider);
+		//Debug.Log("PLAYER COLLISION: "+collider);
 		if (collider.transform.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
             Enemy enemy = collider.transform.gameObject.GetComponent<Enemy>();
