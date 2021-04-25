@@ -17,6 +17,7 @@ public class SproutProjectile : MonoBehaviour
 
     public GameObject projectileDeath;
     Vector3 prevPos;
+    public float difficulty = 0.8f;
     
     // Start is called before the first frame update
     void Start()
@@ -61,7 +62,8 @@ public class SproutProjectile : MonoBehaviour
         if(player!=null)
         {
             Vector3 dir = (player.transform.position - transform.position).normalized;
-            transform.position+=new Vector3(dir.x * movementSpeed * Time.fixedDeltaTime,dir.y * movementSpeed * Time.fixedDeltaTime,0);
+            //set dir.x to get homing functionality
+            transform.position+=new Vector3(direction * movementSpeed * Time.fixedDeltaTime, difficulty*dir.y * movementSpeed * Time.fixedDeltaTime,0);
             //transform.position+=new Vector3(direction * movementSpeed * Time.fixedDeltaTime,0,0);
 
             //m_Rigidbody.AddForce(player.transform.position * m_Thrust);
