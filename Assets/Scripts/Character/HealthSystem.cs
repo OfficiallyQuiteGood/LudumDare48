@@ -35,7 +35,7 @@ public class HealthSystem : MonoBehaviour
     }
 
     // Take damage function
-    private void TakeDamage(int damage = 1)
+    public void TakeDamage(int damage = 1)
     {
         if (bCanBeDamaged)
         {

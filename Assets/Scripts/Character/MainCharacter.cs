@@ -10,6 +10,10 @@ public class MainCharacter : MonoBehaviour
 	float horizontalMove = 0f;
 	bool jump = false;
 
+	public float verticalSpeed;
+	Vector3 prevPos;
+	float prevVertical = 0.0f;
+
 	
 	// Update is called once per frame
 	void Update () {
@@ -22,7 +26,10 @@ public class MainCharacter : MonoBehaviour
 		{
 			jump = true;
 		}
+
+		
 	}
+	
 
 	public void Attack()
 	{
@@ -37,6 +44,30 @@ public class MainCharacter : MonoBehaviour
 
 		//animator.SetFloat("VerticalSpeed", verticalMove);
 		animator.SetFloat("HorizontalSpeed", Mathf.Abs(horizontalMove));
-		animator.SetBool("NotGrounded", jump);
+
+		//get vertical speed
+		prevVertical = verticalSpeed;
+		verticalSpeed = (transform.position - prevPos).y*50;
+		prevPos = transform.position;
+
+		//set verticalSpeed;;
+		//fall speed limit
+		if(verticalSpeed<-20) gameObject.GetComponent<HealthSystem>().TakeDamage(3);
+		animator.SetFloat("VerticalSpeed", verticalSpeed);
+
+		//take damage on fall
+		if(prevVertical<0 && controller.m_Grounded) DealFallDamage();
+	}
+
+	void OnEnterCollision2D(Collider2D collisionInfo)
+	{
+		
+	}
+
+	void DealFallDamage()
+	{
+		Debug.Log("Deal Fall Damage");
+		if(prevVertical < -15) gameObject.GetComponent<HealthSystem>().TakeDamage(2);
+		else if(prevVertical < -12) gameObject.GetComponent<HealthSystem>().TakeDamage(1);
 	}
 }
