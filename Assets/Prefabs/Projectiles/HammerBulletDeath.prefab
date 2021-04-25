@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6296415236320146609}
   - component: {fileID: 3231823883052057610}
   - component: {fileID: 13406089430995404}
+  - component: {fileID: 3962595351675614694}
   m_Layer: 0
   m_Name: HammerBulletDeath
   m_TagString: Untagged
@@ -102,3 +103,16 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &3962595351675614694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6217963693807722197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e04414fbfc37d3447be6dbd83f8f580a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationLength: 0.5

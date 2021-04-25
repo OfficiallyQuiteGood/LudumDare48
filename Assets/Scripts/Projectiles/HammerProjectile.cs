@@ -48,6 +48,24 @@ public class HammerProjectile : MonoBehaviour
         }
     }
 
+    void OnTriggerEnter2D(Collider2D hitInfo)
+    {
+        MainCharacter player = hitInfo.GetComponent<MainCharacter>();
+        if(player!=null)
+        {
+            ProjectileHit();
+            //ProjectileDeath();
+        }
+
+        
+        
+    }
+
+    public void ProjectileHit()
+    {
+
+    }
+
 
     public void changeDirection(int hammerDirection)
     {

@@ -43,27 +43,7 @@ public class Hammer : Enemy
     // Update is called once per frame
     void Update()
     {
-        GameObject player = GameObject.Find("Player");
-        if(player!=null)
-        {
-            
-            float distance = Mathf.Abs(Vector3.Distance(player.transform.position, transform.position));
-
-            //change enemy direction if player in range           
-            playerDirection = player.transform.position.x < transform.position.x ? -1: 1;
-            if(playerDirection != direction) changeDirection();
-
-            if(distance <= agroDistance)
-            {
-                playerNear = true;
-            }
-            else
-            {
-                playerNear = false;
-            }
-
-            setAnimatorParameter("PlayerNear", playerNear);
-        }
+        CheckAgro(true);
         
     }
 
@@ -71,11 +51,9 @@ public class Hammer : Enemy
     {
         if(playerNear && shouldMove && !isShooting)
         {
-            
             StartCoroutine(HammerSwing());
-            
         }
-        else if(shouldMove && !isShooting) 
+        else if(shouldMove) 
         {
             transform.position+=new Vector3(direction * movementSpeed * Time.fixedDeltaTime,0,0);
         }
@@ -94,10 +72,14 @@ public class Hammer : Enemy
         {
             hammerBullet.GetComponent<HammerProjectile>().changeDirection(direction);
         }
-        yield return new WaitForSeconds(2f);
+        StartCoroutine(PauseMovement());
+        yield return new WaitForSeconds(0.7f);
+        
+        setAnimatorParameter("ShouldMove", true);
+        yield return new WaitForSeconds(1f);
         isShooting = false;
         setAnimatorParameter("IsShooting", isShooting);
-        setAnimatorParameter("ShouldMove", true);
+        
         //PauseMovement();
     }
 

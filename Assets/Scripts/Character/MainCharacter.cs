@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class MainCharacter : MonoBehaviour
 {
-public CharacterController2D controller;
-
+	public CharacterController2D controller;
 	public Animator animator;
-	public float Health;
 	public float runSpeed = 40f;
-
 	float horizontalMove = 0f;
 	bool jump = false;
+
 	
 	// Update is called once per frame
 	void Update () {
+
+		horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
 
 		horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
 
@@ -24,19 +24,9 @@ public CharacterController2D controller;
 		}
 	}
 
-	public void TakeDamage()
-	{
-
-	}
-
-	public void FillHeart()
-	{
-
-	}
-
 	public void Attack()
 	{
-
+		animator.SetBool("IsAttacking", true);
 	}
 
 	void FixedUpdate ()

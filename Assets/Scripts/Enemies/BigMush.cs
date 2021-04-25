@@ -9,6 +9,7 @@ public class BigMush : Enemy
 
 	bool jump = false;
     public float chargeSpeed = 3f;
+    bool charging = false;
 
     // Start is called before the first frame update
     void Start()
@@ -45,33 +46,32 @@ public class BigMush : Enemy
     // Update is called once per frame
     void Update()
     {
-        GameObject player = GameObject.Find("Player");
-        if(player!=null)
-        {
-            float distance = Mathf.Abs(Vector3.Distance(player.transform.position, transform.position));
-            playerDirection = player.transform.position.x < transform.position.x ? -1: 1;
-            if(distance<=agroDistance)
-            {
-                playerNear = true;
-            }
-            else
-            {
-                playerNear = false;
-            }
-
-            setAnimatorParameter("PlayerNear", playerNear);
-        }
+        CheckAgro(false);
         
     }
 
     void FixedUpdate()
     {
         //flip the player
-        if(playerNear && shouldMove)
+        if(playerNear && shouldMove && !charging)
         {
-            if(playerDirection != direction) changeDirection();
-            transform.position+=new Vector3(playerDirection * movementSpeed*chargeSpeed * Time.fixedDeltaTime,0,0);
+            StartCoroutine(Charge());
+        }
+        else if(charging && shouldMove)
+        {
+            transform.position+=new Vector3(direction * movementSpeed*chargeSpeed * Time.fixedDeltaTime,0,0);
         }
         else if(shouldMove) transform.position+=new Vector3(direction * movementSpeed * Time.fixedDeltaTime,0,0);
+
+    }
+
+    protected IEnumerator Charge()
+    {
+        charging = true;
+        if(playerDirection != direction) changeDirection();
+        yield return new WaitForSeconds(2);
+        charging = false;
+        
+        StartCoroutine(PauseMovement());
     }
 }

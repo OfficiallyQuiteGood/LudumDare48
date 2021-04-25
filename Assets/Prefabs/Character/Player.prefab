@@ -49,6 +49,7 @@ GameObject:
   - component: {fileID: 4488948187720201018}
   - component: {fileID: 3579516565413295200}
   - component: {fileID: 3154870882975110784}
+  - component: {fileID: 4057609757982954390}
   m_Layer: 10
   m_Name: Player
   m_TagString: Player
@@ -137,7 +138,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 6091213573708431092}
   animator: {fileID: 3154870882975110784}
-  Health: 1
   runSpeed: 20
 --- !u!114 &6091213573708431092
 MonoBehaviour:
@@ -372,6 +372,24 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &4057609757982954390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4223416743461697165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b95047ecaffda24988cc04441230a2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  totalHealth: 3
+  iFrameDuration: 2
+  healthUI: {fileID: 0}
+  deathPrefab: {fileID: 374835177781778217, guid: 87d9e2c61add86144ac529556c22ea9a, type: 3}
+  deathEffect: {fileID: 9100000, guid: a99ab82baf728294fa909e7183e96ddb, type: 2}
+  animator: {fileID: 3154870882975110784}
 --- !u!1 &5688530940386352209
 GameObject:
   m_ObjectHideFlags: 0

@@ -77,10 +77,8 @@ public class SproutProjectile : MonoBehaviour
         {
             ProjectileHit();
         }
-        else if(hitInfo is TilemapCollider2D)
-        {
-             ProjectileDeath();
-        }
+
+        ProjectileDeath();
         
     }
 
@@ -97,7 +95,7 @@ public class SproutProjectile : MonoBehaviour
     public void ProjectileHit()
     {
 
-        ProjectileDeath();
+        //ProjectileDeath();
     }
 
     public void Flip()
