@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4673628243773040346
+--- !u!1 &87128750604587013
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,37 +8,37 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 145000451354294748}
-  - component: {fileID: 4432214318678192375}
+  - component: {fileID: 4893933021095251715}
+  - component: {fileID: 8965532658279319080}
   m_Layer: 0
-  m_Name: MushClump1
+  m_Name: MushClumpBG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &145000451354294748
+--- !u!4 &4893933021095251715
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4673628243773040346}
+  m_GameObject: {fileID: 87128750604587013}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.19, y: -15.1, z: 28.698217}
+  m_LocalPosition: {x: 15.68, y: -29.4, z: 57.396435}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 984282721859990085}
+  - {fileID: 5494748785954604186}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &4432214318678192375
+--- !u!212 &8965532658279319080
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4673628243773040346}
+  m_GameObject: {fileID: 87128750604587013}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -83,7 +83,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &8320846345190217078
+--- !u!1 &3643428219374937001
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -91,8 +91,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 984282721859990085}
-  - component: {fileID: 7074781944114041532}
+  - component: {fileID: 5494748785954604186}
+  - component: {fileID: 2578090553188181091}
   m_Layer: 0
   m_Name: Point Light 2D
   m_TagString: Untagged
@@ -100,27 +100,27 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &984282721859990085
+--- !u!4 &5494748785954604186
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8320846345190217078}
+  m_GameObject: {fileID: 3643428219374937001}
   m_LocalRotation: {x: -0, y: -0, z: 0.010449599, w: 0.9999454}
   m_LocalPosition: {x: -0.22, y: -0.11, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 145000451354294748}
+  m_Father: {fileID: 4893933021095251715}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7074781944114041532
+--- !u!114 &2578090553188181091
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8320846345190217078}
+  m_GameObject: {fileID: 3643428219374937001}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
@@ -129,8 +129,8 @@ MonoBehaviour:
   m_LightType: 3
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.7
-  m_Color: {r: 0.3254717, g: 1, b: 0.75855505, a: 1}
-  m_Intensity: 1.85
+  m_Color: {r: 0.32549024, g: 0.58489054, b: 1, a: 1}
+  m_Intensity: 0.2
   m_LightVolumeOpacity: 0
   m_ApplyToSortingLayers: 000000000d2f2d194bae8b08b1fe6422
   m_LightCookieSprite: {fileID: 0}
