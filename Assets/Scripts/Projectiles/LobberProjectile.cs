@@ -64,7 +64,7 @@ public class LobberProjectile : Projectile
 		transform.position = nextPos;
 		
 		// Do something when we reach the target
-		if (nextPos == target) Arrived();
+		//if (nextPos == target) Arrived();
     }
 
     void Arrived() {
