@@ -41,6 +41,11 @@ public class SproutProjectile : MonoBehaviour
     void Update()
     {
         
+        
+    }
+
+    void FixedUpdate()
+    {
         TrailPlayer();
         
          

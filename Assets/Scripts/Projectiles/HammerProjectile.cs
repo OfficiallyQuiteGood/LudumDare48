@@ -33,10 +33,15 @@ public class HammerProjectile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+        
+    }
+
+    void FixedUpdate()
+    {
         //TileBase tb = tilemap.GetTile(startingPosition);
         transform.position+=new Vector3(direction * movementSpeed * Time.fixedDeltaTime,0,0);
         //Debug.Log(tb);
-        
     }
 
     void OnTriggerExit2D(Collider2D other)
