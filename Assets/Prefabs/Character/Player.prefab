@@ -141,6 +141,7 @@ MonoBehaviour:
   controller: {fileID: 6091213573708431092}
   animator: {fileID: 3154870882975110784}
   runSpeed: 20
+  verticalSpeed: 0
 --- !u!114 &6091213573708431092
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -160,6 +161,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_GroundCheck: {fileID: 7885339859749318122}
+  m_Grounded: 0
   isSwinging: 0
   ropeHook: {x: 0, y: 0}
   swingForce: 20
@@ -418,7 +420,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5688530940386352209}
   m_LocalRotation: {x: -0, y: -0, z: -0.38268343, w: 0.92387956}
-  m_LocalPosition: {x: 0.52, y: 0, z: 0}
+  m_LocalPosition: {x: 2.5, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 357275874515495603}
