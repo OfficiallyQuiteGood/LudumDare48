@@ -6,8 +6,9 @@ public class MainCharacter : MonoBehaviour
 {
 public CharacterController2D controller;
 
+	public GameObject deathEffect;
 	public Animator animator;
-	public float Health;
+	public float Health = 1;
 	public float runSpeed = 40f;
 
 	float horizontalMove = 0f;
@@ -15,6 +16,8 @@ public CharacterController2D controller;
 	
 	// Update is called once per frame
 	void Update () {
+
+		horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
 
 		horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
 
@@ -26,7 +29,16 @@ public CharacterController2D controller;
 
 	public void TakeDamage()
 	{
+		if(Health <= 0)
+		{
+			Die();
+		}
+	}
 
+	public void Die()
+	{
+		Instantiate(deathEffect, transform.position, transform.rotation);
+		Destroy(gameObject);
 	}
 
 	public void FillHeart()
@@ -36,7 +48,7 @@ public CharacterController2D controller;
 
 	public void Attack()
 	{
-
+		animator.SetBool("IsAttacking", true);
 	}
 
 	void FixedUpdate ()

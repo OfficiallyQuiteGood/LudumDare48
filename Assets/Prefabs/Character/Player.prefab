@@ -136,6 +136,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 6091213573708431092}
+  deathEffect: {fileID: 374835177781778217, guid: 87d9e2c61add86144ac529556c22ea9a, type: 3}
   animator: {fileID: 3154870882975110784}
   Health: 1
   runSpeed: 20
