@@ -57,6 +57,11 @@ public class HealthSystem : MonoBehaviour
         }
     }
 
+    public int GetHealth()
+    {
+        return currHealth;
+    }
+
     //reset player and lose 1 health
     // public void FallFar(Vector3 lastPos)
     // {
