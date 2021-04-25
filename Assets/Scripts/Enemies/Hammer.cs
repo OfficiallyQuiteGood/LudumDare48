@@ -49,7 +49,11 @@ public class Hammer : Enemy
 
     void FixedUpdate()
     {
-        if(playerNear && shouldMove && !isShooting)
+        if(isBouncing)
+        {
+            transform.position += new Vector3(0.01f*-playerDirection,0.01f,0);
+        }
+        else if(playerNear && shouldMove && !isShooting)
         {
             StartCoroutine(HammerSwing());
         }

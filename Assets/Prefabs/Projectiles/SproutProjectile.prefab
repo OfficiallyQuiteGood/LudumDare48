@@ -228,7 +228,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction: -1
-  movementSpeed: 1
+  movementSpeed: 3
   timeInterval: 4
   m_Thrust: 0.5
   projectileDeath: {fileID: 4495568155693589128, guid: 8cf5975617f766b4e94040abaf323902, type: 3}
+  difficulty: 0.1

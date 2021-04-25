@@ -15,6 +15,7 @@ public class MainCharacter : MonoBehaviour
 	float prevVertical = 0.0f;
 	//legal position for respawn
 	public Vector3 lastLegalPosition;
+	bool canSetPosition = true;
 
 	void Start()
 	{
@@ -46,7 +47,7 @@ public class MainCharacter : MonoBehaviour
 	//set legal position if valid
 	public void SetLastLegalPosition()
 	{
-		if(verticalSpeed>=0) lastLegalPosition = gameObject.transform.position;
+		if(verticalSpeed>=0 && canSetPosition) lastLegalPosition = gameObject.transform.position;
 	}
 
 	//reset position (if player falls too fast)
@@ -61,8 +62,10 @@ public class MainCharacter : MonoBehaviour
 	//set position and start iframes with delay
 	IEnumerator resetPositionWithDelay(float delay)
 	{
+		canSetPosition = false;
 		yield return new WaitForSeconds(delay);
 		transform.position = lastLegalPosition;
+		canSetPosition = true;
 	}
 
 	void FixedUpdate ()
@@ -90,10 +93,39 @@ public class MainCharacter : MonoBehaviour
 		//take damage on fall
 		if(prevVertical<0 && controller.m_Grounded) DealFallDamage();
 	}
-
-	void OnEnterCollision2D(Collider2D collisionInfo)
+	void OnTriggerEnter2D(Collider2D collider)
 	{
-		
+		Debug.Log("PLAYER COLLISION: "+collider);
+		if (collider.transform.gameObject.layer == LayerMask.NameToLayer("Projectile"))
+        {
+            Projectile projectile = collider.transform.gameObject.GetComponent<Projectile>();
+            if (projectile)
+            {
+                gameObject.GetComponent<HealthSystem>().TakeDamage(1);
+            }
+        }
+	}
+	void OnCollisionEnter2D(Collision2D collision)
+	{
+		Collider2D collider = collision.collider;
+		Debug.Log("PLAYER COLLISION: "+collider);
+		if (collider.transform.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        {
+            Enemy enemy = collider.transform.gameObject.GetComponent<Enemy>();
+            if (enemy)
+            {
+                gameObject.GetComponent<HealthSystem>().TakeDamage(1);
+            }
+        }
+
+		if (collider.transform.gameObject.layer == LayerMask.NameToLayer("Projectile"))
+        {
+            Projectile projectile = collider.transform.gameObject.GetComponent<Projectile>();
+            if (projectile)
+            {
+                gameObject.GetComponent<HealthSystem>().TakeDamage(1);
+            }
+        }
 	}
 
 	void DealFallDamage()
