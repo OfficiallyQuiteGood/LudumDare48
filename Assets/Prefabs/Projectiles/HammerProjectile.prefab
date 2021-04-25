@@ -123,7 +123,7 @@ MonoBehaviour:
   projectileBreak: {fileID: 6217963693807722197, guid: 2d857a4f11afa074e91b58f23c775955, type: 3}
   projectileSpeed: 0
   direction: 1
-  movementSpeed: 1
+  movementSpeed: 3
   timeInterval: 4
   shouldFlip: 1
 --- !u!50 &335680953676288215
@@ -160,7 +160,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.12737316, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -171,7 +171,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.7452537, y: 1}
   m_EdgeRadius: 0
 --- !u!61 &335680953676288209
 BoxCollider2D:
@@ -186,7 +186,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.3754336, y: -0.61073506}
+  m_Offset: {x: -0.35406756, y: -0.61073506}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -197,7 +197,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.24913281, y: 0.85355353}
+  m_Size: {x: 0.23523736, y: 0.85355353}
   m_EdgeRadius: 0
 --- !u!1 &5908232823796459075
 GameObject:
@@ -292,7 +292,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4614719178746542228, guid: 0e0c2ccd1de9f3d47998e1fda39e5193, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.55
+      value: -0.37
       objectReference: {fileID: 0}
     - target: {fileID: 4614719178746542228, guid: 0e0c2ccd1de9f3d47998e1fda39e5193, type: 3}
       propertyPath: m_LocalPosition.y

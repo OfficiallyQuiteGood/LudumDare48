@@ -18,6 +18,8 @@ public class Enemy : MonoBehaviour
     public float agroDistance = 2f;
     protected bool playerNear = false;
 
+    protected bool isBouncing = false;
+
     private bool m_FacingRight = true;  // For determining which way the Enemy is currently facing.
 
     void Start()
@@ -61,7 +63,7 @@ public class Enemy : MonoBehaviour
     public void TakeDamage (int damage)
     {
         Debug.Log("take damage");
-
+        StartCoroutine(BounceBack());
         health -= damage;
 
         if(health <= 0)
@@ -70,6 +72,25 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    public IEnumerator BounceBack()
+    {
+        StartCoroutine(CharacterBlinker(5,0.1f));
+        isBouncing = true;
+        yield return new WaitForSeconds(1);
+        isBouncing = false;
+    }
+
+    protected IEnumerator CharacterBlinker(int numFrames, float frameDuration)
+    {
+        for(int i = 0; i<numFrames; i++)
+        {
+            Debug.Log("Blink");
+            gameObject.GetComponent<Renderer>().enabled = false;
+            yield return new WaitForSeconds(frameDuration);
+            gameObject.GetComponent<Renderer>().enabled = true;
+            yield return new WaitForSeconds(frameDuration);
+        }
+    }
     protected static Vector3 getRandomDirection()
     {
         return new Vector3(UnityEngine.Random.Range(-1,1), UnityEngine.Random.Range(-1f,1f)).normalized;
