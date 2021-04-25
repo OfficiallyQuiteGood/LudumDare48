@@ -19,6 +19,7 @@ public class Hammer : Enemy
 
         //StartCoroutine(MoveAtInterval());
         shouldMove = true;
+        setAnimatorParameter("ShouldMove", shouldMove);
         startingPosition = transform.position;
     }
 
@@ -89,7 +90,10 @@ public class Hammer : Enemy
         yield return new WaitForSeconds(0.3f); 
         
         GameObject hammerBullet = Instantiate(hammerProjectile, FirePoint.position, FirePoint.rotation);
-        hammerBullet.GetComponent<HammerProjectile>().changeDirection(direction);
+        if(hammerBullet.GetComponent<HammerProjectile>().direction != direction)
+        {
+            hammerBullet.GetComponent<HammerProjectile>().changeDirection(direction);
+        }
         yield return new WaitForSeconds(2f);
         isShooting = false;
         setAnimatorParameter("IsShooting", isShooting);

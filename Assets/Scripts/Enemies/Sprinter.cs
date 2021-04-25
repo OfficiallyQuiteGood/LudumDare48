@@ -14,7 +14,7 @@ public class Sprinter : Enemy
     void Start()
     {
         //test death animations
-        StartCoroutine(DealDamage());
+        //StartCoroutine(DealDamage());
 
         //StartCoroutine(MoveAtInterval());
         setAnimatorParameter("ShouldMove", shouldMove);
