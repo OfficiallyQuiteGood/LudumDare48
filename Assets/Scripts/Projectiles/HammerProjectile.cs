@@ -5,6 +5,7 @@ using UnityEngine.Tilemaps;
 
 public class HammerProjectile : MonoBehaviour
 {
+    public GameObject projectileBreak;
     public float projectileSpeed;
     Vector3 startingPosition;
     //TileMap tilemap;
@@ -43,9 +44,10 @@ public class HammerProjectile : MonoBehaviour
         if(other is TilemapCollider2D)
         {
             Debug.Log(other);
-            Destroy(gameObject);
+            ProjectileDeath();
         }
     }
+
 
     public void changeDirection(int hammerDirection)
     {
@@ -66,4 +68,10 @@ public class HammerProjectile : MonoBehaviour
 		theScale.x *= -1;
 		transform.localScale = theScale;
 	}
+
+    public void ProjectileDeath()
+    {
+        Instantiate(projectileBreak, transform.position, transform.rotation);
+        Destroy(gameObject);
+    }
 }

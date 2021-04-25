@@ -6,6 +6,8 @@ public class MainCharacter : MonoBehaviour
 {
 public CharacterController2D controller;
 
+	public Animator animator;
+	public float Health;
 	public float runSpeed = 40f;
 
 	float horizontalMove = 0f;
@@ -22,10 +24,29 @@ public CharacterController2D controller;
 		}
 	}
 
+	public void TakeDamage()
+	{
+
+	}
+
+	public void FillHeart()
+	{
+
+	}
+
+	public void Attack()
+	{
+
+	}
+
 	void FixedUpdate ()
 	{
 		// Move our character
 		controller.Move(horizontalMove * Time.fixedDeltaTime, false, jump);
 		jump = false;
+
+		//animator.SetFloat("VerticalSpeed", verticalMove);
+		animator.SetFloat("HorizontalSpeed", Mathf.Abs(horizontalMove));
+		animator.SetBool("NotGrounded", jump);
 	}
 }

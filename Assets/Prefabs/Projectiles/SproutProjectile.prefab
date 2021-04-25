@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8532082282711278792}
   - component: {fileID: 8532082282711278799}
   - component: {fileID: 8532082282711278788}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: SproutProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8532082282711278798}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.7147546, y: 1.4700351, z: 2.92}
+  m_LocalPosition: {x: -4.7147546, y: 1.4700351, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -158,3 +158,4 @@ MonoBehaviour:
   movementSpeed: 3
   timeInterval: 4
   m_Thrust: 0.5
+  projectileDeath: {fileID: 4495568155693589128, guid: 8cf5975617f766b4e94040abaf323902, type: 3}

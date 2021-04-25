@@ -131,6 +131,7 @@ public class Enemy : MonoBehaviour
         {
             //Debug.Log("edge reached");
             changeDirection();
+            Debug.Log("changeDirection enemy");
         }
         
     }
