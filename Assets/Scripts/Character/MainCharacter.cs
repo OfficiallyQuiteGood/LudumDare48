@@ -59,12 +59,12 @@ public class MainCharacter : MonoBehaviour
 	}
 
 	//reset position (if player falls too fast)
-	void resetPlayerPosition()
+	public void resetPlayerPosition(float delay)
 	{
-		GameObject.Find("Follow Camera").GetComponent<Follow>().PausePan(1f);
+		GameObject.Find("Follow Camera").GetComponent<Follow>().PausePan(delay);
 		gameObject.GetComponent<HealthSystem>().TakeDamage(1);
 		gameObject.GetComponent<CharacterController2D>().playerWon = false;
-		StartCoroutine(resetPositionWithDelay(1f));
+		StartCoroutine(resetPositionWithDelay(delay));
 	}
 
 	//set position and start iframes with delay
@@ -95,7 +95,7 @@ public class MainCharacter : MonoBehaviour
 
 		//set verticalSpeed;;
 		//fall speed limit
-		if(verticalSpeed<-15) resetPlayerPosition();
+		if(verticalSpeed<-15) resetPlayerPosition(1f);
 		
 
 		//take damage on fall

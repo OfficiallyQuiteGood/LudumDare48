@@ -11,6 +11,7 @@ public class ThrowRope : MonoBehaviour
     private GameObject currHook;
     public float ropeMaxCastDistance = 2f;
     public LayerMask ropeLayerMask;
+    public LayerMask ignoreLayers;
     private bool ropeWasCast = false;
     public CharacterController2D characterController;
     public SpriteRenderer crossHair;
@@ -94,9 +95,15 @@ public class ThrowRope : MonoBehaviour
 
             // Create ray cast
             var hit = Physics2D.Raycast(transform.position, aimDirection, ropeMaxCastDistance, ropeLayerMask);
+            //var antiHit = Physics2D.Raycast(transform.position, aimDirection, ropeMaxCastDistance, antiRopeLayerMask);
             
+            if (hit.collider != null)
+            {
+                Debug.Log("Hit " + hit.collider.name);
+            }
+
             // if hit
-            if (hit.collider != null && !ropeWasCast)
+            if (hit.collider != null && !hit.collider.IsTouchingLayers(ignoreLayers) && !ropeWasCast)
             {
                 // Start animation for attack
                 GameObject.Find("Player").GetComponent<MainCharacter>().Attack();
@@ -108,7 +115,6 @@ public class ThrowRope : MonoBehaviour
                 Vector2 endPoint = hit.point;
                 currHook = (GameObject) Instantiate(hook, transform.position, Quaternion.identity);
                 currHook.GetComponent<Rope>().endPoint = endPoint;
-                //currHook.GetComponent<Rope>().CreateRope();
             }
         }
 

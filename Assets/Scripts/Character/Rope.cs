@@ -12,10 +12,14 @@ public class Rope : MonoBehaviour
     public GameObject nodePrefab;
     private GameObject player;
     private GameObject lastNode;
+    private Vector3 lastKnownPosition;
     private List<GameObject> Nodes = new List<GameObject>();
     int vertexCount = 2;
     bool done = false;
     private LineRenderer lineRenderer;
+
+    // Rigid body (if we want one...)
+    private Rigidbody2D rb;
 
     // On awake
     void Awake()
@@ -23,8 +27,10 @@ public class Rope : MonoBehaviour
         // Find player
         player = GameObject.FindGameObjectWithTag("Player");
         lastNode = transform.gameObject;
+        lastKnownPosition = transform.position;
         Nodes.Add(transform.gameObject);
         lineRenderer = GetComponent<LineRenderer>();
+        rb = player.transform.GetChild(0).GetComponent<Rigidbody2D>();
         //StartCoroutine(FixedMovement());
     }
 
@@ -36,7 +42,7 @@ public class Rope : MonoBehaviour
     // Update
     void Update()
     {
-        DoRopeLogic();
+        //DoRopeLogic();
     }
 
     protected IEnumerator FixedMovement()
@@ -51,25 +57,34 @@ public class Rope : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-
+        DoRopeLogic();
     }
 
     private void DoRopeLogic()
     {
-        transform.position = Vector2.MoveTowards(transform.position, endPoint, speed);
-
+        //Debug.Log("Hook position before = " + transform.position + " last known position before = " + lastKnownPosition);
+        transform.position = Vector2.MoveTowards(transform.position, endPoint, speed * Time.fixedDeltaTime);
+        //Debug.Log("Hook position after = " + transform.position + " last known position after = " + lastKnownPosition);
         if ((Vector2)transform.position != endPoint)
         {
             // Check for collision
-            float dist = Vector2.Distance(player.transform.position, lastNode.transform.position);
+            float dist = Vector2.Distance(lastKnownPosition, transform.position);
+            //Debug.Log("Distance between last two points? = " + dist);
             if (dist > distance)
             {
                 CreateNode();
+                lastKnownPosition = transform.position;
             }
         }
         else if (done == false)
         {
             done = true;
+            float dist = Vector2.Distance(player.transform.position, lastNode.transform.position);
+            while (dist > distance)
+            {
+                CreateNode();
+                dist -= distance;
+            }
             lastNode.GetComponent<HingeJoint2D>().connectedBody = player.GetComponent<Rigidbody2D>();
         }
 
@@ -104,7 +119,7 @@ public class Rope : MonoBehaviour
         lastNode.GetComponent<HingeJoint2D>().connectedBody = player.GetComponent<Rigidbody2D>();
     }
 
-    private void CreateNode()
+    public void CreateNode()
     {
         Vector2 pos2Create = player.transform.position - lastNode.transform.position;
         pos2Create.Normalize();
@@ -117,6 +132,8 @@ public class Rope : MonoBehaviour
 
         lastNode.GetComponent<HingeJoint2D>().connectedBody = go.GetComponent<Rigidbody2D>();
     
+        //Debug.Log("Distance between curr and last = " + Vector2.Distance(go.transform.position, lastNode.transform.position));
+
         lastNode = go;
 
         Nodes.Add(lastNode);

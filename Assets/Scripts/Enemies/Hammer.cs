@@ -53,11 +53,11 @@ public class Hammer : Enemy
         {
             transform.position += new Vector3(0.01f*-playerDirection,0.01f,0);
         }
-        else if(playerNear && shouldMove && !isShooting)
+        else if(playerNear && shouldMove && !isShooting && !isAtEdge)
         {
             StartCoroutine(HammerSwing());
         }
-        else if(shouldMove) 
+        else if(shouldMove && !isAtEdge) 
         {
             transform.position+=new Vector3(direction * movementSpeed * Time.fixedDeltaTime,0,0);
         }
