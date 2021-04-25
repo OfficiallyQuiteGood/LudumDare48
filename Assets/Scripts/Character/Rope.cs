@@ -36,7 +36,6 @@ public class Rope : MonoBehaviour
     // Update
     void Update()
     {
-        RenderLine();
     }
 
     protected IEnumerator FixedMovement()
@@ -72,6 +71,8 @@ public class Rope : MonoBehaviour
             done = true;
             lastNode.GetComponent<HingeJoint2D>().connectedBody = player.GetComponent<Rigidbody2D>();
         }
+
+        RenderLine();
     }
     
     private void RenderLine()
