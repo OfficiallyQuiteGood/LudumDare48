@@ -41,7 +41,15 @@ public class MainCharacter : MonoBehaviour
 
 	public void Attack()
 	{
-		animator.SetBool("IsAttacking", true);
+		StartCoroutine(AttackDelay());
+
+	}
+
+	IEnumerator AttackDelay()
+	{
+		SetAnimatorAttribute("IsAttacking", true);
+		yield return new WaitForSeconds(0.25f);
+		SetAnimatorAttribute("IsAttacking", false);
 	}
 
 	//set legal position if valid
@@ -124,6 +132,14 @@ public class MainCharacter : MonoBehaviour
             {
                 gameObject.GetComponent<HealthSystem>().TakeDamage(1);
             }
+        }
+	}
+
+	public void SetAnimatorAttribute(string parameterName, bool val)
+	{
+		if(animator.GetBool(parameterName) != val)
+        {
+            animator.SetBool(parameterName, val);
         }
 	}
 
