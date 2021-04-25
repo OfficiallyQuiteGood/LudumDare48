@@ -87,6 +87,7 @@ public class HealthSystem : MonoBehaviour
         loseCondition.ReloadGame();
     }
 
+
     protected IEnumerator PlayIFrames()
     {
         // Set able to be damaged to false

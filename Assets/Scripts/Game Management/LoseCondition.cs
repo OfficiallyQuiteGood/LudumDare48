@@ -22,7 +22,7 @@ public class LoseCondition : MonoBehaviour
         Debug.Log("Before loading scene");
 
         // Wait x amount of seconds
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(3f);
 
         Debug.Log("after loading scene");
 
