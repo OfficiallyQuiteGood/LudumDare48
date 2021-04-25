@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1839710664290619373}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: FirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 4324704582472364495}
   - component: {fileID: 4324704582472364492}
   - component: {fileID: 4324704582472364493}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Lobber
   m_TagString: Untagged
   m_Icon: {fileID: 0}

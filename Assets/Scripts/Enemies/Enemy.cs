@@ -60,6 +60,7 @@ public class Enemy : MonoBehaviour
     // Take damage function
     public void TakeDamage (int damage)
     {
+        Debug.Log("take damage");
 
         health -= damage;
 
