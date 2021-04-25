@@ -25,7 +25,7 @@ public class Rope : MonoBehaviour
         lastNode = transform.gameObject;
         Nodes.Add(transform.gameObject);
         lineRenderer = GetComponent<LineRenderer>();
-        StartCoroutine(FixedMovement());
+        //StartCoroutine(FixedMovement());
     }
 
     // Start is called before the first frame update
@@ -36,6 +36,7 @@ public class Rope : MonoBehaviour
     // Update
     void Update()
     {
+        DoRopeLogic();
     }
 
     protected IEnumerator FixedMovement()
