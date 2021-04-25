@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2556169454396632174}
   - component: {fileID: 5927868444165240471}
   - component: {fileID: 3106521402576254612}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Hook
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30,7 +30,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8247493491165763851}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -28.199614, y: -5.3624096, z: -2.8920321}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -106,7 +106,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!58 &7644633761571221549
 CircleCollider2D:
@@ -139,7 +139,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: -28.199614, y: -5.3624096}
+  m_ConnectedAnchor: {x: 0, y: 0}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -161,8 +161,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   endPoint: {x: 0, y: 0}
-  speed: 0.2
-  distance: 0.2
+  speed: 15
+  distance: 0.15
   nodePrefab: {fileID: 8671166810273839891, guid: 2ecf807fca770c74fa75bf1f26c2e46a, type: 3}
 --- !u!120 &3106521402576254612
 LineRenderer:
