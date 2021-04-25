@@ -14,10 +14,17 @@ public class Parallax : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        this.transform.position = new Vector3(
-            (16f + (player.transform.position.x * 0.4f)) * 0.5f,
-            (-35f + (player.transform.position.y * 0.8f)) * 0.2f,
-            this.transform.position.z
-        );
+        if(player != null)
+        {
+            this.transform.position = new Vector3(
+                (16f + (player.transform.position.x * 0.4f)) * 0.5f,
+                (-35f + (player.transform.position.y * 0.8f)) * 0.2f,
+                this.transform.position.z
+            );
+        }
+        else
+        {
+            player = GameObject.Find("Player");
+        }
     }
 }

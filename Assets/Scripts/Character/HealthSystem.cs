@@ -41,10 +41,10 @@ public class HealthSystem : MonoBehaviour
         {
             // Decrease health and die if necessary
             currHealth -= damage;
-            healthUI.OnHealthChanged(currHealth);
+            //healthUI.OnHealthChanged(currHealth);
             if (currHealth <= 0)
             {
-                healthUI.OnHealthChanged(0);
+                //healthUI.OnHealthChanged(0);
                 Die();
             }
             
@@ -58,6 +58,7 @@ public class HealthSystem : MonoBehaviour
     {
         // Switch animations?
         Instantiate(deathPrefab, transform.position, Quaternion.identity);
+        GameObject.Find("World Settings").GetComponent<WorldSettings>().InstantiatePlayer();
         Destroy(gameObject);
     }
 

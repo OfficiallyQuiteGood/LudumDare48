@@ -66,7 +66,7 @@ public class MainCharacter : MonoBehaviour
 
 	void DealFallDamage()
 	{
-		Debug.Log("Deal Fall Damage");
+		//Debug.Log("Deal Fall Damage");
 		if(prevVertical < -15) gameObject.GetComponent<HealthSystem>().TakeDamage(2);
 		else if(prevVertical < -12) gameObject.GetComponent<HealthSystem>().TakeDamage(1);
 	}
