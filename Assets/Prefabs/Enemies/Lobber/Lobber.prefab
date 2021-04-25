@@ -204,7 +204,7 @@ MonoBehaviour:
   animator: {fileID: 4324704582472364494}
   timeInterval: 1
   direction: -1
-  agroDistance: 10
+  agroDistance: 6
   FirePoint: {fileID: 1839710664290619373}
   LobProjectile: {fileID: 6287159677699994051, guid: fe33bfebf97e35c43ad35bdb4a99990d, type: 3}
 --- !u!1 &5785888767634728224

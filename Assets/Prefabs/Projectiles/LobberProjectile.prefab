@@ -190,8 +190,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e0d12d81a154f0448a6af52aa20d19c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  arcHeight: 1
+  speed: 3
+  arcHeight: 2
   direction: 1
   movementSpeed: 0.05
   timeInterval: 4
