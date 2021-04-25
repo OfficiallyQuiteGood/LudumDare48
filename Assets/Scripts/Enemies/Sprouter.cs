@@ -40,7 +40,7 @@ public class Sprouter : Enemy
         {
             StartCoroutine(ShootSprouts());
         }
-        else if(shouldMove) 
+        else if(shouldMove && !isAtEdge) 
         {
             transform.position+=new Vector3(direction * movementSpeed * Time.fixedDeltaTime,0,0);
         }

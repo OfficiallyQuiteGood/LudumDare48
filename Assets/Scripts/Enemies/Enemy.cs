@@ -21,7 +21,7 @@ public class Enemy : MonoBehaviour
     protected bool isBouncing = false;
 
     private bool m_FacingRight = true;  // For determining which way the Enemy is currently facing.
-
+    protected bool isAtEdge = false;
     void Start()
     {
         
@@ -144,13 +144,29 @@ public class Enemy : MonoBehaviour
         }
     }
 
+
     //Change Enemy Direction when they reach an edge
     void OnTriggerExit2D(Collider2D other)
     {
-        if (other is Terrain || other is TilemapCollider2D)
+        Debug.Log("ENTER "+other);
+        if (other is TilemapCollider2D)
         {
             changeDirection();
             StartCoroutine(PauseMovement());
+            isAtEdge = true;
+            setAnimatorParameter("IsAtEdge", true);
+        }
+        
+    }
+
+    //hard check to see if enemy at edge
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        Debug.Log("EXIT "+other);
+        if (other is Terrain || other is TilemapCollider2D)
+        {
+            isAtEdge = false;
+            setAnimatorParameter("IsAtEdge", false);
         }
         
     }
