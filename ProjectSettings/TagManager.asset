@@ -23,7 +23,11 @@ TagManager:
   - NonInteractable
   - Ground
   - Tree
+
+  - Rocks
+
   - Hook
+
   - 
   - 
   - 
@@ -51,6 +55,9 @@ TagManager:
     locked: 0
   - name: Terrain
     uniqueID: 2819587305
+    locked: 0
+  - name: Rocks
+    uniqueID: 73157885
     locked: 0
   - name: Foreground
     uniqueID: 422391565
