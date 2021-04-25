@@ -394,6 +394,7 @@ MonoBehaviour:
   deathPrefab: {fileID: 374835177781778217, guid: 87d9e2c61add86144ac529556c22ea9a, type: 3}
   deathEffect: {fileID: 9100000, guid: a99ab82baf728294fa909e7183e96ddb, type: 2}
   animator: {fileID: 3154870882975110784}
+  loseCondition: {fileID: 0}
 --- !u!1 &5688530940386352209
 GameObject:
   m_ObjectHideFlags: 0
@@ -566,9 +567,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_LightType: 3
   m_BlendStyleIndex: 0
-  m_FalloffIntensity: 0.79
+  m_FalloffIntensity: 0.86
   m_Color: {r: 0.9960785, g: 0.9294118, b: 0.9058824, a: 1}
-  m_Intensity: 0.21
+  m_Intensity: 0.1
   m_LightVolumeOpacity: 0
   m_ApplyToSortingLayers: 00000000
   m_LightCookieSprite: {fileID: 0}
@@ -580,7 +581,7 @@ MonoBehaviour:
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0.12
-  m_PointLightOuterRadius: 0.17
+  m_PointLightOuterRadius: 1.07
   m_PointLightDistance: 3
   m_PointLightQuality: 1
   m_ShapeLightParametricSides: 5
