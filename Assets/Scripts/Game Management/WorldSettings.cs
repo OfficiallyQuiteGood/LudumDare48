@@ -22,16 +22,27 @@ public class WorldSettings : MonoBehaviour
         
     }
 
-    public void InstantiatePlayer()
+    // public void InstantiatePlayer(Vector3 lastpos, int health)
+    // {
+    //     Debug.Log("instantiae pos: "+lastpos);
+    //     StartCoroutine(InstantiatePlayerAfterDelay(lastpos, new Quaternion()));
+        
+
+    // IEnumerator InstantiatePlayerAfterDelay(Vector3 lastpos1, Quaternion lastrot1)
+    // {
+    //     yield return new WaitForSeconds(2);
+    //     Debug.Log("Instantiating Player");
+    //     Debug.Log("instantiae pos: "+lastpos1);
+    //     GameObject newPlayer = Instantiate(playerPrefab, lastpos1, lastrot1);
+    //     Debug.Log("Instantiating Player - should be in game");
+    //     //set new follow
+    //     Follow followCam = GameObject.Find("Follow Camera").GetComponent<Follow>();
+    //     followCam.player = newPlayer;
+    // }
+    // }
+
+    public void GameOver()
     {
-        Debug.Log("Instantiating Player");
-        //yield return new WaitForSeconds(2);
-        Checkpoint checkpoint = CheckpointList.getCheckpoint();
-        Debug.Log(checkpoint.transform);
-        GameObject newPlayer = Instantiate(playerPrefab, checkpoint.transform.position, checkpoint.transform.rotation);
-        Debug.Log("Instantiating Player - should be in game");
-        //set new follow
-        Follow followCam = GameObject.Find("Follow Camera").GetComponent<Follow>();
-        followCam.player = newPlayer;
+
     }
 }
