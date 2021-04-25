@@ -22,50 +22,11 @@ public class Sprouter : Enemy
         startingPosition = transform.position;
     }
 
-    private Vector3 getRoamingPosition()
-    {
-        return startingPosition + new Vector3(10*Enemy.getRandomHorizontalDirection(), 0, 0);
-    }
-
-    protected IEnumerator MoveAtInterval()
-    {
-        
-        while (true)
-        {
-            yield return new WaitForSeconds(timeInterval);
-            shouldMove = !shouldMove;
-            setAnimatorParameter("ShouldMove", shouldMove);
-            direction = Enemy.getRandomHorizontalDirection();
-        }
-    }
 
     // Update is called once per frame
     void Update()
     {
-        GameObject player = GameObject.Find("Player");
-        if (player != null)
-        {
-            
-            float distance = Mathf.Abs(Vector3.Distance(player.transform.position, transform.position));
-
-            //change enemy direction if player in range           
-            playerDirection = player.transform.position.x < transform.position.x ? -1: 1;
-            if (playerNear && playerDirection != direction)
-            {
-                changeDirection();
-            }
-
-            if(distance <= agroDistance)
-            {
-                playerNear = true;
-            }
-            else
-            {
-                playerNear = false;
-            }
-
-            setAnimatorParameter("PlayerNear", playerNear);
-        }
+        CheckAgro(true);
         
     }
 
@@ -73,11 +34,9 @@ public class Sprouter : Enemy
     {
         if(playerNear && shouldMove && !isShooting)
         {
-            
             StartCoroutine(ShootSprouts());
-            
         }
-        else if(shouldMove && !isShooting) 
+        else if(shouldMove) 
         {
             transform.position+=new Vector3(direction * movementSpeed * Time.fixedDeltaTime,0,0);
         }
@@ -96,10 +55,11 @@ public class Sprouter : Enemy
         yield return new WaitForSeconds(0.3f);
         GameObject b2 = Instantiate(SproutProjectile, FirePoint.position, FirePoint.rotation);
         b2.GetComponent<SproutProjectile>().changeDirection(direction);
+        setAnimatorParameter("ShouldMove", true);
         yield return new WaitForSeconds(2f);
         isShooting = false;
         setAnimatorParameter("IsShooting", isShooting);
-        setAnimatorParameter("ShouldMove", true);
+        
         //PauseMovement();
     }
 
