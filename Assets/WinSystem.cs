@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Playables;
 using UnityEngine;
 
 public class WinSystem : MonoBehaviour
@@ -8,6 +9,11 @@ public class WinSystem : MonoBehaviour
 
     // Minimush prefab
     public GameObject miniMushPrefab;
+
+    // Director for the cutscene
+    private PlayableDirector director;
+
+    // General variables for the mush spawning
     public int maxNumMiniMush = 20;
     public float spawnFreqMin = 1.5f;
     public float spawnFreqMax = 3.0f;
@@ -34,11 +40,11 @@ public class WinSystem : MonoBehaviour
     // Sprite
     private Sprite sprite;
 
-
     // Start is called before the first frame update
     void Start()
     {
         sprite = GetComponent<SpriteRenderer>().sprite;
+        director = GameObject.Find("EndingCutscene").GetComponent<PlayableDirector>();
         StartCoroutine(StartSpawn());
     }
 
@@ -52,6 +58,7 @@ public class WinSystem : MonoBehaviour
     {
         // Wait then spawn minimush
         yield return new WaitForSeconds(spawnDelay);
+        director.Play();
         StartCoroutine(SpawnMiniMush());
     }
 
