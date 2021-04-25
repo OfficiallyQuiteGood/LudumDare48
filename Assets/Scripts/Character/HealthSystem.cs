@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class HealthSystem : MonoBehaviour
 {
@@ -59,6 +60,22 @@ public class HealthSystem : MonoBehaviour
         // Switch animations?
         Instantiate(deathPrefab, transform.position, Quaternion.identity);
         Destroy(gameObject);
+
+        // Reload entire scene?
+        StartCoroutine(ReloadGame());
+    }
+
+    protected IEnumerator ReloadGame()
+    {
+        Debug.Log("Before loading scene");
+
+        // Wait x amount of seconds
+        yield return new WaitForSeconds(1.5f);
+
+        Debug.Log("after loading scene");
+
+        // Load game again
+        SceneManager.LoadScene("TreeScene");
     }
 
     protected IEnumerator PlayIFrames()
