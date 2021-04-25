@@ -98,6 +98,9 @@ public class ThrowRope : MonoBehaviour
             // if hit
             if (hit.collider != null && !ropeWasCast)
             {
+                // Start animation for attack
+                GameObject.Find("Player").GetComponent<MainCharacter>().Attack();
+
                 // Endpoint
                 crossHair.enabled = false;
                 ropeWasCast = true;
