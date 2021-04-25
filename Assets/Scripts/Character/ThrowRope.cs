@@ -105,6 +105,7 @@ public class ThrowRope : MonoBehaviour
                 Vector2 endPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 currHook = (GameObject) Instantiate(hook, transform.position, Quaternion.identity);
                 currHook.GetComponent<Rope>().endPoint = endPoint;
+                //currHook.GetComponent<Rope>().CreateRope();
             }
         }
 
