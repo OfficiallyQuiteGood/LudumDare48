@@ -23,6 +23,9 @@ public class HealthSystem : MonoBehaviour
     // Animator
     public Animator animator;
 
+    // Lost condition object
+    public LoseCondition loseCondition;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -62,20 +65,7 @@ public class HealthSystem : MonoBehaviour
         Destroy(gameObject);
 
         // Reload entire scene?
-        StartCoroutine(ReloadGame());
-    }
-
-    protected IEnumerator ReloadGame()
-    {
-        Debug.Log("Before loading scene");
-
-        // Wait x amount of seconds
-        yield return new WaitForSeconds(1.5f);
-
-        Debug.Log("after loading scene");
-
-        // Load game again
-        SceneManager.LoadScene("TreeScene");
+        loseCondition.ReloadGame();
     }
 
     protected IEnumerator PlayIFrames()
