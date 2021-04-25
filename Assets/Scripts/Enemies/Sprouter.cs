@@ -43,14 +43,17 @@ public class Sprouter : Enemy
     void Update()
     {
         GameObject player = GameObject.Find("Player");
-        if(player!=null)
+        if (player != null)
         {
             
             float distance = Mathf.Abs(Vector3.Distance(player.transform.position, transform.position));
 
             //change enemy direction if player in range           
             playerDirection = player.transform.position.x < transform.position.x ? -1: 1;
-            if(playerDirection != direction) changeDirection();
+            if (playerNear && playerDirection != direction)
+            {
+                changeDirection();
+            }
 
             if(distance <= agroDistance)
             {
