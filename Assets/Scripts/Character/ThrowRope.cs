@@ -14,13 +14,19 @@ public class ThrowRope : MonoBehaviour
     private bool ropeWasCast = false;
     public CharacterController2D characterController;
     public SpriteRenderer crossHair;
-    public SpriteRenderer crossHairHit;
+    //public SpriteRenderer crossHairHit;
+    //public SpriteRenderer crossHairAttack;
+
+    // Textures....
+    public Sprite crossHairNormal;
+    public Sprite crossHairAttach;
+    public Sprite crossHairAttack;
+
     public float checkFrequency = 0.25f;
 
     // Start is called before the first frame update
     void Start()
     {
-        crossHairHit.enabled = false;
         StartCoroutine(CheckForCrossHairHit());
     }
 
@@ -49,15 +55,17 @@ public class ThrowRope : MonoBehaviour
 
                 var hit = Physics2D.Raycast(transform.position, aimDirection, ropeMaxCastDistance, ropeLayerMask);
 
-                if (cosTheta > 0 && hit.collider != null)
+                if (hit.collider != null && hit.collider.transform.gameObject.layer == LayerMask.NameToLayer("Enemy"))
                 {
-                    crossHair.enabled = false;
-                    crossHairHit.enabled = true;
+                    crossHair.sprite = crossHairAttack;
+                }
+                else if (hit.collider != null)
+                {
+                    crossHair.sprite = crossHairAttach;
                 }
                 else
                 {
-                    crossHair.enabled = true;
-                    crossHairHit.enabled = false;
+                    crossHair.sprite = crossHairNormal;
                 }
             }
         }
@@ -76,10 +84,6 @@ public class ThrowRope : MonoBehaviour
             var aimAngle = Mathf.Atan2(facingDirection.y, facingDirection.x);
             var cosTheta = Vector3.Dot(facingDirection, new Vector3(0.0f, 1.0f, 0.0f));
 
-            if (cosTheta < 0)
-            {
-                return;
-            }
             if (aimAngle < 0f)
             {
                 aimAngle = Mathf.PI * 2 + aimAngle;
@@ -96,7 +100,6 @@ public class ThrowRope : MonoBehaviour
             {
                 // Endpoint
                 crossHair.enabled = false;
-                crossHairHit.enabled = false;
                 ropeWasCast = true;
                 characterController.isSwinging = true;
                 Vector2 endPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -108,17 +111,22 @@ public class ThrowRope : MonoBehaviour
         // Handle mouse up
         if (Input.GetMouseButtonUp(0))
         {
-            if (currHook != null)
-            {
-                // Rope was cast is false now
-                crossHair.enabled = true;
-                ropeWasCast = false;
-                characterController.isSwinging = false;
+            DestroyRope();
+        }
+    }
 
-                // Clear stuff
-                currHook.GetComponent<Rope>().ClearRope();
-                Destroy(currHook);
-            }
+    public void DestroyRope()
+    {
+        if (currHook != null)
+        {
+            // Rope was cast is false now
+            crossHair.enabled = true;
+            ropeWasCast = false;
+            characterController.isSwinging = false;
+
+            // Clear stuff
+            currHook.GetComponent<Rope>().ClearRope();
+            Destroy(currHook);
         }
     }
 }

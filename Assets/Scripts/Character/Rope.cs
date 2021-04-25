@@ -34,6 +34,7 @@ public class Rope : MonoBehaviour
 
         if ((Vector2)transform.position != endPoint)
         {
+            // Check for collision
             float dist = Vector2.Distance(player.transform.position, lastNode.transform.position);
             if (dist > distance)
             {
@@ -88,5 +89,18 @@ public class Rope : MonoBehaviour
         }
         Nodes.Clear();
         lineRenderer.positionCount = 0;
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.collider.transform.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        {
+            Enemy enemy = collision.collider.transform.gameObject.GetComponent<Enemy>();
+            if (enemy)
+            {
+                enemy.TakeDamage(1);
+                player.GetComponent<ThrowRope>().DestroyRope();
+            }
+        }
     }
 }
