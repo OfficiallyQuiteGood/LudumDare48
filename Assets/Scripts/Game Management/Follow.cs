@@ -20,8 +20,15 @@ public class Follow : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        Vector3 desiredPosition = new Vector3(player.transform.position.x + offset.x, player.transform.position.y + offset.y,transform.position.z);
-        Vector3 smoothedPosition = Vector3.Lerp (transform.position, desiredPosition, smoothSpeed);
-        transform.position = smoothedPosition;
+        if(player != null)
+        {
+            Vector3 desiredPosition = new Vector3(player.transform.position.x + offset.x, player.transform.position.y + offset.y,transform.position.z);
+            Vector3 smoothedPosition = Vector3.Lerp (transform.position, desiredPosition, smoothSpeed);
+            transform.position = smoothedPosition;
+        }
+        else
+        {
+            player = GameObject.Find("Player");
+        }
     }
 }

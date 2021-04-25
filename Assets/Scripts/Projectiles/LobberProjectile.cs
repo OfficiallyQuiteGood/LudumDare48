@@ -32,6 +32,8 @@ public class LobberProjectile : MonoBehaviour
         //Fetch the Rigidbody from the GameObject with this script attached
         m_Rigidbody = GetComponent<Rigidbody2D>();
         target = GameObject.Find("Player").transform.position;
+        float distx = Mathf.Abs(target.x-startPos.x);
+        if(distx < 2) target += new Vector3(3*direction, 0, 0);
     }
 
     protected IEnumerator destroyAfterInterval()
