@@ -14,13 +14,14 @@ public class HammerProjectile : MonoBehaviour
     public float timeInterval = 4f;
 
     private bool m_FacingRight = true;
-    
+    public bool shouldFlip;
     // Start is called before the first frame update
     void Start()
     {
         startingPosition = transform.position;
         StartCoroutine(destroyAfterInterval());
         //tilemap = GameObject.Find("Collisions");
+        if(shouldFlip) Flip();
     }
 
     protected IEnumerator destroyAfterInterval()

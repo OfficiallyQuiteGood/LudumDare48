@@ -22,6 +22,6 @@ public class FlatSurfaceSave : MonoBehaviour
     void OnTriggerExit2D(Collider2D hitInfo)
     {
         //if exiting tile
-        if(hitInfo is TilemapCollider2D) player.SetLastPosition();
+        if(hitInfo is TilemapCollider2D) player.SetLastLegalPosition();
     }
 }
