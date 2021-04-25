@@ -147,17 +147,17 @@ public class Enemy : MonoBehaviour
     //Change Enemy Direction when they reach an edge
     void OnTriggerExit2D(Collider2D other)
     {
-        //Debug.Log("Edge");
-        if(other is TilemapCollider2D)
+        if (other is Terrain || other is TilemapCollider2D)
         {
-            //Debug.Log("edge reached");
             changeDirection();
+            StartCoroutine(PauseMovement());
         }
         
     }
 
     void OnCollisionEnter2D(Collision2D other)
     {
+        Debug.Log("collision exit "+other);
         StartCoroutine(PauseMovement());
     }
 
