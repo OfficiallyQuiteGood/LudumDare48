@@ -3042,7 +3042,7 @@ MonoBehaviour:
   m_Color: {r: 1, g: 0.9446698, b: 0.759434, a: 1}
   m_Intensity: 0.44
   m_LightVolumeOpacity: 0.045
-  m_ApplyToSortingLayers: 000000000d2f2d194bae8b08b1fe6422
+  m_ApplyToSortingLayers: 000000000d2f2d194bae8b08b1fe6422cbc1adab
   m_LightCookieSprite: {fileID: 0}
   m_UseNormalMap: 0
   m_LightOrder: 0
@@ -31152,7 +31152,6 @@ Transform:
   - {fileID: 3714395812742193384}
   - {fileID: 1664979339}
   - {fileID: 103169275}
-  - {fileID: 1966491014}
   - {fileID: 694482138}
   - {fileID: 2092192739}
   m_Father: {fileID: 0}
@@ -31277,9 +31276,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4432214318678192375, guid: 2e3c726f2e5914751b00b33cb885a98f, type: 3}
+      propertyPath: m_SortingLayer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4432214318678192375, guid: 2e3c726f2e5914751b00b33cb885a98f, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 143371851
+      objectReference: {fileID: 0}
     - target: {fileID: 4673628243773040346, guid: 2e3c726f2e5914751b00b33cb885a98f, type: 3}
       propertyPath: m_Name
       value: MushClump1 (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7074781944114041532, guid: 2e3c726f2e5914751b00b33cb885a98f, type: 3}
+      propertyPath: m_ApplyToSortingLayers.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7074781944114041532, guid: 2e3c726f2e5914751b00b33cb885a98f, type: 3}
+      propertyPath: m_ApplyToSortingLayers.Array.data[4]
+      value: -1414676021
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2e3c726f2e5914751b00b33cb885a98f, type: 3}
@@ -31353,7 +31368,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4735725806818854164, guid: 7cc6f31c35cd14158874e2473a7852de, type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4735725806818854164, guid: 7cc6f31c35cd14158874e2473a7852de, type: 3}
       propertyPath: m_LocalScale.x
@@ -31402,6 +31417,22 @@ PrefabInstance:
     - target: {fileID: 6629733707515089825, guid: 7cc6f31c35cd14158874e2473a7852de, type: 3}
       propertyPath: m_Name
       value: MushClump2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6819276276323461458, guid: 7cc6f31c35cd14158874e2473a7852de, type: 3}
+      propertyPath: m_SortingLayer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6819276276323461458, guid: 7cc6f31c35cd14158874e2473a7852de, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 143371851
+      objectReference: {fileID: 0}
+    - target: {fileID: 8973035333138063906, guid: 7cc6f31c35cd14158874e2473a7852de, type: 3}
+      propertyPath: m_ApplyToSortingLayers.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8973035333138063906, guid: 7cc6f31c35cd14158874e2473a7852de, type: 3}
+      propertyPath: m_ApplyToSortingLayers.Array.data[4]
+      value: -1414676021
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7cc6f31c35cd14158874e2473a7852de, type: 3}
@@ -31897,7 +31928,7 @@ MonoBehaviour:
   m_Color: {r: 0.43529412, g: 0.8950165, b: 0.972549, a: 1}
   m_Intensity: 0.07
   m_LightVolumeOpacity: 0.078
-  m_ApplyToSortingLayers: 00000000e97c0fa80d2f2d194bae8b08b1fe6422
+  m_ApplyToSortingLayers: 00000000e97c0fa80d2f2d194bae8b08b1fe6422cbc1adab
   m_LightCookieSprite: {fileID: 0}
   m_UseNormalMap: 0
   m_LightOrder: 0
@@ -32153,7 +32184,7 @@ MonoBehaviour:
   m_Color: {r: 0.28875935, g: 0.29592663, b: 0.5943396, a: 1}
   m_Intensity: 0.46
   m_LightVolumeOpacity: 0
-  m_ApplyToSortingLayers: 00000000e97c0fa80d2f2d194bae8b08b1fe6422
+  m_ApplyToSortingLayers: 00000000e97c0fa80d2f2d194bae8b08b1fe6422cbc1adab
   m_LightCookieSprite: {fileID: 0}
   m_UseNormalMap: 0
   m_LightOrder: 0
@@ -43858,6 +43889,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6284275172930863226, guid: 39704509d34a9ea469a5b8aac3462ffb, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6284275172930863226, guid: 39704509d34a9ea469a5b8aac3462ffb, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
@@ -44185,7 +44220,7 @@ MonoBehaviour:
   m_Color: {r: 1, g: 0.9446698, b: 0.759434, a: 1}
   m_Intensity: 0.6
   m_LightVolumeOpacity: 0.045
-  m_ApplyToSortingLayers: 000000000d2f2d194bae8b08b1fe6422
+  m_ApplyToSortingLayers: 000000000d2f2d194bae8b08b1fe6422cbc1adab
   m_LightCookieSprite: {fileID: 0}
   m_UseNormalMap: 0
   m_LightOrder: 0
@@ -44272,14 +44307,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1132830125}
     m_Modifications:
-    - target: {fileID: 2167658855734626578, guid: 5b5a00b7e7289a3439abccf0fe86301b, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
-    - target: {fileID: 2167658855734627049, guid: 5b5a00b7e7289a3439abccf0fe86301b, type: 3}
-      propertyPath: 
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 4324704582472364488, guid: a0841fcd2d08b844cadd35b5af30e4aa, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -44328,6 +44355,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lobber
       objectReference: {fileID: 0}
+    - target: {fileID: 2167658855734626578, guid: 5b5a00b7e7289a3439abccf0fe86301b, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+    - target: {fileID: 2167658855734627049, guid: 5b5a00b7e7289a3439abccf0fe86301b, type: 3}
+      propertyPath: 
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a0841fcd2d08b844cadd35b5af30e4aa, type: 3}
 --- !u!1 &1379393572 stripped
@@ -44355,7 +44390,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 526235449056542493, guid: 7895cf38a9bb649a4a4be05372f9b928, type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 526235449056542493, guid: 7895cf38a9bb649a4a4be05372f9b928, type: 3}
       propertyPath: m_LocalPosition.x
@@ -44400,6 +44435,22 @@ PrefabInstance:
     - target: {fileID: 1529675297341927861, guid: 7895cf38a9bb649a4a4be05372f9b928, type: 3}
       propertyPath: m_Name
       value: GreenShroom
+      objectReference: {fileID: 0}
+    - target: {fileID: 2141796408768620220, guid: 7895cf38a9bb649a4a4be05372f9b928, type: 3}
+      propertyPath: m_ApplyToSortingLayers.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2141796408768620220, guid: 7895cf38a9bb649a4a4be05372f9b928, type: 3}
+      propertyPath: m_ApplyToSortingLayers.Array.data[4]
+      value: -1414676021
+      objectReference: {fileID: 0}
+    - target: {fileID: 5079483884903676983, guid: 7895cf38a9bb649a4a4be05372f9b928, type: 3}
+      propertyPath: m_SortingLayer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5079483884903676983, guid: 7895cf38a9bb649a4a4be05372f9b928, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 143371851
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7895cf38a9bb649a4a4be05372f9b928, type: 3}
@@ -44452,7 +44503,7 @@ MonoBehaviour:
   m_Color: {r: 1, g: 0.9446698, b: 0.759434, a: 1}
   m_Intensity: 0.99
   m_LightVolumeOpacity: 0.045
-  m_ApplyToSortingLayers: 000000000d2f2d194bae8b08b1fe6422
+  m_ApplyToSortingLayers: 000000000d2f2d194bae8b08b1fe6422cbc1adab
   m_LightCookieSprite: {fileID: 0}
   m_UseNormalMap: 0
   m_LightOrder: 0
@@ -44583,9 +44634,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4432214318678192375, guid: 2e3c726f2e5914751b00b33cb885a98f, type: 3}
+      propertyPath: m_SortingLayer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4432214318678192375, guid: 2e3c726f2e5914751b00b33cb885a98f, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 143371851
+      objectReference: {fileID: 0}
     - target: {fileID: 4673628243773040346, guid: 2e3c726f2e5914751b00b33cb885a98f, type: 3}
       propertyPath: m_Name
       value: MushClump1 (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7074781944114041532, guid: 2e3c726f2e5914751b00b33cb885a98f, type: 3}
+      propertyPath: m_ApplyToSortingLayers.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7074781944114041532, guid: 2e3c726f2e5914751b00b33cb885a98f, type: 3}
+      propertyPath: m_ApplyToSortingLayers.Array.data[4]
+      value: -1414676021
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2e3c726f2e5914751b00b33cb885a98f, type: 3}
@@ -44638,7 +44705,7 @@ MonoBehaviour:
   m_Color: {r: 1, g: 0.9446698, b: 0.759434, a: 1}
   m_Intensity: 0.6
   m_LightVolumeOpacity: 0.045
-  m_ApplyToSortingLayers: 000000000d2f2d194bae8b08b1fe6422
+  m_ApplyToSortingLayers: 000000000d2f2d194bae8b08b1fe6422cbc1adab
   m_LightCookieSprite: {fileID: 0}
   m_UseNormalMap: 0
   m_LightOrder: 0
@@ -44770,6 +44837,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: MushClump2 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6819276276323461458, guid: 7cc6f31c35cd14158874e2473a7852de, type: 3}
+      propertyPath: m_SortingLayer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6819276276323461458, guid: 7cc6f31c35cd14158874e2473a7852de, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 143371851
+      objectReference: {fileID: 0}
+    - target: {fileID: 8973035333138063906, guid: 7cc6f31c35cd14158874e2473a7852de, type: 3}
+      propertyPath: m_ApplyToSortingLayers.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8973035333138063906, guid: 7cc6f31c35cd14158874e2473a7852de, type: 3}
+      propertyPath: m_ApplyToSortingLayers.Array.data[4]
+      value: -1414676021
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7cc6f31c35cd14158874e2473a7852de, type: 3}
 --- !u!1001 &1788938130
@@ -44833,11 +44916,6 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 7737658093102459742, guid: 87fc12e48439fb54f8f6152bea1d0878, type: 3}
   m_PrefabInstance: {fileID: 1176325222}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1966491014 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1669787278808036564, guid: fc88b6cd3b8674d5f8c320379d9f0abb, type: 3}
-  m_PrefabInstance: {fileID: 81640327}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &1988790399 stripped
 Transform:
@@ -45003,7 +45081,7 @@ MonoBehaviour:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 0.88
   m_LightVolumeOpacity: 0.045
-  m_ApplyToSortingLayers: 00000000e97c0fa80d2f2d194bae8b08b1fe6422
+  m_ApplyToSortingLayers: 00000000e97c0fa80d2f2d194bae8b08b1fe6422cbc1adab
   m_LightCookieSprite: {fileID: 0}
   m_UseNormalMap: 0
   m_LightOrder: 0
@@ -45143,6 +45221,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Moss
       objectReference: {fileID: 0}
+    - target: {fileID: 2141796408768620220, guid: 7895cf38a9bb649a4a4be05372f9b928, type: 3}
+      propertyPath: m_ApplyToSortingLayers.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2141796408768620220, guid: 7895cf38a9bb649a4a4be05372f9b928, type: 3}
+      propertyPath: m_ApplyToSortingLayers.Array.data[4]
+      value: -1414676021
+      objectReference: {fileID: 0}
+    - target: {fileID: 5079483884903676983, guid: 7895cf38a9bb649a4a4be05372f9b928, type: 3}
+      propertyPath: m_SortingLayer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5079483884903676983, guid: 7895cf38a9bb649a4a4be05372f9b928, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 143371851
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7895cf38a9bb649a4a4be05372f9b928, type: 3}
 --- !u!4 &982469137196569765 stripped
@@ -45180,6 +45274,14 @@ PrefabInstance:
     - target: {fileID: 703557259548250559, guid: fc88b6cd3b8674d5f8c320379d9f0abb, type: 3}
       propertyPath: m_PointLightOuterRadius
       value: 4.81
+      objectReference: {fileID: 0}
+    - target: {fileID: 703557259548250559, guid: fc88b6cd3b8674d5f8c320379d9f0abb, type: 3}
+      propertyPath: m_ApplyToSortingLayers.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 703557259548250559, guid: fc88b6cd3b8674d5f8c320379d9f0abb, type: 3}
+      propertyPath: m_ApplyToSortingLayers.Array.data[4]
+      value: -1414676021
       objectReference: {fileID: 0}
     - target: {fileID: 1669787278808036564, guid: fc88b6cd3b8674d5f8c320379d9f0abb, type: 3}
       propertyPath: m_RootOrder
@@ -45224,6 +45326,14 @@ PrefabInstance:
     - target: {fileID: 1669787278808036564, guid: fc88b6cd3b8674d5f8c320379d9f0abb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3626388860503620153, guid: fc88b6cd3b8674d5f8c320379d9f0abb, type: 3}
+      propertyPath: m_SortingLayer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3626388860503620153, guid: fc88b6cd3b8674d5f8c320379d9f0abb, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 143371851
       objectReference: {fileID: 0}
     - target: {fileID: 4051475575546659124, guid: fc88b6cd3b8674d5f8c320379d9f0abb, type: 3}
       propertyPath: m_LocalPosition.y
@@ -45292,9 +45402,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4432214318678192375, guid: 2e3c726f2e5914751b00b33cb885a98f, type: 3}
+      propertyPath: m_SortingLayer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4432214318678192375, guid: 2e3c726f2e5914751b00b33cb885a98f, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 143371851
+      objectReference: {fileID: 0}
     - target: {fileID: 4673628243773040346, guid: 2e3c726f2e5914751b00b33cb885a98f, type: 3}
       propertyPath: m_Name
       value: MushClump1 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7074781944114041532, guid: 2e3c726f2e5914751b00b33cb885a98f, type: 3}
+      propertyPath: m_ApplyToSortingLayers.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7074781944114041532, guid: 2e3c726f2e5914751b00b33cb885a98f, type: 3}
+      propertyPath: m_ApplyToSortingLayers.Array.data[4]
+      value: -1414676021
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2e3c726f2e5914751b00b33cb885a98f, type: 3}
@@ -45357,6 +45483,22 @@ PrefabInstance:
     - target: {fileID: 6629733707515089825, guid: 7cc6f31c35cd14158874e2473a7852de, type: 3}
       propertyPath: m_Name
       value: MushClump2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6819276276323461458, guid: 7cc6f31c35cd14158874e2473a7852de, type: 3}
+      propertyPath: m_SortingLayer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6819276276323461458, guid: 7cc6f31c35cd14158874e2473a7852de, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 143371851
+      objectReference: {fileID: 0}
+    - target: {fileID: 8973035333138063906, guid: 7cc6f31c35cd14158874e2473a7852de, type: 3}
+      propertyPath: m_ApplyToSortingLayers.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8973035333138063906, guid: 7cc6f31c35cd14158874e2473a7852de, type: 3}
+      propertyPath: m_ApplyToSortingLayers.Array.data[4]
+      value: -1414676021
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7cc6f31c35cd14158874e2473a7852de, type: 3}
