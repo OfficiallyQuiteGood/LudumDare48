@@ -55,15 +55,23 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 137a12ed568b56c49912cb4c79f2a215, type: 3}
   - {fileID: 8300000, guid: 733a26294c5cd0142a4ef6d4c456c001, type: 3}
   deathNoises:
-  - {fileID: 8300000, guid: c4a9bd9992198524da8a50f41fdc8044, type: 3}
-  - {fileID: 8300000, guid: ea27421928b33d4468cf1c157512b3c3, type: 3}
-  attackNoises: []
+  - {fileID: 8300000, guid: 8b7c14c61b2009649bf8e590840c0342, type: 3}
+  attackNoises:
+  - {fileID: 8300000, guid: 4a235b39bf689c1498133ac386217b9d, type: 3}
   moveNoises:
   - {fileID: 8300000, guid: a61510b3a6219394da3c8a7976a437a3, type: 3}
   - {fileID: 8300000, guid: f483829407ab9e146affcda24873d3ee, type: 3}
   damageNoises:
   - {fileID: 8300000, guid: f2ff19f8cad870445b5bdac941449a51, type: 3}
   - {fileID: 8300000, guid: c3c9cf765142ccb4fb3be24c183e229a, type: 3}
+  shootNoises:
+  - {fileID: 8300000, guid: dc171526dfebea748856665ae9dcefb5, type: 3}
+  hammerNoises:
+  - {fileID: 8300000, guid: 91d440c501de99545a1b6d362535a1ae, type: 3}
+  sproutNoises:
+  - {fileID: 8300000, guid: 0cc4dd86cf84ee34c9939c07ba651844, type: 3}
+  projectileBreak:
+  - {fileID: 8300000, guid: 65006b134a22c1f45aa06a600720f4ed, type: 3}
 --- !u!82 &7045652636181985554
 AudioSource:
   m_ObjectHideFlags: 0

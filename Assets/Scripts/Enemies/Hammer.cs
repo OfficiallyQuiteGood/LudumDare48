@@ -61,6 +61,7 @@ public class Hammer : Enemy
         }
         else if(shouldMove && !isAtEdge) 
         {
+            playNoise(2,0.3f);
             transform.position+=new Vector3(direction * movementSpeed * Time.fixedDeltaTime,0,0);
         }
     }
@@ -73,6 +74,7 @@ public class Hammer : Enemy
         setAnimatorParameter("ShouldMove", false);
         yield return new WaitForSeconds(0.3f); 
         
+        playNoise(5,0.3f);
         GameObject hammerBullet = Instantiate(hammerProjectile, FirePoint.position, FirePoint.rotation);
         if(hammerBullet.GetComponent<HammerProjectile>().direction != direction)
         {

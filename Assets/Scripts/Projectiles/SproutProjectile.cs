@@ -15,7 +15,7 @@ public class SproutProjectile : Projectile
     public float m_Thrust = 2f;
     Rigidbody2D m_Rigidbody;
 
-    public GameObject projectileDeath;
+    
     Vector3 prevPos;
     public float difficulty = 0.8f;
     
@@ -128,9 +128,5 @@ public class SproutProjectile : Projectile
 		transform.localScale = theScale;
 	}
 
-    void ProjectileDeath()
-    {
-        Instantiate(projectileDeath, transform.position, transform.rotation);
-        Destroy(gameObject);
-    }
+    
 }
