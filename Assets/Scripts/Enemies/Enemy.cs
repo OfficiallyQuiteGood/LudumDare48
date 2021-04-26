@@ -60,7 +60,7 @@ public class Enemy : MonoBehaviour
 
     public void playNoise(int ind, float delay)
     {
-        worldSettings.PlayNoise(ind, delay);
+        if(gameObject.GetComponent<Renderer>().isVisible) worldSettings.PlayNoise(ind, delay);
     }
 
     public void changeDirection()
