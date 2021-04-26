@@ -465,7 +465,7 @@ MonoBehaviour:
   crossHairAttach: {fileID: 21300000, guid: 2cf5c11b2fee288428c17f42dc482912, type: 3}
   crossHairAttack: {fileID: 21300000, guid: a7a7b8220093d64449136ae08cf65c21, type: 3}
   checkFrequency: 0.25
-  throwFreq: 1
+  throwFreq: 0.25
   initialThrowDelay: 1
 --- !u!58 &3579516565413295200
 CircleCollider2D:
