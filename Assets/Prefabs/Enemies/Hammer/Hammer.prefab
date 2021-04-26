@@ -77,7 +77,7 @@ MonoBehaviour:
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.8
   m_Color: {r: 1, g: 0.5330188, b: 0.5649799, a: 1}
-  m_Intensity: 1.4
+  m_Intensity: 1.6
   m_LightVolumeOpacity: 0
   m_ApplyToSortingLayers: 00000000b1fe64220d2f2d194bae8b08cbc1adab
   m_LightCookieSprite: {fileID: 0}
@@ -180,7 +180,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1414676021
-  m_SortingLayer: 7
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: a064084e56ae31f4195053c50bc5830f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -308,6 +308,7 @@ MonoBehaviour:
   agroDistance: 10
   bounceY: 0.05
   bounceX: 0.1
+  worldSettings: {fileID: 0}
   FirePoint: {fileID: 985154839422833592}
   hammerProjectile: {fileID: 335680953676288208, guid: 1770fed11da50c041a20beb999bbfdbd, type: 3}
 --- !u!61 &4067943238009568603

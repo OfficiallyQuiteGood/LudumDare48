@@ -55,12 +55,15 @@ TagManager:
   - name: Rocks
     uniqueID: 73157885
     locked: 0
-  - name: Foreground
-    uniqueID: 422391565
+  - name: Entities
+    uniqueID: 2880291275
     locked: 0
   - name: Props
     uniqueID: 143371851
     locked: 0
-  - name: Entities
-    uniqueID: 2880291275
+  - name: Foreground
+    uniqueID: 422391565
+    locked: 0
+  - name: Reticle
+    uniqueID: 2927441011
     locked: 0
