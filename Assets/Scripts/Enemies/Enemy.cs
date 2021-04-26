@@ -115,6 +115,12 @@ public class Enemy : MonoBehaviour
 		transform.localScale = theScale;
 	}
 
+    // Kill by calling die
+    public void Kill()
+    {
+        Die();
+    }
+
     // Die (virtual) function
     virtual protected void Die()
     {
