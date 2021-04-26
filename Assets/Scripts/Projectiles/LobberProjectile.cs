@@ -23,7 +23,6 @@ public class LobberProjectile : Projectile
     public float m_Thrust = 2f;
     Rigidbody2D m_Rigidbody;
 
-    public GameObject projectileDeath;
     
     // Start is called before the first frame update
     void Start()
@@ -138,10 +137,4 @@ public class LobberProjectile : Projectile
 		theScale.x *= -1;
 		transform.localScale = theScale;
 	}
-
-    void ProjectileDeath()
-    {
-        Instantiate(projectileDeath, transform.position, transform.rotation);
-        Destroy(gameObject);
-    }
 }

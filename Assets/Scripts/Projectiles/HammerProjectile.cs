@@ -5,7 +5,6 @@ using UnityEngine.Tilemaps;
 
 public class HammerProjectile : Projectile
 {
-    public GameObject projectileBreak;
     public float projectileSpeed;
     Vector3 startingPosition;
     //TileMap tilemap;
@@ -91,10 +90,4 @@ public class HammerProjectile : Projectile
 		theScale.x *= -1;
 		transform.localScale = theScale;
 	}
-
-    public void ProjectileDeath()
-    {
-        Instantiate(projectileBreak, transform.position, transform.rotation);
-        Destroy(gameObject);
-    }
 }

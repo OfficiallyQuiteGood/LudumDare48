@@ -28,6 +28,7 @@ public class WorldSettings : MonoBehaviour
     public AudioClip[] projectileBreak;
     public List<AudioClip[]> noisePacks;
     protected bool[] canPlay;
+    GameObject player;
 
 
     // Start is called before the first frame update
@@ -53,11 +54,27 @@ public class WorldSettings : MonoBehaviour
         {
             canPlay[i] = true;
         }
+
+        player = GameObject.Find("Player");
     }
 
     public void PlayNoise(int ind, float delay)
     {
-        StartCoroutine(playNoiseOnDelay(ind, delay));
+        if(player!=null) StartCoroutine(playNoiseOnDelay(ind, delay));
+    }
+
+    public void PlayNoise(int ind)
+    {
+        if(player!=null)
+        {
+            if(canPlay[ind])
+            {
+                canPlay[ind] = false;
+                AudioClip[] noisePack = noisePacks[ind];
+                if(noisePack!=null && noisePack.Length > 0) EnemyAudio.PlayOneShot(noisePack[Random.Range(0, noisePack.Length)]);
+                canPlay[ind] = true;
+            }
+        }
     }
 
     public IEnumerator playNoiseOnDelay(int ind, float delay)

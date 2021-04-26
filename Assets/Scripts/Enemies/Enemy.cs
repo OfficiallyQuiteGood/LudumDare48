@@ -21,6 +21,7 @@ public class Enemy : MonoBehaviour
     protected bool isBouncing = false;
     public float bounceY = 0.1f;
     public float bounceX = 0.1f;
+    bool hasIframes = false;
 
     private bool m_FacingRight = true;  // For determining which way the Enemy is currently facing.
     protected bool isAtEdge = false;
@@ -60,7 +61,13 @@ public class Enemy : MonoBehaviour
 
     public void playNoise(int ind, float delay)
     {
-        if(gameObject.GetComponent<Renderer>().isVisible) worldSettings.PlayNoise(ind, delay);
+        if(gameObject.GetComponent<Renderer>().isVisible || isBouncing) worldSettings.PlayNoise(ind, delay);
+    }
+
+    //play noise without IEnumerator
+    public void playNoise(int ind)
+    {
+        if(gameObject.GetComponent<Renderer>().isVisible || isBouncing) worldSettings.PlayNoise(ind);
     }
 
     public void changeDirection()
@@ -92,23 +99,38 @@ public class Enemy : MonoBehaviour
     // Take damage function
     public void TakeDamage (int damage)
     {
-        playNoise(3, 0);
-        Debug.Log("take damage");
+        
+        
+        if(!hasIframes) health -= damage;
         StartCoroutine(BounceBack());
-        health -= damage;
+        
 
+        Debug.Log(health);
         if(health <= 0)
         {
             Die();
+        }
+        else
+        {
+            Debug.Log("take damage");
+            playNoise(3);
         }
     }
 
     public IEnumerator BounceBack()
     {
+        StartCoroutine(giveIframes(0.5f));
         StartCoroutine(CharacterBlinker(5,0.1f));
         isBouncing = true;
         yield return new WaitForSeconds(1);
         isBouncing = false;
+    }
+
+    public IEnumerator giveIframes(float delay)
+    {
+        hasIframes = true;
+        yield return new WaitForSeconds(delay);
+        hasIframes = false;
     }
 
     protected IEnumerator CharacterBlinker(int numFrames, float frameDuration)
@@ -152,7 +174,7 @@ public class Enemy : MonoBehaviour
     // Die (virtual) function
     virtual protected void Die()
     {
-        playNoise(1, 0);
+        playNoise(0, 0);
         Instantiate(deathEffect, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }

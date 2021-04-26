@@ -254,11 +254,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 4ad7aedbb77764743b33413a0ab28e5c, type: 3}
   - {fileID: 8300000, guid: 33480e12238e37e40850235b27bbfff2, type: 3}
   ropeStick:
-  - {fileID: 8300000, guid: eb0ef4b255932054bafbfbbc677e9a7e, type: 3}
-  - {fileID: 8300000, guid: 8b4a1b8e84951aa449bc364623a56a04, type: 3}
-  - {fileID: 8300000, guid: 05fa625b42cdab445b78a77b2ab6609c, type: 3}
+  - {fileID: 8300000, guid: 143e4396a05b6ca4090e0213f652c0d0, type: 3}
   ropeSound:
-  - {fileID: 8300000, guid: 88b6f765f196a5947806b5d3c84833ba, type: 3}
+  - {fileID: 8300000, guid: 5e5f8e4e24473e948ad568796ec86a5b, type: 3}
 --- !u!114 &6091213573708431092
 MonoBehaviour:
   m_ObjectHideFlags: 0
