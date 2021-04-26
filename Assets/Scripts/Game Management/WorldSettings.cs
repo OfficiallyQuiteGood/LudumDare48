@@ -22,6 +22,9 @@ public class WorldSettings : MonoBehaviour
     public AudioClip[] moveNoises;
     //3
     public AudioClip[] damageNoises;
+    public AudioClip[] shootNoises;
+    public AudioClip[] hammerNoises;
+    public AudioClip[] sproutNoises;
     public List<AudioClip[]> noisePacks;
     protected bool[] canPlay;
 
@@ -32,17 +35,21 @@ public class WorldSettings : MonoBehaviour
         audioSource.PlayOneShot(RandomClip());
         //Debug.Log("started");
         noisePacks = new List<AudioClip[]>();
-        canPlay = new bool[4];
-        for(int i = 0; i<canPlay.Length; i++)
-        {
-            canPlay[i] = true;
-        }
+        
 
         noisePacks.Add(deathNoises);
         noisePacks.Add(attackNoises);
         noisePacks.Add(moveNoises);
         noisePacks.Add(damageNoises);
+        noisePacks.Add(shootNoises);
+        noisePacks.Add(hammerNoises);
+        noisePacks.Add(sproutNoises);
 
+        canPlay = new bool[noisePacks.Count];
+        for(int i = 0; i<canPlay.Length; i++)
+        {
+            canPlay[i] = true;
+        }
     }
 
     public void PlayNoise(int ind, float delay)

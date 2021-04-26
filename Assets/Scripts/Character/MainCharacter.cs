@@ -29,6 +29,8 @@ public class MainCharacter : MonoBehaviour
     public AudioClip[] damageNoises;
     public List<AudioClip[]> noisePacks;
 	public AudioClip[] jumpNoises;
+	public AudioClip[] ropeStick;
+	public AudioClip[] ropeSound;
     protected bool[] canPlay;
 
 	void Start()
@@ -43,6 +45,8 @@ public class MainCharacter : MonoBehaviour
         noisePacks.Add(moveNoises);
         noisePacks.Add(damageNoises);
 		noisePacks.Add(jumpNoises);
+		noisePacks.Add(ropeStick);
+		noisePacks.Add(ropeSound);
 
 		
         canPlay = new bool[noisePacks.Count];
