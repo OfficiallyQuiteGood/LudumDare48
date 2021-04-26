@@ -33,6 +33,7 @@ public class Lobber : Enemy
 
     void FixedUpdate()
     {
+        CalculateVelocity();
         if(isBouncing)
         {
             transform.position += new Vector3(bounceX*-playerDirection,bounceY,0);

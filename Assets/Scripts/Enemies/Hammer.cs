@@ -50,6 +50,7 @@ public class Hammer : Enemy
 
     void FixedUpdate()
     {
+        CalculateVelocity();
         if(isBouncing)
         {
             transform.position += new Vector3(bounceX*-playerDirection,bounceY,0);
