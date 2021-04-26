@@ -239,7 +239,7 @@ MonoBehaviour:
   lastLegalPosition: {x: 0, y: 0, z: 0}
   audioSource: {fileID: 7894846783574246937}
   deathNoises:
-  - {fileID: 8300000, guid: ea27421928b33d4468cf1c157512b3c3, type: 3}
+  - {fileID: 8300000, guid: e7c9f27434d1ab748b10644a5d892411, type: 3}
   attackNoises:
   - {fileID: 8300000, guid: 294dfe2f7882e824ca49411c1ba6d80f, type: 3}
   moveNoises:
@@ -253,6 +253,12 @@ MonoBehaviour:
   jumpNoises:
   - {fileID: 8300000, guid: 4ad7aedbb77764743b33413a0ab28e5c, type: 3}
   - {fileID: 8300000, guid: 33480e12238e37e40850235b27bbfff2, type: 3}
+  ropeStick:
+  - {fileID: 8300000, guid: eb0ef4b255932054bafbfbbc677e9a7e, type: 3}
+  - {fileID: 8300000, guid: 8b4a1b8e84951aa449bc364623a56a04, type: 3}
+  - {fileID: 8300000, guid: 05fa625b42cdab445b78a77b2ab6609c, type: 3}
+  ropeSound:
+  - {fileID: 8300000, guid: 88b6f765f196a5947806b5d3c84833ba, type: 3}
 --- !u!114 &6091213573708431092
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -459,6 +465,8 @@ MonoBehaviour:
   crossHairAttach: {fileID: 21300000, guid: 2cf5c11b2fee288428c17f42dc482912, type: 3}
   crossHairAttack: {fileID: 21300000, guid: a7a7b8220093d64449136ae08cf65c21, type: 3}
   checkFrequency: 0.25
+  throwFreq: 1
+  initialThrowDelay: 1
 --- !u!58 &3579516565413295200
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -525,7 +533,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.397
   m_Pitch: 1
   Loop: 0
   Mute: 0
