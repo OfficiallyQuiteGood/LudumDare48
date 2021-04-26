@@ -50059,6 +50059,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+    - target: {fileID: 3867487051315947752, guid: 1e699d1c8f520c149999b894d7d71f4d, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 4057609757982954390, guid: 1e699d1c8f520c149999b894d7d71f4d, type: 3}
       propertyPath: healthUI
       value: 
@@ -50074,6 +50078,10 @@ PrefabInstance:
     - target: {fileID: 4488948187720201018, guid: 1e699d1c8f520c149999b894d7d71f4d, type: 3}
       propertyPath: ropeMaxCastDistance
       value: 3.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5688530940386352209, guid: 1e699d1c8f520c149999b894d7d71f4d, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 6091213573708431092, guid: 1e699d1c8f520c149999b894d7d71f4d, type: 3}
       propertyPath: healthUI
@@ -50139,6 +50147,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+    - target: {fileID: 7150210304639652937, guid: 1e699d1c8f520c149999b894d7d71f4d, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1e699d1c8f520c149999b894d7d71f4d, type: 3}
 --- !u!1 &1525657078 stripped
