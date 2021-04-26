@@ -434,7 +434,7 @@ MonoBehaviour:
     m_Bits: 51969
   ignoreLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 65536
   characterController: {fileID: 6091213573708431092}
   crossHair: {fileID: 662493837640617281}
   crossHairNormal: {fileID: 21300000, guid: e9ed2eaccc9a13549863466af482ee2d, type: 3}
