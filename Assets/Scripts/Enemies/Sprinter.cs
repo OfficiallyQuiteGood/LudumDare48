@@ -57,7 +57,7 @@ public class Sprinter : Enemy
         // else if(shouldMove) 
         if(isBouncing)
         {
-            transform.position += new Vector3(0.01f*-playerDirection,0.01f,0);
+            transform.position += new Vector3(bounceX*-playerDirection,bounceY,0);
         }
         else {transform.position+=new Vector3(direction * movementSpeed * Time.fixedDeltaTime,0,0);}
     }

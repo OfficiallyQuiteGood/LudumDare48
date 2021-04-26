@@ -55,7 +55,7 @@ public class BigMush : Enemy
         //flip the player
         if(isBouncing)
         {
-            transform.position += new Vector3(0.05f*-playerDirection,0.05f,0);
+            transform.position += new Vector3(bounceX*-playerDirection,bounceY,0);
         }
         else if(playerNear && shouldMove && !charging)
         {

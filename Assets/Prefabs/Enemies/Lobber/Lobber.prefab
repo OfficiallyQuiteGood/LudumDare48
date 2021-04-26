@@ -105,7 +105,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1414676021
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: aa252e4a5a0adbe4b9cf366703f3865a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -205,6 +205,8 @@ MonoBehaviour:
   timeInterval: 1
   direction: -1
   agroDistance: 6
+  bounceY: 0.05
+  bounceX: 0.1
   FirePoint: {fileID: 1839710664290619373}
   LobProjectile: {fileID: 6287159677699994051, guid: fe33bfebf97e35c43ad35bdb4a99990d, type: 3}
 --- !u!1 &5785888767634728224

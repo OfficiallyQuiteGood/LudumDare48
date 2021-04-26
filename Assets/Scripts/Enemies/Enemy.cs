@@ -19,6 +19,8 @@ public class Enemy : MonoBehaviour
     protected bool playerNear = false;
 
     protected bool isBouncing = false;
+    public float bounceY = 0.1f;
+    public float bounceX = 0.1f;
 
     private bool m_FacingRight = true;  // For determining which way the Enemy is currently facing.
     protected bool isAtEdge = false;
@@ -128,6 +130,7 @@ public class Enemy : MonoBehaviour
 
     protected void setAnimatorParameter(string parameterName, bool val)
     {
+        if(!HasParameter(parameterName, animator)) return;
         if(animator.GetBool(parameterName) != val)
         {
             animator.SetBool(parameterName, val);
@@ -136,6 +139,7 @@ public class Enemy : MonoBehaviour
 
     protected void setAnimatorParameter(string parameterName, float val)
     {
+        if(!HasParameter(parameterName, animator)) return;
         if(animator.GetFloat(parameterName) != val)
         {
             animator.SetFloat(parameterName, val);
@@ -144,17 +148,27 @@ public class Enemy : MonoBehaviour
 
     protected void setAnimatorParameter(string parameterName, int val)
     {
+        if(!HasParameter(parameterName, animator)) return;
         if(animator.GetInteger(parameterName) != val)
         {
             animator.SetInteger(parameterName, val);
         }
     }
 
+    public static bool HasParameter(string paramName, Animator animator)
+    {
+        foreach (AnimatorControllerParameter param in animator.parameters)
+        {
+        if (param.name == paramName)
+            return true;
+        }
+        return false;
+    }
+
 
     //Change Enemy Direction when they reach an edge
     void OnTriggerExit2D(Collider2D other)
     {
-        //Debug.Log("ENTER "+other);
         if (other is TilemapCollider2D)
         {
             changeDirection();
@@ -168,7 +182,6 @@ public class Enemy : MonoBehaviour
     //hard check to see if enemy at edge
     void OnTriggerEnter2D(Collider2D other)
     {
-        //Debug.Log("EXIT "+other);
         if (other is Terrain || other is TilemapCollider2D)
         {
             isAtEdge = false;
@@ -179,7 +192,6 @@ public class Enemy : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        //Debug.Log("collision exit "+other);
         StartCoroutine(PauseMovement());
     }
 

@@ -17,12 +17,12 @@ public class LoseCondition : MonoBehaviour
         
     }
 
-    protected IEnumerator ReloadGameCoroutine()
+    protected IEnumerator ReloadGameCoroutine(float delay)
     {
         Debug.Log("Before loading scene");
 
         // Wait x amount of seconds
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(delay);
 
         Debug.Log("after loading scene");
 
@@ -32,6 +32,6 @@ public class LoseCondition : MonoBehaviour
 
     public void ReloadGame()
     {
-        StartCoroutine(ReloadGameCoroutine());
+        StartCoroutine(ReloadGameCoroutine(6f));
     }
 }

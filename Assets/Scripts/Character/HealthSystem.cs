@@ -107,7 +107,6 @@ public class HealthSystem : MonoBehaviour
     {
         for(int i = 0; i<numFrames; i++)
         {
-            Debug.Log("Blink");
             GameObject.Find("Player").GetComponent<Renderer>().enabled = false;
             yield return new WaitForSeconds(frameDuration);
             GameObject.Find("Player").GetComponent<Renderer>().enabled = true;
