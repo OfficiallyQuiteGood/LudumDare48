@@ -150,7 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f7f54de2febc8645aa6b19bd4b9fcf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 3
+  health: 4
   movementSpeed: 2
   jumpForce: 150
   deathEffect: {fileID: 1569254283426463652, guid: fee0262040065254a93aee3ac47908b4, type: 3}
