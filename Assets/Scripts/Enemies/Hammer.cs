@@ -14,6 +14,7 @@ public class Hammer : Enemy
     // Start is called before the first frame update
     void Start()
     {
+        base.Start();
         //test death animations
         //StartCoroutine(DealDamage());
 

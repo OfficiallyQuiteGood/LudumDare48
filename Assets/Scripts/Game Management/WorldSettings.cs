@@ -12,13 +12,53 @@ public class WorldSettings : MonoBehaviour
 
     public AudioSource audioSource;
     public AudioClip[] audioClipArray;
+    // Audio Clips
+    //0
+    public AudioClip[] deathNoises;
+    //1
+    public AudioClip[] attackNoises;
+    //2
+    public AudioClip[] moveNoises;
+    //3
+    public AudioClip[] damageNoises;
+    public List<AudioClip[]> noisePacks;
+    protected bool[] canPlay;
+
 
     // Start is called before the first frame update
     void Start()
     {
         audioSource.PlayOneShot(RandomClip());
         //Debug.Log("started");
+        noisePacks = new List<AudioClip[]>();
+        canPlay = new bool[4];
+        for(int i = 0; i<canPlay.Length; i++)
+        {
+            canPlay[i] = true;
+        }
 
+        noisePacks.Add(deathNoises);
+        noisePacks.Add(attackNoises);
+        noisePacks.Add(moveNoises);
+        noisePacks.Add(damageNoises);
+
+    }
+
+    public void PlayNoise(int ind, float delay)
+    {
+        StartCoroutine(playNoiseOnDelay(ind, delay));
+    }
+
+    public IEnumerator playNoiseOnDelay(int ind, float delay)
+    {
+        if(canPlay[ind])
+        {
+            canPlay[ind] = false;
+            AudioClip[] noisePack = noisePacks[ind];
+            if(noisePack!=null && noisePack.Length > 0) audioSource.PlayOneShot(noisePack[Random.Range(0, noisePack.Length)]);
+            yield return new WaitForSeconds(delay);
+            canPlay[ind] = true;
+        }
     }
 
     AudioClip RandomClip()

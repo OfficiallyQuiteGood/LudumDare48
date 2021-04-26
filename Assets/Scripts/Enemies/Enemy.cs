@@ -28,30 +28,10 @@ public class Enemy : MonoBehaviour
     // Audio Clips
     public AudioSource audioSource;
     //0
-    public AudioClip[] deathNoises;
-    //1
-    public AudioClip[] attackNoises;
-    //2
-    public AudioClip[] moveNoises;
-    //3
-    public AudioClip[] damageNoises;
-    public List<AudioClip[]> noisePacks;
-    protected bool[] canPlay;
+    public WorldSettings worldSettings;
     public void Start()
     {
-        noisePacks = new List<AudioClip[]>();
-        canPlay = new bool[4];
-        for(int i = 0; i<canPlay.Length; i++)
-        {
-            canPlay[i] = true;
-        }
-
-        noisePacks.Add(deathNoises);
-        noisePacks.Add(attackNoises);
-        noisePacks.Add(moveNoises);
-        noisePacks.Add(damageNoises);
-
-        StartCoroutine(playNoiseOnDelay(2, 2));
+        worldSettings = GameObject.Find("World Settings").GetComponent<WorldSettings>();
     }
 
     // Update is called once per frame
@@ -62,20 +42,7 @@ public class Enemy : MonoBehaviour
 
     public void playNoise(int ind, float delay)
     {
-        StartCoroutine(playNoiseOnDelay(ind, delay));
-    }
-
-    public IEnumerator playNoiseOnDelay(int ind, float delay)
-    {
-        if(canPlay[ind])
-        {
-            Debug.Log("play "+ind);
-            canPlay[ind] = false;
-            AudioClip[] noisePack = noisePacks[ind];
-            audioSource.PlayOneShot(noisePack[Random.Range(0, noisePack.Length)]);
-            yield return new WaitForSeconds(delay);
-            canPlay[ind] = true;
-        }
+        worldSettings.PlayNoise(ind, delay);
     }
 
     public void changeDirection()
@@ -130,7 +97,6 @@ public class Enemy : MonoBehaviour
     {
         for(int i = 0; i<numFrames; i++)
         {
-            Debug.Log("Blink");
             gameObject.GetComponent<Renderer>().enabled = false;
             yield return new WaitForSeconds(frameDuration);
             gameObject.GetComponent<Renderer>().enabled = true;
@@ -168,7 +134,7 @@ public class Enemy : MonoBehaviour
     // Die (virtual) function
     virtual protected void Die()
     {
-        playNoise(0, 0);
+        playNoise(1, 0);
         Instantiate(deathEffect, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
