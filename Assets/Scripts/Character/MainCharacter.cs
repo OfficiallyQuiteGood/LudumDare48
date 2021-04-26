@@ -31,6 +31,7 @@ public class MainCharacter : MonoBehaviour
 	public AudioClip[] jumpNoises;
 	public AudioClip[] ropeStick;
 	public AudioClip[] ropeSound;
+	public AudioClip[] healthPickup;
     protected bool[] canPlay;
 
 	void Start()
@@ -47,6 +48,7 @@ public class MainCharacter : MonoBehaviour
 		noisePacks.Add(jumpNoises);
 		noisePacks.Add(ropeStick);
 		noisePacks.Add(ropeSound);
+		noisePacks.Add(healthPickup);
 
 		
         canPlay = new bool[noisePacks.Count];
@@ -115,7 +117,7 @@ public class MainCharacter : MonoBehaviour
 		GameObject.Find("Follow Camera").GetComponent<Follow>().PausePan(delay);
 		gameObject.GetComponent<HealthSystem>().TakeDamage(1);
 		gameObject.GetComponent<CharacterController2D>().playerWon = false;
-		StartCoroutine(resetPositionWithDelay(delay));
+		StartCoroutine(resetPositionWithDelay(0.5f));
 	}
 
 	//set position and start iframes with delay
