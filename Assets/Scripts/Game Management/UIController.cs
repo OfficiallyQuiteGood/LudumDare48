@@ -15,11 +15,13 @@ public class UIController : MonoBehaviour
     public void FadeScreen(float delay = 1)
     {
         StartCoroutine(FadeBlackOutSquare(true,5,1));
+        GameObject.Find("DefeatText").GetComponent<DefeatImage>().DisplayImage(2f);
     }
 
     public void AppearScreen()
     {
         StartCoroutine(FadeBlackOutSquare(false,5,1));
+        
     }
 
     public IEnumerator FadeBlackOutSquare(bool fadeToBlack = true, int fadeSpeed = 5,float delay = 0)

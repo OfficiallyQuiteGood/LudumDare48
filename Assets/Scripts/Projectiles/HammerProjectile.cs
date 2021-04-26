@@ -49,7 +49,6 @@ public class HammerProjectile : Projectile
         //Debug.Log("Edge");
         if(other is TilemapCollider2D)
         {
-            Debug.Log(other);
             ProjectileDeath();
         }
     }
