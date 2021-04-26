@@ -24,15 +24,58 @@ public class Enemy : MonoBehaviour
 
     private bool m_FacingRight = true;  // For determining which way the Enemy is currently facing.
     protected bool isAtEdge = false;
-    void Start()
+
+    // Audio Clips
+    public AudioSource audioSource;
+    //0
+    public AudioClip[] deathNoises;
+    //1
+    public AudioClip[] attackNoises;
+    //2
+    public AudioClip[] moveNoises;
+    //3
+    public AudioClip[] damageNoises;
+    public List<AudioClip[]> noisePacks;
+    protected bool[] canPlay;
+    public void Start()
     {
-        
+        noisePacks = new List<AudioClip[]>();
+        canPlay = new bool[4];
+        for(int i = 0; i<canPlay.Length; i++)
+        {
+            canPlay[i] = true;
+        }
+
+        noisePacks.Add(deathNoises);
+        noisePacks.Add(attackNoises);
+        noisePacks.Add(moveNoises);
+        noisePacks.Add(damageNoises);
+
+        StartCoroutine(playNoiseOnDelay(2, 2));
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void playNoise(int ind, float delay)
+    {
+        StartCoroutine(playNoiseOnDelay(ind, delay));
+    }
+
+    public IEnumerator playNoiseOnDelay(int ind, float delay)
+    {
+        if(canPlay[ind])
+        {
+            Debug.Log("play "+ind);
+            canPlay[ind] = false;
+            AudioClip[] noisePack = noisePacks[ind];
+            audioSource.PlayOneShot(noisePack[Random.Range(0, noisePack.Length)]);
+            yield return new WaitForSeconds(delay);
+            canPlay[ind] = true;
+        }
     }
 
     public void changeDirection()
@@ -64,6 +107,7 @@ public class Enemy : MonoBehaviour
     // Take damage function
     public void TakeDamage (int damage)
     {
+        playNoise(3, 0);
         Debug.Log("take damage");
         StartCoroutine(BounceBack());
         health -= damage;
@@ -124,6 +168,7 @@ public class Enemy : MonoBehaviour
     // Die (virtual) function
     virtual protected void Die()
     {
+        playNoise(0, 0);
         Instantiate(deathEffect, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
