@@ -72,6 +72,11 @@ public class ThrowRope : MonoBehaviour
         }
     }
 
+    private bool IsLayerInLayerMask(LayerMask layerMask, int layer)
+    {
+        return layerMask == (layerMask | (1 << layer));
+    }
+
     // Handle input
     private void HandleInput()
     {
@@ -95,15 +100,9 @@ public class ThrowRope : MonoBehaviour
 
             // Create ray cast
             var hit = Physics2D.Raycast(transform.position, aimDirection, ropeMaxCastDistance, ropeLayerMask);
-            //var antiHit = Physics2D.Raycast(transform.position, aimDirection, ropeMaxCastDistance, antiRopeLayerMask);
-            
-            if (hit.collider != null)
-            {
-                Debug.Log("Hit " + hit.collider.name);
-            }
 
             // if hit
-            if (hit.collider != null && !hit.collider.IsTouchingLayers(ignoreLayers) && !ropeWasCast)
+            if (hit.collider != null && !IsLayerInLayerMask(ignoreLayers, hit.collider.gameObject.layer) && !ropeWasCast)
             {
                 // Start animation for attack
                 GameObject.Find("Player").GetComponent<MainCharacter>().Attack();
