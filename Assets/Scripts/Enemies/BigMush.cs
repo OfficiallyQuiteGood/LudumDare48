@@ -18,6 +18,7 @@ public class BigMush : Enemy
         //StartCoroutine(DealDamage());
 
         //StartCoroutine(MoveAtInterval());
+        base.Start();
         setAnimatorParameter("ShouldMove", shouldMove);
         startingPosition = transform.position;
     }
@@ -60,12 +61,18 @@ public class BigMush : Enemy
         else if(playerNear && shouldMove && !charging)
         {
             StartCoroutine(Charge());
+            
         }
         else if(charging && shouldMove)
         {
             transform.position+=new Vector3(direction * movementSpeed*chargeSpeed * Time.fixedDeltaTime,0,0);
+            playNoise(2,0.2f);
         }
-        else if(shouldMove) transform.position+=new Vector3(direction * movementSpeed * Time.fixedDeltaTime,0,0);
+        else if(shouldMove)
+        {
+            playNoise(2,0.3f);
+            transform.position+=new Vector3(direction * movementSpeed * Time.fixedDeltaTime,0,0);
+        }
 
     }
 
