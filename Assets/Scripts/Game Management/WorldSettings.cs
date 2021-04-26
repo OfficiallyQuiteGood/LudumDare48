@@ -102,6 +102,7 @@ public class WorldSettings : MonoBehaviour
             audioSource.volume = Mathf.Lerp(start, targetVolume, currentTime / duration);
             yield return null;
         }
+        OnDoneFading(audioSource);
         yield break;
     }
 
@@ -135,18 +136,26 @@ public class WorldSettings : MonoBehaviour
 
     }
 
+    public void OnDoneFading(AudioSource audio)
+    {
+        if (audio != endingMusicSource)
+        {
+            // Play one shot clip
+            endingMusicSource.PlayOneShot(endingMusic);
+
+            // Fade back in
+            StartCoroutine(StartFade(endingMusicSource, 1.5f, 0.202f));
+        }
+    }
+
     public void OnWin()
     {
+        Debug.Log("Winning in world settings");
+
         // Tell it that we've reached the end
         reachedEnd = true;
 
         // Fade curr music out
-        StartFade(audioSource, 1.5f, 0.0f);
-
-        // Play one shot clip
-        endingMusicSource.PlayOneShot(endingMusic);
-
-        // Fade back in
-        StartFade(endingMusicSource, 1.5f, 0.202f);
+        StartCoroutine(StartFade(audioSource, 1.5f, 0.0f));
     }
 }

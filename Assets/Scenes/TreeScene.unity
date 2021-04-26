@@ -36012,6 +36012,10 @@ PrefabInstance:
       value: 9.81
       objectReference: {fileID: 0}
     - target: {fileID: 6733047532052823037, guid: 39704509d34a9ea469a5b8aac3462ffb, type: 3}
+      propertyPath: endingMusic
+      value: 
+      objectReference: {fileID: 8300000, guid: 19580899a25ac4646873cf1615f25bbf, type: 3}
+    - target: {fileID: 6733047532052823037, guid: 39704509d34a9ea469a5b8aac3462ffb, type: 3}
       propertyPath: endingMusicSource
       value: 
       objectReference: {fileID: 938401061}

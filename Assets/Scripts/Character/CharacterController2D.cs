@@ -147,7 +147,7 @@ public class CharacterController2D : MonoBehaviour
 			healthUI.gameObject.SetActive(false);
 
 			// Tell the world we've reached the end
-			worldSettings.reachedEnd = true;
+			worldSettings.OnWin();
 
 			// Set on win for ending cutscene
 			endingCutscene.OnWin();
