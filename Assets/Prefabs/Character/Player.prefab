@@ -431,7 +431,7 @@ MonoBehaviour:
   ropeMaxCastDistance: 2
   ropeLayerMask:
     serializedVersion: 2
-    m_Bits: 51969
+    m_Bits: 117505
   ignoreLayers:
     serializedVersion: 2
     m_Bits: 65536
