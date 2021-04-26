@@ -25,12 +25,14 @@ public class Enemy : MonoBehaviour
     private bool m_FacingRight = true;  // For determining which way the Enemy is currently facing.
     protected bool isAtEdge = false;
 
-    // Audio Clips
-    public AudioSource audioSource;
-    //0
+    // WorldSettings required to play audio
     public WorldSettings worldSettings;
+    // Vertical Velocity
+    protected Vector3 prev;
+    protected float maxVerticalVelocity;
     public void Start()
     {
+        prev = transform.position;
         worldSettings = GameObject.Find("World Settings").GetComponent<WorldSettings>();
     }
 
@@ -38,6 +40,22 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         
+    }
+
+    // Fall Damage Logic
+    //on every update calculate velocity
+    public void CalculateVelocity()
+    {
+
+        float newVelocity = Mathf.Abs(transform.position.y - prev.y)*50;
+        maxVerticalVelocity = Mathf.Max(maxVerticalVelocity, newVelocity);
+        prev = transform.position;
+
+        if(maxVerticalVelocity >= 12 && newVelocity < maxVerticalVelocity) 
+        {
+            Debug.Log("kill from falling");
+            Die();
+        }
     }
 
     public void playNoise(int ind, float delay)
