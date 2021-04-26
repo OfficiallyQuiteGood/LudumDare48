@@ -25,9 +25,15 @@ public class ThrowRope : MonoBehaviour
 
     public float checkFrequency = 0.25f;
 
+    // Can grapple again bool
+    private bool canThrowRope = false;
+    public float throwFreq = 1.0f;
+    public float initialThrowDelay = 1.0f;
+
     // Start is called before the first frame update
     void Start()
     {
+        StartCoroutine(WaitToThrowRope(initialThrowDelay));
         StartCoroutine(CheckForCrossHairHit());
     }
 
@@ -81,8 +87,11 @@ public class ThrowRope : MonoBehaviour
     private void HandleInput()
     {
         // Need to check for mouse position about to hit something
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && canThrowRope)
         {
+            // Set throw rope to false
+            canThrowRope = false;
+
             // Calculate aim direction
             var worldMousePosition =
                 Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0f));
@@ -115,6 +124,9 @@ public class ThrowRope : MonoBehaviour
                 currHook = (GameObject) Instantiate(hook, transform.position, Quaternion.identity);
                 currHook.GetComponent<Rope>().endPoint = endPoint;
             }
+
+            // Start coroutine
+            StartCoroutine(WaitToThrowRope(throwFreq));
         }
 
         // Handle mouse up
@@ -137,5 +149,14 @@ public class ThrowRope : MonoBehaviour
             currHook.GetComponent<Rope>().ClearRope();
             Destroy(currHook);
         }
+    }
+
+    protected IEnumerator WaitToThrowRope(float freq)
+    {
+        // Wait x amount of time before being able to throw rope again
+        yield return new WaitForSeconds(freq);
+
+        // Now, set able to throw rope again
+        canThrowRope = true;
     }
 }
