@@ -161,18 +161,7 @@ MonoBehaviour:
   agroDistance: 5
   bounceY: 0.05
   bounceX: 0.1
-  audioSource: {fileID: 71797026972798969}
-  deathNoises:
-  - {fileID: 8300000, guid: ea27421928b33d4468cf1c157512b3c3, type: 3}
-  - {fileID: 8300000, guid: ea27421928b33d4468cf1c157512b3c3, type: 3}
-  attackNoises:
-  - {fileID: 8300000, guid: c2f29a274e708f64b8e36a5eb0b719c5, type: 3}
-  moveNoises:
-  - {fileID: 8300000, guid: a61510b3a6219394da3c8a7976a437a3, type: 3}
-  - {fileID: 8300000, guid: f483829407ab9e146affcda24873d3ee, type: 3}
-  damageNoises:
-  - {fileID: 8300000, guid: f2ff19f8cad870445b5bdac941449a51, type: 3}
-  - {fileID: 8300000, guid: c3c9cf765142ccb4fb3be24c183e229a, type: 3}
+  worldSettings: {fileID: 0}
   chargeSpeed: 2
 --- !u!95 &1331990085232040849
 Animator:
