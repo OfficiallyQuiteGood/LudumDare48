@@ -12,6 +12,7 @@ public class WorldSettings : MonoBehaviour
 
     public AudioSource audioSource;
     public AudioSource EnemyAudio;
+    public AudioSource endingMusicSource;
     public AudioClip[] audioClipArray;
     // Audio Clips
     //0
@@ -28,6 +29,9 @@ public class WorldSettings : MonoBehaviour
     public AudioClip[] projectileBreak;
     public List<AudioClip[]> noisePacks;
     protected bool[] canPlay;
+    public bool reachedEnd = false;
+    private AudioClip currClip;
+    public AudioClip endingMusic;
     GameObject player;
 
 
@@ -56,6 +60,19 @@ public class WorldSettings : MonoBehaviour
         }
 
         player = GameObject.Find("Player");
+    }
+
+    protected IEnumerator PlayBackgroundMusic()
+    {
+        while(!reachedEnd)
+        {
+            // Play random clip
+            currClip = RandomClip();
+            audioSource.PlayOneShot(currClip);
+
+            // Yield wait for song to be over
+            yield return new WaitForSeconds(currClip.length);
+        }
     }
 
     public void PlayNoise(int ind, float delay)
@@ -94,6 +111,21 @@ public class WorldSettings : MonoBehaviour
         return audioClipArray[Random.Range(0, audioClipArray.Length)];
     }
 
+    public IEnumerator StartFade(AudioSource audioSource, float duration, float targetVolume)
+    {
+        float currentTime = 0;
+        float start = audioSource.volume;
+
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+            audioSource.volume = Mathf.Lerp(start, targetVolume, currentTime / duration);
+            yield return null;
+        }
+        OnDoneFading(audioSource);
+        yield break;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -122,5 +154,28 @@ public class WorldSettings : MonoBehaviour
     public void GameOver()
     {
 
+    }
+
+    public void OnDoneFading(AudioSource audio)
+    {
+        if (audio != endingMusicSource)
+        {
+            // Play one shot clip
+            endingMusicSource.PlayOneShot(endingMusic);
+
+            // Fade back in
+            StartCoroutine(StartFade(endingMusicSource, 1.5f, 0.202f));
+        }
+    }
+
+    public void OnWin()
+    {
+        Debug.Log("Winning in world settings");
+
+        // Tell it that we've reached the end
+        reachedEnd = true;
+
+        // Fade curr music out
+        StartCoroutine(StartFade(audioSource, 1.5f, 0.0f));
     }
 }

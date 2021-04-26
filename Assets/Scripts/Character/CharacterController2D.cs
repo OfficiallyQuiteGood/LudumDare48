@@ -27,6 +27,7 @@ public class CharacterController2D : MonoBehaviour
 	public bool playerWon;
 	public HealthUI healthUI;
 	public EndingCutscene endingCutscene;
+	public WorldSettings worldSettings;
 
 
 	[Header("Events")]
@@ -144,6 +145,9 @@ public class CharacterController2D : MonoBehaviour
 
 			// Hide UI
 			healthUI.gameObject.SetActive(false);
+
+			// Tell the world we've reached the end
+			worldSettings.OnWin();
 
 			// Set on win for ending cutscene
 			endingCutscene.OnWin();
