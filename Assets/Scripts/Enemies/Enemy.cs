@@ -25,33 +25,15 @@ public class Enemy : MonoBehaviour
     private bool m_FacingRight = true;  // For determining which way the Enemy is currently facing.
     protected bool isAtEdge = false;
 
-    // Audio Clips
-    public AudioSource audioSource;
-    //0
-    public AudioClip[] deathNoises;
-    //1
-    public AudioClip[] attackNoises;
-    //2
-    public AudioClip[] moveNoises;
-    //3
-    public AudioClip[] damageNoises;
-    public List<AudioClip[]> noisePacks;
-    protected bool[] canPlay;
+    // WorldSettings required to play audio
+    public WorldSettings worldSettings;
+    // Vertical Velocity
+    protected Vector3 prev;
+    protected float maxVerticalVelocity;
     public void Start()
     {
-        noisePacks = new List<AudioClip[]>();
-        canPlay = new bool[4];
-        for(int i = 0; i<canPlay.Length; i++)
-        {
-            canPlay[i] = true;
-        }
-
-        noisePacks.Add(deathNoises);
-        noisePacks.Add(attackNoises);
-        noisePacks.Add(moveNoises);
-        noisePacks.Add(damageNoises);
-
-        StartCoroutine(playNoiseOnDelay(2, 2));
+        prev = transform.position;
+        worldSettings = GameObject.Find("World Settings").GetComponent<WorldSettings>();
     }
 
     // Update is called once per frame
@@ -60,22 +42,25 @@ public class Enemy : MonoBehaviour
         
     }
 
-    public void playNoise(int ind, float delay)
+    // Fall Damage Logic
+    //on every update calculate velocity
+    public void CalculateVelocity()
     {
-        StartCoroutine(playNoiseOnDelay(ind, delay));
+
+        float newVelocity = Mathf.Abs(transform.position.y - prev.y)*50;
+        maxVerticalVelocity = Mathf.Max(maxVerticalVelocity, newVelocity);
+        prev = transform.position;
+
+        if(maxVerticalVelocity >= 12 && newVelocity < maxVerticalVelocity) 
+        {
+            Debug.Log("kill from falling");
+            Die();
+        }
     }
 
-    public IEnumerator playNoiseOnDelay(int ind, float delay)
+    public void playNoise(int ind, float delay)
     {
-        if(canPlay[ind])
-        {
-            Debug.Log("play "+ind);
-            canPlay[ind] = false;
-            AudioClip[] noisePack = noisePacks[ind];
-            audioSource.PlayOneShot(noisePack[Random.Range(0, noisePack.Length)]);
-            yield return new WaitForSeconds(delay);
-            canPlay[ind] = true;
-        }
+        if(gameObject.GetComponent<Renderer>().isVisible) worldSettings.PlayNoise(ind, delay);
     }
 
     public void changeDirection()
@@ -130,7 +115,6 @@ public class Enemy : MonoBehaviour
     {
         for(int i = 0; i<numFrames; i++)
         {
-            Debug.Log("Blink");
             gameObject.GetComponent<Renderer>().enabled = false;
             yield return new WaitForSeconds(frameDuration);
             gameObject.GetComponent<Renderer>().enabled = true;
@@ -168,7 +152,7 @@ public class Enemy : MonoBehaviour
     // Die (virtual) function
     virtual protected void Die()
     {
-        playNoise(0, 0);
+        playNoise(1, 0);
         Instantiate(deathEffect, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }

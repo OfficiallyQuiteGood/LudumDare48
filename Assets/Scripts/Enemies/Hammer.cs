@@ -14,6 +14,7 @@ public class Hammer : Enemy
     // Start is called before the first frame update
     void Start()
     {
+        base.Start();
         //test death animations
         //StartCoroutine(DealDamage());
 
@@ -49,6 +50,7 @@ public class Hammer : Enemy
 
     void FixedUpdate()
     {
+        CalculateVelocity();
         if(isBouncing)
         {
             transform.position += new Vector3(bounceX*-playerDirection,bounceY,0);

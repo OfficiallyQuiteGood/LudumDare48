@@ -53,6 +53,7 @@ public class BigMush : Enemy
 
     void FixedUpdate()
     {
+        CalculateVelocity();
         //flip the player
         if(isBouncing)
         {

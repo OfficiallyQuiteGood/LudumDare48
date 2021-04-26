@@ -142,6 +142,7 @@ GameObject:
   - component: {fileID: 3579516565413295200}
   - component: {fileID: 3154870882975110784}
   - component: {fileID: 4057609757982954390}
+  - component: {fileID: 7894846783574246937}
   m_Layer: 10
   m_Name: Player
   m_TagString: Player
@@ -236,6 +237,22 @@ MonoBehaviour:
   runSpeed: 20
   verticalSpeed: 0
   lastLegalPosition: {x: 0, y: 0, z: 0}
+  audioSource: {fileID: 7894846783574246937}
+  deathNoises:
+  - {fileID: 8300000, guid: ea27421928b33d4468cf1c157512b3c3, type: 3}
+  attackNoises:
+  - {fileID: 8300000, guid: 294dfe2f7882e824ca49411c1ba6d80f, type: 3}
+  moveNoises:
+  - {fileID: 8300000, guid: ade8b173c6860b5498f4db5180995c89, type: 3}
+  - {fileID: 8300000, guid: 1c6b708b24d076c4b9ecd9a175208453, type: 3}
+  damageNoises:
+  - {fileID: 8300000, guid: 294dfe2f7882e824ca49411c1ba6d80f, type: 3}
+  - {fileID: 8300000, guid: 4fbc01cf5a03d804f91fac83fb4a7fef, type: 3}
+  - {fileID: 8300000, guid: 0db26e5f775bb01499dcb04716f8d489, type: 3}
+  - {fileID: 8300000, guid: c2f29a274e708f64b8e36a5eb0b719c5, type: 3}
+  jumpNoises:
+  - {fileID: 8300000, guid: 4ad7aedbb77764743b33413a0ab28e5c, type: 3}
+  - {fileID: 8300000, guid: 33480e12238e37e40850235b27bbfff2, type: 3}
 --- !u!114 &6091213573708431092
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -442,6 +459,8 @@ MonoBehaviour:
   crossHairAttach: {fileID: 21300000, guid: 2cf5c11b2fee288428c17f42dc482912, type: 3}
   crossHairAttack: {fileID: 21300000, guid: a7a7b8220093d64449136ae08cf65c21, type: 3}
   checkFrequency: 0.25
+  throwFreq: 0.25
+  initialThrowDelay: 1
 --- !u!58 &3579516565413295200
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -496,6 +515,102 @@ MonoBehaviour:
   deathEffect: {fileID: 9100000, guid: a99ab82baf728294fa909e7183e96ddb, type: 2}
   animator: {fileID: 3154870882975110784}
   loseCondition: {fileID: 0}
+--- !u!82 &7894846783574246937
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4223416743461697165}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &5688530940386352209
 GameObject:
   m_ObjectHideFlags: 0

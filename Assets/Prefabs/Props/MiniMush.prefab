@@ -47,7 +47,7 @@ MonoBehaviour:
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1
+  m_Intensity: 0.1
   m_LightVolumeOpacity: 0
   m_ApplyToSortingLayers: 00000000b1fe64220d2f2d194bae8b08
   m_LightCookieSprite: {fileID: 0}
@@ -83,6 +83,7 @@ GameObject:
   - component: {fileID: 8608319499775352788}
   - component: {fileID: 2702821359634630691}
   - component: {fileID: 6909880113254421321}
+  - component: {fileID: 3834368660675931992}
   m_Layer: 0
   m_Name: MiniMush
   m_TagString: Untagged
@@ -144,7 +145,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 143371851
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 822d0f457c4ba87419c37cd17cf7782f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -176,6 +177,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &3834368660675931992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1658814002826412406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e01f01130fc5984fb01a4a039845258, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 6909880113254421321}
 --- !u!1 &9215262974105979654
 GameObject:
   m_ObjectHideFlags: 0
