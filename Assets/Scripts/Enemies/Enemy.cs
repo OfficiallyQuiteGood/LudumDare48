@@ -113,6 +113,12 @@ public class Enemy : MonoBehaviour
 		transform.localScale = theScale;
 	}
 
+    // Kill by calling die
+    public void Kill()
+    {
+        Die();
+    }
+
     // Die (virtual) function
     virtual protected void Die()
     {
@@ -148,7 +154,7 @@ public class Enemy : MonoBehaviour
     //Change Enemy Direction when they reach an edge
     void OnTriggerExit2D(Collider2D other)
     {
-        Debug.Log("ENTER "+other);
+        //Debug.Log("ENTER "+other);
         if (other is TilemapCollider2D)
         {
             changeDirection();
@@ -162,7 +168,7 @@ public class Enemy : MonoBehaviour
     //hard check to see if enemy at edge
     void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("EXIT "+other);
+        //Debug.Log("EXIT "+other);
         if (other is Terrain || other is TilemapCollider2D)
         {
             isAtEdge = false;
@@ -173,7 +179,7 @@ public class Enemy : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        Debug.Log("collision exit "+other);
+        //Debug.Log("collision exit "+other);
         StartCoroutine(PauseMovement());
     }
 

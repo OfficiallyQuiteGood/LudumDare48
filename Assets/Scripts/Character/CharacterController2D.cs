@@ -25,6 +25,8 @@ public class CharacterController2D : MonoBehaviour
 	// Player win prefab
 	public GameObject playerWinPrefab;
 	public bool playerWon;
+	public HealthUI healthUI;
+	public EndingCutscene endingCutscene;
 
 
 	[Header("Events")]
@@ -134,11 +136,18 @@ public class CharacterController2D : MonoBehaviour
 			Debug.Log("Player survived, winning");
 
             // First, destroy all objects
-            Object[] enemies = GameObject.FindObjectsOfType(typeof(Enemy));
-            foreach (Object obj in enemies)
+            var enemies = (Enemy[]) GameObject.FindObjectsOfType<Enemy>();
+			Debug.Log("Enemies " + enemies);
+            foreach (Enemy obj in enemies)
             {
-                Destroy(obj);
+                obj.Kill();
             }
+
+			// Hide UI
+			healthUI.gameObject.SetActive(false);
+
+			// Set on win for ending cutscene
+			endingCutscene.OnWin();
 
             // Destroy player and start win
             Instantiate(playerWinPrefab, transform.position, Quaternion.identity);
