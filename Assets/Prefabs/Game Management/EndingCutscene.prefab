@@ -63,6 +63,8 @@ PlayableDirector:
     value: {fileID: 0}
   - key: {fileID: -8119690298057272666, guid: 6c94d466dbe388b4a8c949a61b8751d7, type: 2}
     value: {fileID: 0}
+  - key: {fileID: 2225978759279517294, guid: 6c94d466dbe388b4a8c949a61b8751d7, type: 2}
+    value: {fileID: 0}
   m_ExposedReferences:
     m_References: []
 --- !u!1001 &152378281937358843
@@ -120,6 +122,38 @@ PrefabInstance:
       propertyPath: m_Intensity
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1815502734166238471, guid: 2d0c10ad448b3114e8e538adf00639ef, type: 3}
+      propertyPath: m_ApplyToSortingLayers.Array.size
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1815502734166238471, guid: 2d0c10ad448b3114e8e538adf00639ef, type: 3}
+      propertyPath: m_ApplyToSortingLayers.Array.data[0]
+      value: -1463671539
+      objectReference: {fileID: 0}
+    - target: {fileID: 1815502734166238471, guid: 2d0c10ad448b3114e8e538adf00639ef, type: 3}
+      propertyPath: m_ApplyToSortingLayers.Array.data[1]
+      value: 577044145
+      objectReference: {fileID: 0}
+    - target: {fileID: 1815502734166238471, guid: 2d0c10ad448b3114e8e538adf00639ef, type: 3}
+      propertyPath: m_ApplyToSortingLayers.Array.data[2]
+      value: -1475379991
+      objectReference: {fileID: 0}
+    - target: {fileID: 1815502734166238471, guid: 2d0c10ad448b3114e8e538adf00639ef, type: 3}
+      propertyPath: m_ApplyToSortingLayers.Array.data[3]
+      value: 73157885
+      objectReference: {fileID: 0}
+    - target: {fileID: 1815502734166238471, guid: 2d0c10ad448b3114e8e538adf00639ef, type: 3}
+      propertyPath: m_ApplyToSortingLayers.Array.data[4]
+      value: 422391565
+      objectReference: {fileID: 0}
+    - target: {fileID: 1815502734166238471, guid: 2d0c10ad448b3114e8e538adf00639ef, type: 3}
+      propertyPath: m_ApplyToSortingLayers.Array.data[5]
+      value: 143371851
+      objectReference: {fileID: 0}
+    - target: {fileID: 1815502734166238471, guid: 2d0c10ad448b3114e8e538adf00639ef, type: 3}
+      propertyPath: m_ApplyToSortingLayers.Array.data[6]
+      value: -1414676021
+      objectReference: {fileID: 0}
     - target: {fileID: 3181299264679864035, guid: 2d0c10ad448b3114e8e538adf00639ef, type: 3}
       propertyPath: m_Name
       value: EndingTitle
@@ -133,12 +167,16 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5047682809654856065, guid: 2d0c10ad448b3114e8e538adf00639ef, type: 3}
+      propertyPath: m_SortingOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5047682809654856065, guid: 2d0c10ad448b3114e8e538adf00639ef, type: 3}
       propertyPath: m_SortingLayerID
       value: 143371851
       objectReference: {fileID: 0}
     - target: {fileID: 5047682809654856065, guid: 2d0c10ad448b3114e8e538adf00639ef, type: 3}
       propertyPath: m_RenderingLayerMask
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6414176643460838706, guid: 2d0c10ad448b3114e8e538adf00639ef, type: 3}
       propertyPath: m_LocalPosition.z
