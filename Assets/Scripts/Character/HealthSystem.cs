@@ -44,6 +44,7 @@ public class HealthSystem : MonoBehaviour
         if (bCanBeDamaged)
         {
             // Decrease health and die if necessary
+            
             currHealth -= damage;
             healthUI.OnHealthChanged(currHealth);
             if (currHealth <= 0)
@@ -120,6 +121,7 @@ public class HealthSystem : MonoBehaviour
     {
         if (collider.tag == "Health")
         {
+            gameObject.GetComponent<MainCharacter>().playNoise(7,0);
             currHealth += 1;
             if (currHealth > totalHealth)
             {
