@@ -32,6 +32,7 @@ public class WorldSettings : MonoBehaviour
     public bool reachedEnd = false;
     private AudioClip currClip;
     public AudioClip endingMusic;
+    GameObject player;
 
 
     // Start is called before the first frame update
@@ -57,6 +58,8 @@ public class WorldSettings : MonoBehaviour
         {
             canPlay[i] = true;
         }
+
+        player = GameObject.Find("Player");
     }
 
     protected IEnumerator PlayBackgroundMusic()
@@ -74,7 +77,21 @@ public class WorldSettings : MonoBehaviour
 
     public void PlayNoise(int ind, float delay)
     {
-        StartCoroutine(playNoiseOnDelay(ind, delay));
+        if(player!=null) StartCoroutine(playNoiseOnDelay(ind, delay));
+    }
+
+    public void PlayNoise(int ind)
+    {
+        if(player!=null)
+        {
+            if(canPlay[ind])
+            {
+                canPlay[ind] = false;
+                AudioClip[] noisePack = noisePacks[ind];
+                if(noisePack!=null && noisePack.Length > 0) EnemyAudio.PlayOneShot(noisePack[Random.Range(0, noisePack.Length)]);
+                canPlay[ind] = true;
+            }
+        }
     }
 
     public IEnumerator playNoiseOnDelay(int ind, float delay)

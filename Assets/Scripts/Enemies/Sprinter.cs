@@ -61,6 +61,10 @@ public class Sprinter : Enemy
         {
             transform.position += new Vector3(bounceX*-playerDirection,bounceY,0);
         }
-        else {transform.position+=new Vector3(direction * movementSpeed * Time.fixedDeltaTime,0,0);}
+        else
+        {
+            playNoise(2,0.2f);
+            transform.position+=new Vector3(direction * movementSpeed * Time.fixedDeltaTime,0,0);
+        }
     }
 }

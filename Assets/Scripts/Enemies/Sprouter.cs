@@ -44,6 +44,7 @@ public class Sprouter : Enemy
         }
         else if(shouldMove && !isAtEdge) 
         {
+            playNoise(2,0.3f);
             transform.position+=new Vector3(direction * movementSpeed * Time.fixedDeltaTime,0,0);
         }
     }
@@ -54,13 +55,18 @@ public class Sprouter : Enemy
         isShooting = true;
         setAnimatorParameter("IsShooting", isShooting);
         setAnimatorParameter("ShouldMove", false);
+        
         yield return new WaitForSeconds(0.3f); 
         
+        playNoise(6,0);
         GameObject b1 = Instantiate(SproutProjectile, FirePoint.position, FirePoint.rotation);
         b1.GetComponent<SproutProjectile>().changeDirection(direction);
         yield return new WaitForSeconds(0.3f);
+
+        playNoise(6,0);
         GameObject b2 = Instantiate(SproutProjectile, FirePoint.position, FirePoint.rotation);
         b2.GetComponent<SproutProjectile>().changeDirection(direction);
+        
         setAnimatorParameter("ShouldMove", true);
         yield return new WaitForSeconds(2f);
         isShooting = false;
