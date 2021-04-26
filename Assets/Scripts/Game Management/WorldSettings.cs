@@ -11,6 +11,7 @@ public class WorldSettings : MonoBehaviour
     public CheckpointList CheckpointList;
 
     public AudioSource audioSource;
+    public AudioSource EnemyAudio;
     public AudioClip[] audioClipArray;
     // Audio Clips
     //0
@@ -55,7 +56,7 @@ public class WorldSettings : MonoBehaviour
         {
             canPlay[ind] = false;
             AudioClip[] noisePack = noisePacks[ind];
-            if(noisePack!=null && noisePack.Length > 0) audioSource.PlayOneShot(noisePack[Random.Range(0, noisePack.Length)]);
+            if(noisePack!=null && noisePack.Length > 0) EnemyAudio.PlayOneShot(noisePack[Random.Range(0, noisePack.Length)]);
             yield return new WaitForSeconds(delay);
             canPlay[ind] = true;
         }
