@@ -24,19 +24,20 @@ public class Rope : MonoBehaviour
     // On awake
     void Awake()
     {
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
         // Find player
         player = GameObject.FindGameObjectWithTag("Player");
+        Debug.Log("Player is " + player);
         lastNode = transform.gameObject;
         lastKnownPosition = transform.position;
         Nodes.Add(transform.gameObject);
         lineRenderer = GetComponent<LineRenderer>();
         rb = player.transform.GetChild(0).GetComponent<Rigidbody2D>();
         //StartCoroutine(FixedMovement());
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
     }
 
     // Update

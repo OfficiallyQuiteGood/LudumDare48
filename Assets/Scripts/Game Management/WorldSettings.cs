@@ -17,7 +17,7 @@ public class WorldSettings : MonoBehaviour
     void Start()
     {
         audioSource.PlayOneShot(RandomClip());
-        Debug.Log("started");
+        //Debug.Log("started");
 
     }
 
