@@ -21,7 +21,7 @@ public class Parallax : MonoBehaviour
         );
 
         //9 - > -90
-        float colorvar = Mathf.Clamp((camera.transform.position.y + 50f) / 50f, 0.2f, 1f);
+        float colorvar = Mathf.Clamp((camera.transform.position.y + 50f) / 50f, 0.2f, 0.8f);
         
         this.GetComponent<SpriteRenderer>().color = 
             new Color(colorvar, colorvar, colorvar, 1);
