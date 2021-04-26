@@ -26,6 +26,7 @@ public class WorldSettings : MonoBehaviour
     public AudioClip[] shootNoises;
     public AudioClip[] hammerNoises;
     public AudioClip[] sproutNoises;
+    public AudioClip[] projectileBreak;
     public List<AudioClip[]> noisePacks;
     protected bool[] canPlay;
     public bool reachedEnd = false;
@@ -36,6 +37,7 @@ public class WorldSettings : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        audioSource.loop = true;
         audioSource.PlayOneShot(RandomClip());
         //Debug.Log("started");
         noisePacks = new List<AudioClip[]>();
@@ -48,6 +50,7 @@ public class WorldSettings : MonoBehaviour
         noisePacks.Add(shootNoises);
         noisePacks.Add(hammerNoises);
         noisePacks.Add(sproutNoises);
+        noisePacks.Add(projectileBreak);
 
         canPlay = new bool[noisePacks.Count];
         for(int i = 0; i<canPlay.Length; i++)
