@@ -48,23 +48,31 @@ public class LobberProjectile : Projectile
         
     }
 
+    bool reachedTarget = false;
     void FixedUpdate()
     {
-        // Compute the next position, with arc added in
-		float x0 = startPos.x;
-		float x1 = target.x;
-		float dist = x1 - x0;
-		float nextX = Mathf.MoveTowards(transform.position.x, x1, speed * Time.deltaTime);
-		float baseY = Mathf.Lerp(startPos.y, target.y, (nextX - x0) / dist);
-		float arc = arcHeight * (nextX - x0) * (nextX - x1) / (-0.25f * dist * dist);
-		Vector3 nextPos = new Vector3(nextX, baseY + arc, transform.position.z);
+        if(!reachedTarget)
+        {
+            // Compute the next position, with arc added in
+            float x0 = startPos.x;
+            float x1 = target.x;
+            float dist = x1 - x0;
+            float nextX = Mathf.MoveTowards(transform.position.x, x1, speed * Time.deltaTime);
+            float baseY = Mathf.Lerp(startPos.y, target.y, (nextX - x0) / dist);
+            float arc = arcHeight * (nextX - x0) * (nextX - x1) / (-0.25f * dist * dist);
+            Vector3 nextPos = new Vector3(nextX, baseY + arc, transform.position.z);
+            
+            // Rotate to face the next position, and then move there
+            transform.rotation = LookAt2D(nextPos - transform.position);
+            transform.position = nextPos;
+            // Do something when we reach the target
+            if (nextPos == target)
+            {
+                reachedTarget = true;
+            }
+        }
+
 		
-		// Rotate to face the next position, and then move there
-		transform.rotation = LookAt2D(nextPos - transform.position);
-		transform.position = nextPos;
-		
-		// Do something when we reach the target
-		//if (nextPos == target) Arrived();
     }
 
     void Arrived() {
