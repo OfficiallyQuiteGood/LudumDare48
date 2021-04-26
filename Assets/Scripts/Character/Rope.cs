@@ -79,6 +79,7 @@ public class Rope : MonoBehaviour
         }
         else if (done == false)
         {
+            GameObject.Find("Player").GetComponent<MainCharacter>().playNoise(5,0);
             done = true;
             float dist = Vector2.Distance(player.transform.position, lastNode.transform.position);
             while (dist > distance)
@@ -174,6 +175,8 @@ public class Rope : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
+        Debug.Log("PLAY COLLISION");
+        GameObject.Find("Player").GetComponent<MainCharacter>().playNoise(5,0);
         if (collision.collider.transform.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
             Enemy enemy = collision.collider.transform.gameObject.GetComponent<Enemy>();
