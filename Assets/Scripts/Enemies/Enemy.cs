@@ -19,6 +19,8 @@ public class Enemy : MonoBehaviour
     protected bool playerNear = false;
 
     protected bool isBouncing = false;
+    public float bounceY = 0.1f;
+    public float bounceX = 0.1f;
 
     private bool m_FacingRight = true;  // For determining which way the Enemy is currently facing.
     protected bool isAtEdge = false;
