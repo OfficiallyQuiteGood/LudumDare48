@@ -115,6 +115,7 @@ public class ThrowRope : MonoBehaviour
             {
                 // Start animation for attack
                 GameObject.Find("Player").GetComponent<MainCharacter>().Attack();
+                GameObject.Find("Player").GetComponent<MainCharacter>().playNoise(4,0);
 
                 // Endpoint
                 crossHair.enabled = false;

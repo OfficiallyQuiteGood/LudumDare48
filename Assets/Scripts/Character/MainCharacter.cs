@@ -17,10 +17,39 @@ public class MainCharacter : MonoBehaviour
 	public Vector3 lastLegalPosition;
 	bool canSetPosition = true;
 
+	// Audio Clips
+    public AudioSource audioSource;
+    //0
+    public AudioClip[] deathNoises;
+    //1
+    public AudioClip[] attackNoises;
+    //2
+    public AudioClip[] moveNoises;
+    //3
+    public AudioClip[] damageNoises;
+    public List<AudioClip[]> noisePacks;
+	public AudioClip[] jumpNoises;
+    protected bool[] canPlay;
+
 	void Start()
 	{
 		lastLegalPosition = transform.position;
 		prevPos = transform.position;
+
+		
+		noisePacks = new List<AudioClip[]>();
+        noisePacks.Add(deathNoises);
+        noisePacks.Add(attackNoises);
+        noisePacks.Add(moveNoises);
+        noisePacks.Add(damageNoises);
+		noisePacks.Add(jumpNoises);
+
+		
+        canPlay = new bool[noisePacks.Count];
+        for(int i = 0; i<canPlay.Length; i++)
+        {
+            canPlay[i] = true;
+        }
 	}
 	
 	// Update is called once per frame
@@ -32,11 +61,29 @@ public class MainCharacter : MonoBehaviour
 
 		if (Input.GetButtonDown("Jump"))
 		{
+			playNoise(4,0);
 			jump = true;
 		}
 
 		
 	}
+
+	public void playNoise(int ind, float delay)
+    {
+        StartCoroutine(playNoiseOnDelay(ind, delay));
+    }
+
+    public IEnumerator playNoiseOnDelay(int ind, float delay)
+    {
+        if(canPlay[ind])
+        {
+            canPlay[ind] = false;
+            AudioClip[] noisePack = noisePacks[ind];
+            audioSource.PlayOneShot(noisePack[Random.Range(0, noisePack.Length)]);
+            yield return new WaitForSeconds(delay);
+            canPlay[ind] = true;
+        }
+    }
 	
 
 	public void Attack()
@@ -80,6 +127,7 @@ public class MainCharacter : MonoBehaviour
 	{
 		// Move our character
 		controller.Move(horizontalMove * Time.fixedDeltaTime, false, jump);
+		if(Mathf.Abs(horizontalMove)>0 && controller.m_Grounded) playNoise(2,0.3f);
 		jump = false;
 
 		
