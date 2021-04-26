@@ -58,11 +58,11 @@ TagManager:
   - name: Entities
     uniqueID: 2880291275
     locked: 0
-  - name: Foreground
-    uniqueID: 422391565
-    locked: 0
   - name: Props
     uniqueID: 143371851
+    locked: 0
+  - name: Foreground
+    uniqueID: 422391565
     locked: 0
   - name: Reticle
     uniqueID: 2927441011
