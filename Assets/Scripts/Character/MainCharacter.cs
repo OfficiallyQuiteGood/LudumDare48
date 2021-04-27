@@ -79,6 +79,17 @@ public class MainCharacter : MonoBehaviour
         StartCoroutine(playNoiseOnDelay(ind, delay));
     }
 
+	public void playNoise(int ind)
+	{
+		if(canPlay[ind])
+        {
+            canPlay[ind] = false;
+            AudioClip[] noisePack = noisePacks[ind];
+            audioSource.PlayOneShot(noisePack[Random.Range(0, noisePack.Length)]);
+            canPlay[ind] = true;
+        }
+	}
+
     public IEnumerator playNoiseOnDelay(int ind, float delay)
     {
         if(canPlay[ind])
