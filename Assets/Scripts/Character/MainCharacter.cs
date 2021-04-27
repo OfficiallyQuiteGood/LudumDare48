@@ -117,7 +117,7 @@ public class MainCharacter : MonoBehaviour
 		GameObject.Find("Follow Camera").GetComponent<Follow>().PausePan(delay);
 		gameObject.GetComponent<HealthSystem>().TakeDamage(1);
 		gameObject.GetComponent<CharacterController2D>().playerWon = false;
-		StartCoroutine(resetPositionWithDelay(0.5f));
+		StartCoroutine(resetPositionWithDelay(0.6f));
 	}
 
 	//set position and start iframes with delay
@@ -153,7 +153,7 @@ public class MainCharacter : MonoBehaviour
 		
 
 		//take damage on fall
-		if(prevVertical<0 && controller.m_Grounded) DealFallDamage();
+		//if(prevVertical<0 && controller.m_Grounded) DealFallDamage();
 	}
 	void OnTriggerEnter2D(Collider2D collider)
 	{

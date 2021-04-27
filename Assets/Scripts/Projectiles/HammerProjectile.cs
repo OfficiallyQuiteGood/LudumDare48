@@ -67,7 +67,11 @@ public class HammerProjectile : Projectile
 
     public void ProjectileHit()
     {
-
+        HealthSystem player = GameObject.Find("Player").GetComponent<HealthSystem>();
+        if(player)
+        {
+            player.TakeDamage(1);
+        }
     }
 
 
