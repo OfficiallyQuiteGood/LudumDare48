@@ -44,7 +44,7 @@ public class HealthSystem : MonoBehaviour
         if (bCanBeDamaged)
         {
             // Decrease health and die if necessary
-            
+            gameObject.GetComponent<MainCharacter>().playNoise(3,0);
             currHealth -= damage;
             healthUI.OnHealthChanged(currHealth);
             if (currHealth <= 0)
@@ -77,7 +77,7 @@ public class HealthSystem : MonoBehaviour
     {
         //fade to black
         GameObject.Find("Canvas").GetComponent<UIController>().FadeScreen();
-
+        gameObject.GetComponent<MainCharacter>().playNoise(0);
 
         // Switch animations?
         Instantiate(deathPrefab, transform.position, Quaternion.identity);
