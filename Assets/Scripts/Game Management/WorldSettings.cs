@@ -38,8 +38,11 @@ public class WorldSettings : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        audioSource.loop = true;
-        audioSource.PlayOneShot(RandomClip());
+        //audioSource.loop = true;
+        //audioSource.PlayOneShot(RandomClip());
+
+        StartCoroutine(PlayBackgroundMusic());
+
         //Debug.Log("started");
         noisePacks = new List<AudioClip[]>();
         
@@ -64,7 +67,7 @@ public class WorldSettings : MonoBehaviour
 
     protected IEnumerator PlayBackgroundMusic()
     {
-        while(!reachedEnd)
+        while (!reachedEnd)
         {
             // Play random clip
             currClip = RandomClip();
