@@ -594,8 +594,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IntroScreen: {fileID: 390468171}
-  introMusic: {fileID: 0}
-  source: {fileID: 0}
+  introMusic: {fileID: 8300000, guid: 97bbd7d6546293f428602ab7c3a6a18f, type: 3}
+  source: {fileID: 1629276083}
 --- !u!82 &1629276083
 AudioSource:
   m_ObjectHideFlags: 0
@@ -608,7 +608,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.291
   m_Pitch: 1
   Loop: 0
   Mute: 0
