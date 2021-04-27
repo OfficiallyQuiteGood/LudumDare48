@@ -54,6 +54,7 @@ public class HammerProjectile : Projectile
 
     void OnTriggerEnter2D(Collider2D hitInfo)
     {
+        Debug.Log(hitInfo);
         MainCharacter player = hitInfo.GetComponent<MainCharacter>();
         if(player!=null)
         {
