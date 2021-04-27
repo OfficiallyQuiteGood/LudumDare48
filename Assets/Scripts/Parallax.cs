@@ -15,7 +15,7 @@ public class Parallax : MonoBehaviour
     void Update()
     {
         this.transform.position = new Vector3(
-            camera.transform.position.x * 8f / 9f + 1f,
+            camera.transform.position.x * 13f / 14f + 1f,
             camera.transform.position.y * 2f / 3f - 15f,
             this.transform.position.z
         );
