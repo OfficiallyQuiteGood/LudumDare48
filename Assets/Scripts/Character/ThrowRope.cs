@@ -118,7 +118,7 @@ public class ThrowRope : MonoBehaviour
                 GameObject.Find("Player").GetComponent<MainCharacter>().playNoise(6,0);
 
                 // Endpoint
-                crossHair.enabled = false;
+                //crossHair.enabled = false;
                 ropeWasCast = true;
                 characterController.isSwinging = true;
                 Vector2 endPoint = hit.point;
@@ -142,7 +142,7 @@ public class ThrowRope : MonoBehaviour
         if (currHook != null)
         {
             // Rope was cast is false now
-            crossHair.enabled = true;
+            //crossHair.enabled = true;
             ropeWasCast = false;
             characterController.isSwinging = false;
 
