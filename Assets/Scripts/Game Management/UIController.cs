@@ -7,6 +7,12 @@ public class UIController : MonoBehaviour
 {
     public GameObject blackOutSquare;
     // Start is called before the first frame update
+
+    void Start()
+    {
+        AppearScreen();
+        
+    }
     void Update()
     {
 
@@ -20,11 +26,14 @@ public class UIController : MonoBehaviour
 
     public void AppearScreen()
     {
-        StartCoroutine(FadeBlackOutSquare(false,5,1));
-        
+        Color objectColor = blackOutSquare.GetComponent<Image>().color;
+        objectColor = new Color(objectColor.r, objectColor.g, objectColor.b, 1);
+        blackOutSquare.GetComponent<Image>().color = objectColor;
+        StartCoroutine(FadeBlackOutSquare(false,20f,0.01f));
+        GameObject.Find("DefeatText").GetComponent<DefeatImage>().HideImage(2f);
     }
 
-    public IEnumerator FadeBlackOutSquare(bool fadeToBlack = true, int fadeSpeed = 5,float delay = 0)
+    public IEnumerator FadeBlackOutSquare(bool fadeToBlack = true, float fadeSpeed = 5,float delay = 0.05f)
     {
         yield return new WaitForSeconds(delay);
         Color objectColor = blackOutSquare.GetComponent<Image>().color;
@@ -49,7 +58,7 @@ public class UIController : MonoBehaviour
 
                 objectColor = new Color(objectColor.r, objectColor.g, objectColor.b, fadeAmount);
                 blackOutSquare.GetComponent<Image>().color = objectColor;
-                yield return new WaitForSeconds(0.005f);
+                yield return new WaitForSeconds(delay);
             }
         }
     }
