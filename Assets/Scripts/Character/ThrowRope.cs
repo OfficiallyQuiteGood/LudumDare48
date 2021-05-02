@@ -91,7 +91,7 @@ public class ThrowRope : MonoBehaviour
         {
             // Delete a rope if it exists
             DestroyRope();
-            
+
             // Set throw rope to false
             canThrowRope = false;
 

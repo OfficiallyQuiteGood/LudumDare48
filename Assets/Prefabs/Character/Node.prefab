@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 420897086520243484}
   - component: {fileID: 8010634237985503237}
   - component: {fileID: 6606251846159839591}
+  - component: {fileID: -8713863743759181047}
   m_Layer: 17
   m_Name: Node
   m_TagString: Untagged
@@ -142,7 +143,25 @@ HingeJoint2D:
   m_Motor:
     m_MotorSpeed: 0
     m_MaximumMotorForce: 10000
-  m_UseLimits: 0
+  m_UseLimits: 1
   m_AngleLimits:
-    m_LowerAngle: 80
-    m_UpperAngle: 100
+    m_LowerAngle: 0
+    m_UpperAngle: 360
+--- !u!256 &-8713863743759181047
+FrictionJoint2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8671166810273839891}
+  m_Enabled: 1
+  serializedVersion: 4
+  m_EnableCollision: 0
+  m_ConnectedRigidBody: {fileID: 0}
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_AutoConfigureConnectedAnchor: 1
+  m_Anchor: {x: 0, y: 0}
+  m_ConnectedAnchor: {x: 0, y: 0}
+  m_MaxForce: 10000
+  m_MaxTorque: 10

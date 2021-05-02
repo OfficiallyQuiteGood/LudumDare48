@@ -29,6 +29,8 @@ public class CharacterController2D : MonoBehaviour
 	public EndingCutscene endingCutscene;
 	public WorldSettings worldSettings;
 
+	public GrapplingRope.GrapplingRope grapplingRope;
+
 
 	[Header("Events")]
 	[Space]

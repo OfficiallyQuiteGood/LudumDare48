@@ -21,6 +21,14 @@ public class Rope : MonoBehaviour
     // Rigid body (if we want one...)
     private Rigidbody2D rb;
 
+    // Constraint step
+    public float constraintStep = 5f;
+    public float minLim = 1f;
+    public float maxLim = 180f;
+    public float minThreshold = 60f;
+    public float maxThreshold = 120f;
+    private bool useLimits = false;
+
     // On awake
     void Awake()
     {
@@ -88,6 +96,7 @@ public class Rope : MonoBehaviour
                 dist -= distance;
             }
             lastNode.GetComponent<HingeJoint2D>().connectedBody = player.GetComponent<Rigidbody2D>();
+            lastNode.GetComponent<FrictionJoint2D>().connectedBody = player.GetComponent<Rigidbody2D>();
         }
 
         RenderLine();
@@ -132,7 +141,40 @@ public class Rope : MonoBehaviour
 
         go.transform.SetParent(transform);
 
+        // If use limits logic
+        if (useLimits)
+        {
+            // constantly decrease the constraints
+            HingeJoint2D hj = go.GetComponent<HingeJoint2D>();
+            JointAngleLimits2D lims = hj.limits;
+            hj.useLimits = true;
+            lims.min = minLim;
+            lims.max = maxLim;
+
+            // Update lims for next node
+            minLim -= constraintStep;
+            maxLim += constraintStep;
+
+            Debug.Log("Constraint Step = " + constraintStep + ", minLim = " + minLim + ", maxLim = " + maxLim);
+
+            // Make sure lims don't pass thresholds
+            if (minLim > minThreshold)
+            {
+                minLim = minThreshold;
+            }
+            
+            if (maxLim < maxThreshold)
+            {
+                maxLim = maxThreshold;
+            }
+
+            // Store back into hinge joint limits
+            hj.limits = lims;
+        }
+
+        // Connect to last one
         lastNode.GetComponent<HingeJoint2D>().connectedBody = go.GetComponent<Rigidbody2D>();
+        lastNode.GetComponent<FrictionJoint2D>().connectedBody = go.GetComponent<Rigidbody2D>();
     
         //Debug.Log("Distance between curr and last = " + Vector2.Distance(go.transform.position, lastNode.transform.position));
 

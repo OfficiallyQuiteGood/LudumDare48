@@ -1,33 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
 
 public class RopeControllerRealistic : MonoBehaviour 
 {
     //Objects that will interact with the rope
     public Transform whatTheRopeIsConnectedTo;
     public Transform whatIsHangingFromTheRope;
-
-    // Crosshair    
-    public Transform crosshair;
-    public SpriteRenderer crosshairSprite;
-
-    //Line renderer used to display the rope and mask
-    public LineRenderer ropeRenderer;
-    public LayerMask ropeLayerMask;
-
-    // Rope related vars
-    private bool ropeAttached;
-    public float ropeMaxCastDistance = 2f;
-    public DistanceJoint2D ropeJoint;
-    public GameObject ropeHingeAnchor;
-    private Rigidbody2D ropeHingeAnchorRb;
-    private SpriteRenderer ropeHingeAnchorSprite;
-
-    // Player related vars
-    private Vector2 playerPosition;
-    public CharacterController2D playerMovement;
+    
+    //Line renderer used to display the rope
+    LineRenderer lineRenderer;
 
     //A list with all rope section
     public List<RopeSection> allRopeSections = new List<RopeSection>();
@@ -44,18 +26,15 @@ public class RopeControllerRealistic : MonoBehaviour
     public float aRope = 0.05f;
     //Mass of one rope section
     public float mRopeSection = 0.2f;
-    public int numRopeSegments = 7;
 
-    void Awake()
-    {
-        ropeJoint.enabled = false;
-        playerPosition = transform.position;
-        ropeHingeAnchorRb = ropeHingeAnchor.GetComponent<Rigidbody2D>();
-        ropeHingeAnchorSprite = ropeHingeAnchor.GetComponent<SpriteRenderer>();
-    }
+
 
     void Start() 
 	{
+        //Init the line renderer we use to display the rope
+        lineRenderer = GetComponent<LineRenderer>();
+
+
         //
         //Create the rope
         //
@@ -64,7 +43,7 @@ public class RopeControllerRealistic : MonoBehaviour
 
         List<Vector3> ropePositions = new List<Vector3>();
 
-        for (int i = 0; i < numRopeSegments; i++)
+        for (int i = 0; i < 7; i++)
         {
             ropePositions.Add(pos);
 
@@ -79,34 +58,10 @@ public class RopeControllerRealistic : MonoBehaviour
         }
     }
 	
+	
+
 	void Update() 
 	{
-        var worldMousePosition =
-            Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0f));
-        var facingDirection = worldMousePosition - transform.position;
-        var aimAngle = Mathf.Atan2(facingDirection.y, facingDirection.x);
-        if (aimAngle < 0f)
-        {
-            aimAngle = Mathf.PI * 2 + aimAngle;
-        }
-
-        // 4
-        var aimDirection = Quaternion.Euler(0, 0, aimAngle * Mathf.Rad2Deg) * Vector2.right;
-        // 5
-        playerPosition = transform.position;
-
-        // 6
-        if (!ropeAttached)
-        {
-            SetCrosshairPosition(aimAngle);
-        }
-        else 
-        {
-            crosshairSprite.enabled = false;
-        }
-
-        HandleInput(aimDirection);
-
         //Display the rope with the line renderer
         DisplayRope();
 
@@ -119,6 +74,8 @@ public class RopeControllerRealistic : MonoBehaviour
         //Make what's hanging from the rope look at the next to last rope position to make it rotate with the rope
         whatIsHangingFromTheRope.LookAt(allRopeSections[1].pos);
     }
+
+
 
     void FixedUpdate()
     {
@@ -136,82 +93,26 @@ public class RopeControllerRealistic : MonoBehaviour
                 UpdateRopeSimulation(allRopeSections, timeStep);
             }
         }
+
+
+        ////Move what is hanging from the rope to the end of the rope
+        ////This will not always work because when what's connected to the rope has collided, the rope
+        ////is not aware of it so it will continue to move, which will teleport the cube away from the obstacle
+        //whatIsHangingFromTheRope.GetComponent<Rigidbody>().MovePosition(allRopeSections[0].pos);
+
+        ////Make what's hanging from the rope look at the next to last rope position to make it rotate with the rope
+        //whatIsHangingFromTheRope.LookAt(allRopeSections[1].pos);
     }
 
-    private void SetCrosshairPosition(float aimAngle)
-    {
-        if (!crosshairSprite.enabled)
-        {
-            crosshairSprite.enabled = true;
-        }
 
-        var x = transform.position.x + 1f * Mathf.Cos(aimAngle);
-        var y = transform.position.y + 1f * Mathf.Sin(aimAngle);
-
-        var crossHairPosition = new Vector3(x, y, 0);
-        crosshair.transform.position = crossHairPosition;
-    }
-
-    private void HandleInput(Vector2 aimDirection)
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            // 2
-            if (ropeAttached) return;
-            ropeRenderer.enabled = true;
-
-            var hit = Physics2D.Raycast(playerPosition, aimDirection, ropeMaxCastDistance, ropeLayerMask);
-            
-            // 3
-            if (hit.collider != null)
-            {
-                ropeAttached = true;
-                if (!allRopeSections.Select(x => x.pos).Contains(hit.point))
-                {
-                    // 4
-                    // Jump slightly to distance the player a little from the ground after grappling to something.
-                    transform.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, 2f), ForceMode2D.Impulse);
-                    allRopeSections.Add(new RopeSection(hit.point));
-                    ropeJoint.distance = Vector2.Distance(playerPosition, hit.point);
-                    ropeJoint.enabled = true;
-                    ropeHingeAnchorSprite.enabled = true;
-                }
-            }
-            // 5
-            else
-            {
-                ropeRenderer.enabled = false;
-                ropeAttached = false;
-                ropeJoint.enabled = false;
-            }
-        }
-
-        if (Input.GetMouseButtonUp(0))
-        {
-            ResetRope();
-        }
-    }
-
-    private void ResetRope()
-    {
-        ropeJoint.enabled = false;
-        ropeAttached = false;
-        playerMovement.isSwinging = false;
-        ropeRenderer.positionCount = 2;
-        ropeRenderer.SetPosition(0, transform.position);
-        ropeRenderer.SetPosition(1, transform.position);
-        allRopeSections.Clear();
-        ropeHingeAnchorSprite.enabled = false;
-        //wrapPointsLookup.Clear();
-    }
 
     //Display the rope with a line renderer
     private void DisplayRope()
     {
         float ropeWidth = 0.2f;
 
-        ropeRenderer.startWidth = ropeWidth;
-        ropeRenderer.endWidth = ropeWidth;
+        lineRenderer.startWidth = ropeWidth;
+        lineRenderer.endWidth = ropeWidth;
 
         //An array with all rope section positions
         Vector3[] positions = new Vector3[allRopeSections.Count];
@@ -221,10 +122,13 @@ public class RopeControllerRealistic : MonoBehaviour
             positions[i] = allRopeSections[i].pos;
         }
 
-        ropeRenderer.positionCount = positions.Length;
+        lineRenderer.positionCount = positions.Length;
 
-        ropeRenderer.SetPositions(positions);
+        lineRenderer.SetPositions(positions);
     }
+
+
+
 
     private void UpdateRopeSimulation(List<RopeSection> allRopeSections, float timeStep)
     {
@@ -311,6 +215,8 @@ public class RopeControllerRealistic : MonoBehaviour
             ImplementMaximumStretch(allRopeSections);
         }
     }
+
+
 
     //Calculate accelerations in each rope section which is what is needed to get the next pos and vel
     private List<Vector3> CalculateAccelerations(List<RopeSection> allRopeSections)
@@ -410,6 +316,8 @@ public class RopeControllerRealistic : MonoBehaviour
         return accelerations;
     }
 
+
+
     //Implement maximum stretch to avoid numerical instabilities
     private void ImplementMaximumStretch(List<RopeSection> allRopeSections)
     {
@@ -458,6 +366,8 @@ public class RopeControllerRealistic : MonoBehaviour
         }
     }
 
+
+
     //Move a rope section based on stretch/compression
     private void MoveSection(Vector3 finalChange, int listPos)
     {
@@ -472,6 +382,8 @@ public class RopeControllerRealistic : MonoBehaviour
 
         allRopeSections[listPos] = bottomSection;
     }
+
+
 
     //Compare the current length of the rope with the wanted length
     private void DebugRopeLength()
