@@ -89,6 +89,9 @@ public class ThrowRope : MonoBehaviour
         // Need to check for mouse position about to hit something
         if (Input.GetMouseButtonDown(0) && canThrowRope)
         {
+            // Delete a rope if it exists
+            DestroyRope();
+            
             // Set throw rope to false
             canThrowRope = false;
 
