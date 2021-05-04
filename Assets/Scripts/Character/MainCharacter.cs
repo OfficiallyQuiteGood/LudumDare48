@@ -126,6 +126,8 @@ public class MainCharacter : MonoBehaviour
 	//reset position (if player falls too fast)
 	public void resetPlayerPosition(float delay)
 	{
+		if(gameObject.GetComponent<HealthSystem>().GetHealth()<=0) return;
+		
 		GameObject.Find("Follow Camera").GetComponent<Follow>().PausePan(delay);
 		gameObject.GetComponent<HealthSystem>().TakeDamage(1);
 		gameObject.GetComponent<CharacterController2D>().playerWon = false;
@@ -135,6 +137,7 @@ public class MainCharacter : MonoBehaviour
 	//set position and start iframes with delay
 	IEnumerator resetPositionWithDelay(float delay)
 	{
+		
 		canSetPosition = false;
 		yield return new WaitForSeconds(delay);
 		transform.position = lastLegalPosition;
