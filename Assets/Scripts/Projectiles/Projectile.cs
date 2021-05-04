@@ -5,6 +5,7 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     public GameObject projectileDeath;
+    bool delayReleased = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,6 +16,31 @@ public class Projectile : MonoBehaviour
     void Update()
     {
         
+    }
+
+    protected GameObject TryFindPlayer()
+    {
+        if(delayReleased)
+        {
+            lockSearch();
+            GameObject player = GameObject.Find("Player");
+            if(player != null) return player;
+            else
+            {
+                return null;
+            }
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    IEnumerator lockSearch()
+    {
+        delayReleased = false;
+        yield return new WaitForSeconds(1f);
+        delayReleased = true;
     }
 
     public void ProjectileDeath()

@@ -220,4 +220,13 @@ public class MainCharacter : MonoBehaviour
 	{
 		this.checkPoint = cp;
 	}
+
+	public void loadCheckPoint()
+	{
+		if(checkPoint != null)
+		{
+			gameObject.GetComponent<HealthSystem>().HealHealth(3);
+			gameObject.transform.position = checkPoint.transform.position;
+		}
+	}
 }

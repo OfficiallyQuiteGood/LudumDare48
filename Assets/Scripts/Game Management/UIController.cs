@@ -30,7 +30,7 @@ public class UIController : MonoBehaviour
         objectColor = new Color(objectColor.r, objectColor.g, objectColor.b, 1);
         blackOutSquare.GetComponent<Image>().color = objectColor;
         StartCoroutine(FadeBlackOutSquare(false,20f,0.01f));
-        GameObject.Find("DefeatText").GetComponent<DefeatImage>().HideImage(2f);
+        GameObject.Find("DefeatText").GetComponent<DefeatImage>().HideImage(1f);
     }
 
     public IEnumerator FadeBlackOutSquare(bool fadeToBlack = true, float fadeSpeed = 5,float delay = 0.05f)
