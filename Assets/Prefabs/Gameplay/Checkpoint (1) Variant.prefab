@@ -19,6 +19,18 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.9764151
       objectReference: {fileID: 0}
+    - target: {fileID: 1548899379410963936, guid: 738695146b2ee8a42b74d851795ec79f, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 0.32
+      objectReference: {fileID: 0}
+    - target: {fileID: 1548899379410963936, guid: 738695146b2ee8a42b74d851795ec79f, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 0.64
+      objectReference: {fileID: 0}
+    - target: {fileID: 1548899379410963938, guid: 738695146b2ee8a42b74d851795ec79f, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: e26d3268b8135544b881f6d4d3d24b9d, type: 3}
     - target: {fileID: 1548899379410963938, guid: 738695146b2ee8a42b74d851795ec79f, type: 3}
       propertyPath: m_Color.a
       value: 1
