@@ -85,6 +85,7 @@ public class HealthSystem : MonoBehaviour
 
         // Switch animations?
         Instantiate(deathPrefab, transform.position, Quaternion.identity);
+        GameObject.Find("Follow Camera").GetComponent<Follow>().PausePan(5f);
         GameObject.Find("World Settings").GetComponent<WorldSettings>().GameOver();
         StartCoroutine(HidePlayerForSeconds(5f));
         //Destroy(gameObject);

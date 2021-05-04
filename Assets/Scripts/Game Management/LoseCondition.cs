@@ -29,6 +29,7 @@ public class LoseCondition : MonoBehaviour
         // Load game again
         GameObject.Find("Player").GetComponent<MainCharacter>().loadCheckPoint();
         GameObject.Find("Canvas").GetComponent<UIController>().AppearScreen();
+        
         //SceneManager.LoadScene("TreeScene");
     }
 
