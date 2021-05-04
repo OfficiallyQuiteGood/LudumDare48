@@ -17,7 +17,7 @@ public class LoseCondition : MonoBehaviour
         
     }
 
-    protected IEnumerator ReloadGameCoroutine(float delay)
+    protected IEnumerator ReloadToCheckpointCoroutine(float delay)
     {
         Debug.Log("Before loading scene");
 
@@ -27,11 +27,13 @@ public class LoseCondition : MonoBehaviour
         Debug.Log("after loading scene");
 
         // Load game again
-        SceneManager.LoadScene("TreeScene");
+        GameObject.Find("Player").GetComponent<MainCharacter>().loadCheckPoint();
+        GameObject.Find("Canvas").GetComponent<UIController>().AppearScreen();
+        //SceneManager.LoadScene("TreeScene");
     }
 
-    public void ReloadGame()
+    public void ReloadToCheckpoint()
     {
-        StartCoroutine(ReloadGameCoroutine(6f));
+        StartCoroutine(ReloadToCheckpointCoroutine(6f));
     }
 }

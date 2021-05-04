@@ -26,6 +26,12 @@ public class DefeatImage : MonoBehaviour
         StartCoroutine(FadeInImage(true, 5, delay));
     }
 
+    public void HideImage(float delay)
+    {
+        gameObject.GetComponent<Image>().sprite = images[Random.Range(0, images.Length)];
+        StartCoroutine(FadeInImage(false, 5, delay));
+    }
+
     public IEnumerator FadeInImage(bool fadeIn = true, int fadeSpeed = 5,float delay = 0)
     {
         yield return new WaitForSeconds(delay);

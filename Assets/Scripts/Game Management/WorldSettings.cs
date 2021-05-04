@@ -8,7 +8,6 @@ public class WorldSettings : MonoBehaviour
     public float gravity = 9.81f;
 
     public GameObject playerPrefab;
-    public CheckpointList CheckpointList;
 
     public AudioSource audioSource;
     public AudioSource EnemyAudio;
