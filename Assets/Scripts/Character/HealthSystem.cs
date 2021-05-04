@@ -52,9 +52,13 @@ public class HealthSystem : MonoBehaviour
                 healthUI.OnHealthChanged(0);
                 Die();
             }
+            else
+            {
+                StartCoroutine(PlayIFrames());
+            }
             
             // Play iFrames
-            StartCoroutine(PlayIFrames());
+            
         }
     }
 
@@ -82,10 +86,20 @@ public class HealthSystem : MonoBehaviour
         // Switch animations?
         Instantiate(deathPrefab, transform.position, Quaternion.identity);
         GameObject.Find("World Settings").GetComponent<WorldSettings>().GameOver();
-        Destroy(gameObject);
+        StartCoroutine(HidePlayerForSeconds(5f));
+        //Destroy(gameObject);
 
         // Reload entire scene?
-        loseCondition.ReloadGame();
+        loseCondition.ReloadToCheckpoint();
+    }
+
+    protected IEnumerator HidePlayerForSeconds(float seconds)
+    {
+        bCanBeDamaged = false;
+        GameObject.Find("Player").GetComponent<Renderer>().enabled = false;
+        yield return new WaitForSeconds(seconds);
+        GameObject.Find("Player").GetComponent<Renderer>().enabled = true;
+        bCanBeDamaged = true;
     }
 
 
@@ -129,5 +143,12 @@ public class HealthSystem : MonoBehaviour
             }
             healthUI.OnHealthChanged(currHealth);
         }
+    }
+
+    public void HealHealth(int health)
+    {
+        if(health<0) Debug.Log("Negative Health Amount Given");
+        currHealth = currHealth + health < 3 ? currHealth + health : 3;
+        healthUI.OnHealthChanged(currHealth);
     }
 }

@@ -16,6 +16,7 @@ public class MainCharacter : MonoBehaviour
 	//legal position for respawn
 	public Vector3 lastLegalPosition;
 	bool canSetPosition = true;
+	CheckPoint checkPoint;
 
 	// Audio Clips
     public AudioSource audioSource;
@@ -213,5 +214,19 @@ public class MainCharacter : MonoBehaviour
 	{
 		//Debug.Log("Deal Fall Damage");
 		if(prevVertical < -12) gameObject.GetComponent<HealthSystem>().TakeDamage(1);
+	}
+
+	public void setCheckPoint(CheckPoint cp)
+	{
+		this.checkPoint = cp;
+	}
+
+	public void loadCheckPoint()
+	{
+		if(checkPoint != null)
+		{
+			gameObject.GetComponent<HealthSystem>().HealHealth(3);
+			gameObject.transform.position = checkPoint.transform.position;
+		}
 	}
 }

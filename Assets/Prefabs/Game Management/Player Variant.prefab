@@ -81,7 +81,7 @@ SortingGroup:
   m_GameObject: {fileID: 3733720047368090899}
   m_Enabled: 1
   m_SortingLayerID: -1414676021
-  m_SortingLayer: 5
+  m_SortingLayer: 3
   m_SortingOrder: 0
 --- !u!114 &1525657092
 MonoBehaviour:
@@ -108,7 +108,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 662493837640617281, guid: 1e699d1c8f520c149999b894d7d71f4d, type: 3}
       propertyPath: m_SortingLayer
-      value: 8
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 662493837640617281, guid: 1e699d1c8f520c149999b894d7d71f4d, type: 3}
       propertyPath: m_SortingOrder
@@ -136,7 +136,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4223416743461697165, guid: 1e699d1c8f520c149999b894d7d71f4d, type: 3}
       propertyPath: m_Name
-      value: Player
+      value: Player Variant
       objectReference: {fileID: 0}
     - target: {fileID: 4488948187720201018, guid: 1e699d1c8f520c149999b894d7d71f4d, type: 3}
       propertyPath: ropeMaxCastDistance
@@ -241,6 +241,10 @@ PrefabInstance:
     - target: {fileID: 8232735604548322261, guid: 1e699d1c8f520c149999b894d7d71f4d, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8907380631760251864, guid: 1e699d1c8f520c149999b894d7d71f4d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.68
       objectReference: {fileID: 0}
     - target: {fileID: 9223127692598381316, guid: 1e699d1c8f520c149999b894d7d71f4d, type: 3}
       propertyPath: m_Color.b
