@@ -87,51 +87,105 @@ namespace GrapplingRope
         private int numCollisions;
         private bool shouldSnapshotCollision;
 
-        private Camera cam;
         private Material material;
         private Collider2D[] colliderBuffer;
 
         private Vector4[] renderPositions;
-        [SerializeField] private Transform hookPoint;
-        [SerializeField] private MovementComponent player;
+        [SerializeField] private Transform startPoint;
+        [SerializeField] private MovementComponent endPointMover;
+        private CharacterSettings characterSettings;
 
-        private Vector2 down = new Vector2(0.0f, -1.0f);
-        public float stiffness = 0.5f;
+        private bool bShouldUpdate = false;
+        private Camera main;
+
+        void OnEnable()
+        {
+            EventManager.Instance.OnRopeActionDelegate += OnRopeAction;
+        }
+
+        void OnDisable()
+        {
+            EventManager.Instance.OnRopeActionDelegate -= OnRopeAction;
+        }
 
         private void Awake()
         {
-            if (totalNodes > MAX_RENDER_POINTS)
+            //OnRopeAction(true, Vector3.zero);
+            main = Camera.main;
+            characterSettings = GetComponent<CharacterSettings>();
+        }
+
+        private void OnRopeAction(bool createRope, Vector3 mousePosition)
+        {
+            if (createRope)
+            {
+                CreateRope(mousePosition);
+            }
+            else
+            {
+                //DestroyRope();
+            }
+        }
+
+        private void CreateRope(Vector3 mousePosition)
+        {
+            // Enable update
+            bShouldUpdate = true;
+            
+            // Local vars
+            Vector2 start = endPointMover.transform.position;
+            Vector2 dir = ((Vector2)mousePosition - start).normalized;
+            
+            // Calculate the cast distance and then determine the end bit
+            // TODO: Think of a way to handle the mouse click on location (causes near 0 castDistance)
+            float castDistance = Vector2.Distance((Vector2)mousePosition, start);
+            if (castDistance > characterSettings.maxRopeDistance)
+            {
+                castDistance = characterSettings.maxRopeDistance;
+            }
+            startPoint.position = start + dir * castDistance;
+            Debug.Log("start = " + start + ", mousePosition = " + (Vector2)mousePosition + ", dir = " + dir);
+
+            // Need to calculate how many nodes to use since it
+            int numNodes = mousePosition == Vector3.zero ? totalNodes : Mathf.CeilToInt(castDistance / nodeDistance);
+            if (numNodes > MAX_RENDER_POINTS)
             {
                 Debug.LogError("Total nodes is more than MAX_RENDER_POINTS, so won't be able to render the entire rope.");
             }
 
-            nodes = new VerletNode[totalNodes];
+            nodes = new VerletNode[numNodes];
             collisionInfos = new CollisionInfo[MAX_ROPE_COLLISIONS];
             for (int i = 0; i < collisionInfos.Length; i++)
             {
-                collisionInfos[i] = new CollisionInfo(totalNodes);
+                collisionInfos[i] = new CollisionInfo(numNodes);
             }
 
             // Buffer for OverlapCircleNonAlloc.
             colliderBuffer = new Collider2D[COLLIDER_BUFFER_SIZE];
-            renderPositions = new Vector4[totalNodes];
+            renderPositions = new Vector4[numNodes];
 
             // Spawn nodes starting from the transform position and working down.
-            Vector2 pos = transform.position;
-            for (int i = 0; i < totalNodes; i++)
+            for (int i = 0; i < numNodes; i++)
             {
-                nodes[i] = new VerletNode(pos);
-                renderPositions[i] = new Vector4(pos.x, pos.y, 1, 1);
-                pos.y -= nodeDistance;
+                nodes[i] = new VerletNode(start);
+                renderPositions[i] = new Vector4(start.x, start.y, 1, 1);
+                if (mousePosition == Vector3.zero)
+                {
+                    start.y -= nodeDistance;
+                }
+                else
+                {
+                    start += dir * nodeDistance;
+                }
             }
 
             // Mesh setup.
             Mesh mesh = new Mesh();
             {
-                Vector3[] vertices = new Vector3[totalNodes * VERTICES_PER_NODE];
-                int[] triangles = new int[totalNodes * TRIANGLES_PER_NODE * 3];
+                Vector3[] vertices = new Vector3[numNodes * VERTICES_PER_NODE];
+                int[] triangles = new int[numNodes * TRIANGLES_PER_NODE * 3];
 
-                for (int i = 0; i < totalNodes; i++)
+                for (int i = 0; i < numNodes; i++)
                 {
                     // 4 triangles per node, 3 indices per triangle.
                     int idx = i * TRIANGLES_PER_NODE * 3;
@@ -168,41 +222,46 @@ namespace GrapplingRope
 
         private void Update()
         {
-            if (shouldSnapshotCollision)
+            if (bShouldUpdate)
             {
-                SnapshotCollision();
-            }
-
-            // Fixed timestep.
-            timeAccum += Time.deltaTime;
-            timeAccum = Mathf.Min(timeAccum, maxStep);
-            while (timeAccum >= stepTime)
-            {
-                Simulate();
-
-                for (int i = 0; i < iterations; i++)
+                if (shouldSnapshotCollision)
                 {
-                    ApplyConstraints();
-                    AdjustCollisions();
+                    SnapshotCollision();
                 }
 
-                timeAccum -= stepTime;
+                // Fixed timestep.
+                timeAccum += Time.deltaTime;
+                timeAccum = Mathf.Min(timeAccum, maxStep);
+                while (timeAccum >= stepTime)
+                {
+                    Simulate();
+
+                    for (int i = 0; i < iterations; i++)
+                    {
+                        ApplyConstraints();
+                        AdjustCollisions();
+                    }
+
+                    timeAccum -= stepTime;
+                }
             }
         }
 
         private void LateUpdate()
         {
-            for (int i = 0; i < nodes.Length; i++)
+            if (bShouldUpdate)
             {
-                renderPositions[i].w = 1;
-                Vector2 pos = nodes[i].position;
-                renderPositions[i].x = pos.x;
-                renderPositions[i].y = pos.y;
-                renderPositions[i].z = 1;
-                //Debug.Log("Rendering! Position = " + renderPositions[i]);
-            }
+                for (int i = 0; i < nodes.Length; i++)
+                {
+                    renderPositions[i].w = 1;
+                    Vector2 pos = nodes[i].position;
+                    renderPositions[i].x = pos.x;
+                    renderPositions[i].y = pos.y;
+                    renderPositions[i].z = 1;
+                }
 
-            material.SetVectorArray("_Points", renderPositions);
+                material.SetVectorArray("_Points", renderPositions);
+            }
         }
 
         private void FixedUpdate()
@@ -212,9 +271,8 @@ namespace GrapplingRope
 
         private void SnapshotCollision()
         {
-            //Profiler.BeginSample("Snapshot");
-
             numCollisions = 0;
+
             // Loop through each node and get collisions within a radius.
             for (int i = 0; i < nodes.Length; i++)
             {
@@ -268,7 +326,6 @@ namespace GrapplingRope
                         numCollisions++;
                         if (numCollisions >= MAX_ROPE_COLLISIONS)
                         {
-                            //Profiler.EndSample();
                             return;
                         }
 
@@ -288,8 +345,6 @@ namespace GrapplingRope
             }
 
             shouldSnapshotCollision = false;
-
-            //Profiler.EndSample();
         }
 
         private void Simulate()
@@ -298,28 +353,29 @@ namespace GrapplingRope
             {
                 VerletNode node = nodes[i];
 
+                Vector2 tempAcc = gravity;
+                if (endPointMover.isMouseDown && i == 0)
+                {
+                    tempAcc = gravity + endPointMover.force;
+                }
+
                 Vector2 temp = node.position;
-                node.position += (node.position - node.oldPosition) + gravity * stepTime * stepTime;
+                node.position += (node.position - node.oldPosition) + tempAcc * stepTime * stepTime;
                 node.oldPosition = temp;
-                //Debug.Log("Node position = " + node.position);
             }
         }
 
         private void ApplyConstraints()
         {
-            //Profiler.BeginSample("Constraints");
-
             // Set start and end constraints
-            nodes[0].position = hookPoint.position;
-            //nodes[nodes.Length - 1].position = endPoint.position;
-            if (player.isMouseDown)
+            nodes[nodes.Length - 1].position = startPoint.transform.position; //main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0f));
+            if (!endPointMover.isMouseDown)
             {
-                //endPoint.position = (Vector3)nodes[nodes.Length - 1].position;
-                nodes[nodes.Length - 1].position = player.transform.position;
+                nodes[0].position = endPointMover.transform.position;
             }
             else
             {
-                player.transform.position = nodes[nodes.Length - 1].position;
+                endPointMover.transform.position = nodes[0].position;
             }
 
             for (int i = 0; i < nodes.Length - 1; i++)
@@ -328,11 +384,11 @@ namespace GrapplingRope
                 VerletNode node2 = nodes[i + 1];
 
                 // Current distance between rope nodes.
-                //Debug.Log("Node 1 pos = " + node1.position + ", Node 2 pos = " + node2.position);
                 float diffX = node1.position.x - node2.position.x;
                 float diffY = node1.position.y - node2.position.y;
                 float dist = Vector2.Distance(node1.position, node2.position);
                 float difference = 0;
+                
                 // Guard against divide by 0.
                 if (dist > 0)
                 {
@@ -340,50 +396,10 @@ namespace GrapplingRope
                 }
 
                 Vector2 diff = new Vector2(diffX, diffY);
-                //Debug.Log("dist = " + ", diff = " + diff);
-                Vector2 translate = diff * (.7f * difference);
+                Vector2 translate = diff * (.5f * difference);
 
                 node1.position += translate;
                 node2.position -= translate;
-            }
-
-            /*
-            // Distance constraint which reduces iterations, but doesn't handle stretchyness in a natural way.
-            VerletNode first = nodes[0];
-            VerletNode last = nodes[nodes.Length-1];
-            // Same distance calculation as above, but less optimal.
-            float distance = Vector2.Distance(first.position, last.position);
-            if (distance > 0 && distance > nodes.Length * nodeDistance) {
-                Vector2 dir = (last.position - first.position).normalized;
-                last.position = first.position + nodes.Length * nodeDistance * dir;
-            }
-            */
-
-            //Profiler.EndSample();
-        }
-
-        private void ApplySmallerConstraints()
-        {
-            for (int i = 0; i < nodes.Length - 1; i++)
-            {
-                // Attempt to apply stiffness constraint
-                VerletNode node1 = nodes[i];
-                VerletNode node2 = nodes[i + 1];
-
-                float diffX = node1.position.x - node2.position.x;
-                float diffY = node1.position.y - node2.position.y;
-                Vector2 diff = new Vector2(diffX, diffY);
-
-                float dist = Vector2.Distance(node1.position, node2.position);
-
-                // Calculate unit vector in direction of node2
-                Vector2 diffVec = (down * dist - diff) * stiffness;
-                Vector2 xVec = new Vector2(diffVec.x, 0.0f).normalized;
-                Vector2 finalVec = Vector2.Dot(diffVec, xVec) * xVec;
-                //Debug.Log("down*dist = " + (down*dist) + ", diffVec = " + diffVec);
-
-                // Add diff vec to second node...
-                node2.position += finalVec;
             }
         }
 
@@ -462,26 +478,7 @@ namespace GrapplingRope
                         break;
                 }
             }
-
-
-            //Profiler.EndSample();
         }
-
-        /*
-        private void OnDrawGizmos() {
-            if (!Application.isPlaying) {
-                return;
-            }
-            for (int i = 0; i < nodes.Length - 1; i++) {
-                if (i % 2 == 0) {
-                    Gizmos.color = Color.green;
-                } else {
-                    Gizmos.color = Color.white;
-                }
-                Gizmos.DrawLine(nodes[i].position, nodes[i + 1].position);
-            }
-        }
-        */
     
         // Enable function
         public void ActivateRope()
@@ -490,7 +487,7 @@ namespace GrapplingRope
             gameObject.SetActive(true);
 
             // Set all nodes to be at player pos for now
-            Vector3 defaultPos = player.transform.position;
+            Vector3 defaultPos = endPointMover.transform.position;
             foreach (VerletNode v in nodes)
             {
                 v.position = defaultPos;

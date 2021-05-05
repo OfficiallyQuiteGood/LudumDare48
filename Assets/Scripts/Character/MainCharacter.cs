@@ -63,8 +63,6 @@ public class MainCharacter : MonoBehaviour
 
 		horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
 
-		horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
-
 		if (Input.GetButtonDown("Jump"))
 		{
 			playNoise(4,0);

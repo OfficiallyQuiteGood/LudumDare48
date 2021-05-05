@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7189123337774778446}
-  - component: {fileID: 1067843777728147774}
   - component: {fileID: 1539065766610654221}
   - component: {fileID: 922124176206894119}
+  - component: {fileID: 7859682377861182924}
   m_Layer: 0
   m_Name: StandaloneRope
   m_TagString: Untagged
@@ -35,30 +35,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1067843777728147774
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1548675055121377146}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 332a8bc568b3ad84dbb6e9bdc248d670, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  totalNodes: 200
-  iterations: 80
-  nodeDistance: 0.1
-  stepTime: 0.01
-  maxStep: 0.1
-  drawWidth: 0.025
-  gravity: {x: 0, y: -20}
-  collisionRadius: 0.5
-  startPoint: {fileID: 4060414638795303937}
-  endPoint: {fileID: 1574619568828020999}
-  endPointMover: {fileID: 6687406546953118540}
-  stiffness: 0.5
 --- !u!33 &1539065766610654221
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -108,6 +84,28 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &7859682377861182924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1548675055121377146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9313a21c2118174da36cf7e3b1f3893, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  totalNodes: 50
+  iterations: 20
+  nodeDistance: 0.1
+  stepTime: 0.01
+  maxStep: 0.1
+  drawWidth: 0.025
+  gravity: {x: 0, y: -20}
+  collisionRadius: 0.5
+  startPoint: {fileID: 4060414638795303937}
+  endPointMover: {fileID: 6687406546953118540}
 --- !u!1 &7372921579264712487
 GameObject:
   m_ObjectHideFlags: 0
@@ -119,7 +117,7 @@ GameObject:
   - component: {fileID: 1574619568828020999}
   - component: {fileID: 2571863178245847477}
   - component: {fileID: 6687406546953118540}
-  - component: {fileID: 2957452937825464757}
+  - component: {fileID: 8371987846118270907}
   m_Layer: 0
   m_Name: EndPoint
   m_TagString: Untagged
@@ -204,31 +202,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9721a6020968f6b4993d5d7cf82a8114, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gravity: {x: 0, y: -20, z: 0}
-  mass: 1
-  finalPos: {x: 0, y: 0, z: 0}
   isMouseDown: 0
---- !u!50 &2957452937825464757
-Rigidbody2D:
-  serializedVersion: 4
+  force: {x: 0, y: 0}
+  swingForce: 20
+--- !u!114 &8371987846118270907
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7372921579264712487}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b225cff3037aadd478608f31edcc8077, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxRopeDistance: 10
 --- !u!1 &8704608417646045245
 GameObject:
   m_ObjectHideFlags: 0
@@ -238,6 +227,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4060414638795303937}
+  - component: {fileID: 4840794679383984178}
+  - component: {fileID: 2988636614537972493}
   m_Layer: 0
   m_Name: StartPoint
   m_TagString: Untagged
@@ -259,3 +250,31 @@ Transform:
   m_Father: {fileID: 7189123337774778446}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4840794679383984178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8704608417646045245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9721a6020968f6b4993d5d7cf82a8114, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMouseDown: 0
+  force: {x: 0, y: 0}
+  swingForce: 20
+--- !u!114 &2988636614537972493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8704608417646045245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b225cff3037aadd478608f31edcc8077, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxRopeDistance: 2

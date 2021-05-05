@@ -189,7 +189,7 @@ namespace StandaloneRope
 
                 for (int i = 0; i < iterations; i++)
                 {
-                    //ApplyConstraints();
+                    ApplyConstraints();
                     AdjustCollisions();
                 }
 
@@ -305,42 +305,25 @@ namespace StandaloneRope
             {
                 VerletNode node = nodes[i];
 
-                // Vector2 temp = node.position;
-                // node.position += (node.position - node.oldPosition) + gravity * stepTime * stepTime;
-                // node.oldPosition = temp;
-                //Debug.Log("Node position = " + node.position);
+                Vector2 tempAcc = gravity;
+                if (i == nodes.Length - 1)
+                {
+                    tempAcc = gravity + endPointMover.force;
+                }
 
-                // Do velocity verlet
-                Vector2 newPos = node.position + node.velocity * stepTime + node.acceleration * (stepTime * stepTime * 0.5f);
-                Vector2 newAcc = ApplyForces(node);
-                Vector2 newVel = node.velocity + (node.acceleration + newAcc) * (stepTime * 0.5f);
-                node.position = newPos;
-                node.velocity = newVel;
-                node.acceleration = newAcc;
+                Vector2 temp = node.position;
+                node.position += (node.position - node.oldPosition) + tempAcc * stepTime * stepTime;
+                node.oldPosition = temp;
+                Debug.Log("Node position = " + node.position);
             }
-        }
-
-        private Vector2 ApplyForces(VerletNode node)
-        {
-            Vector2 springForce = -(node.mass * node.position) / (stepTime * stepTime);  //-(node.mass / (stepTime * stepTime)) * Ck * node.position - (node.mass / stepTime) * Cd * node.velocity;
-            //Vector2 springAcc = springForce / node.mass;
-            Vector2 dragForce = 0.5f * drag * (node.velocity * new Vector2(Mathf.Abs(node.velocity.x), Mathf.Abs(node.velocity.y)));
-            //Vector2 dragAcc = dragForce / node.mass;
-            Vector2 gravityForce = gravity * node.mass;
-            Vector2 resultantForce = gravityForce + dragForce + springForce;
-            return resultantForce / node.mass;
         }
 
         private void ApplyConstraints()
         {
-            //Profiler.BeginSample("Constraints");
-
             // Set start and end constraints
             nodes[0].position = startPoint.position;
-            //nodes[nodes.Length - 1].position = endPoint.position;
             if (endPointMover.isMouseDown)
             {
-                //endPoint.position = (Vector3)nodes[nodes.Length - 1].position;
                 nodes[nodes.Length - 1].position = endPointMover.transform.position;
             }
             else
@@ -354,11 +337,11 @@ namespace StandaloneRope
                 VerletNode node2 = nodes[i + 1];
 
                 // Current distance between rope nodes.
-                //Debug.Log("Node 1 pos = " + node1.position + ", Node 2 pos = " + node2.position);
                 float diffX = node1.position.x - node2.position.x;
                 float diffY = node1.position.y - node2.position.y;
                 float dist = Vector2.Distance(node1.position, node2.position);
                 float difference = 0;
+                
                 // Guard against divide by 0.
                 if (dist > 0)
                 {
@@ -366,26 +349,11 @@ namespace StandaloneRope
                 }
 
                 Vector2 diff = new Vector2(diffX, diffY);
-                //Debug.Log("dist = " + ", diff = " + diff);
                 Vector2 translate = diff * (.5f * difference);
 
                 node1.position += translate;
                 node2.position -= translate;
             }
-
-            /*
-            // Distance constraint which reduces iterations, but doesn't handle stretchyness in a natural way.
-            VerletNode first = nodes[0];
-            VerletNode last = nodes[nodes.Length-1];
-            // Same distance calculation as above, but less optimal.
-            float distance = Vector2.Distance(first.position, last.position);
-            if (distance > 0 && distance > nodes.Length * nodeDistance) {
-                Vector2 dir = (last.position - first.position).normalized;
-                last.position = first.position + nodes.Length * nodeDistance * dir;
-            }
-            */
-
-            //Profiler.EndSample();
         }
 
         private void ApplySmallerConstraints()

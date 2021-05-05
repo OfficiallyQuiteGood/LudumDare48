@@ -5,49 +5,68 @@ using UnityEngine;
 public class MovementComponent : MonoBehaviour
 {
     /* Movement related variables */
-
-    // Physics related vars
-    public Vector3 gravity = new Vector3(0, -20f, 0);
-    public float mass = 1.0f;
-
-    // final movement vector
-    public Vector3 finalPos;
-
+        
     // Bool for is mouse down
     public bool isMouseDown = false;
 
-    // Rigid body
-    Rigidbody2D rb;
+    // Added force
+    public Vector2 force;
+    public float swingForce = 20.0f;
+
+    // Component references
+    private MainCharacter mainCharacter;
+    private CharacterController2D characterController;
 
     // Start is called before the first frame update
     void Start()
     {
-        finalPos = Vector3.zero;
-        rb = GetComponent<Rigidbody2D>();
+        //mainCharacter = GetComponent<MainCharacter>();
+        //characterController = GetComponent<CharacterController2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        /*
-        // Do some more physics stuff
-        finalPos += gravity * Time.deltaTime * Time.deltaTime;
-
-        // Apply position
-        transform.position = finalPos;
-
-        // Final thing before ending is resetting the final vel
-        finalPos = Vector3.zero;
-        */
         if (Input.GetMouseButtonDown(0))
         {
-            isMouseDown = true;
-            transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            OnMouseDown();
         }
-        
         if (Input.GetMouseButtonUp(0))
         {
-            isMouseDown = false;
+            OnMouseUp();
         }
+    }
+
+    // Fixed update
+    void FixedUpdate()
+    {		
+        if (isMouseDown)
+        {
+            force = new Vector2(Input.GetAxisRaw("Horizontal") * swingForce, - 10.0f);
+        }
+    }
+
+    // On mouse down function
+    void OnMouseDown()
+    {
+        // Get mouse pos
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0f));
+        mousePos.z = 0;
+
+        // Send it to the event manager
+        // TODO: need to add events to main character/character controller in order to disable all physics related stuff
+        EventManager.Instance.OnRopeAction(true, mousePos);
+        isMouseDown = true;
+        //mainCharacter.enabled = false;
+        //characterController.enabled = false;
+    }
+
+    // On mouse up
+    void OnMouseUp()
+    {
+        EventManager.Instance.OnMouseClicked(false);
+        isMouseDown = false;
+        //mainCharacter.enabled = true;
+        //characterController.enabled = true;
     }
 }
