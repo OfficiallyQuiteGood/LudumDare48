@@ -95,21 +95,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c8adb81df576449d852555b91621ed3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2440516741847249031
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3733720047368090899}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53c779639fbad904d918307109f46d8d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialThrowDelay: 1
-  throwFreq: 1
-  grapplingHook: {fileID: 3295765035555469377}
 --- !u!114 &2069252358907083986
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -122,10 +107,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9721a6020968f6b4993d5d7cf82a8114, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gravity: {x: 0, y: -20, z: 0}
-  mass: 1
-  finalPos: {x: 0, y: 0, z: 0}
   isMouseDown: 0
+  force: {x: 0, y: 0}
+  swingForce: 20
+--- !u!114 &2440516741847249031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3733720047368090899}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53c779639fbad904d918307109f46d8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initialThrowDelay: 1
+  throwFreq: 1
+  grapplingHook: {fileID: 3295765035555469377}
 --- !u!1001 &669982733540885406
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -153,6 +152,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+    - target: {fileID: 2614173593849805877, guid: 1e699d1c8f520c149999b894d7d71f4d, type: 3}
+      propertyPath: maxRopeDistance
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 3867487051315947752, guid: 1e699d1c8f520c149999b894d7d71f4d, type: 3}
       propertyPath: m_TagString
       value: Untagged
@@ -321,7 +324,8 @@ PrefabInstance:
       propertyPath: m_ApplyToSortingLayers.Array.data[4]
       value: -1414676021
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3551828524513338750, guid: 1e699d1c8f520c149999b894d7d71f4d, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 1e699d1c8f520c149999b894d7d71f4d, type: 3}
 --- !u!1 &3733720047368090899 stripped
 GameObject:
@@ -395,7 +399,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 453702068548565214, guid: 9ee8beb8d862e1944a9e6bd5068304c7, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6529400388965906367, guid: 9ee8beb8d862e1944a9e6bd5068304c7, type: 3}
       propertyPath: player
@@ -405,6 +409,10 @@ PrefabInstance:
       propertyPath: startPoint
       value: 
       objectReference: {fileID: 2793173334547728032}
+    - target: {fileID: 6529400388965906367, guid: 9ee8beb8d862e1944a9e6bd5068304c7, type: 3}
+      propertyPath: endPointMover
+      value: 
+      objectReference: {fileID: 2069252358907083986}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9ee8beb8d862e1944a9e6bd5068304c7, type: 3}
 --- !u!114 &8833430375790059002 stripped

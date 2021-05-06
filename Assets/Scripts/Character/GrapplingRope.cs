@@ -71,6 +71,7 @@ namespace GrapplingRope
 
         [Min(2)]
         public int totalNodes = 200;
+        private int numNodes = 0;
         public int iterations = 80;
         public float nodeDistance = 0.1f;
         [Min(0.001f)]
@@ -112,7 +113,8 @@ namespace GrapplingRope
         {
             //OnRopeAction(true, Vector3.zero);
             main = Camera.main;
-            characterSettings = GetComponent<CharacterSettings>();
+            characterSettings = endPointMover.GetComponent<CharacterSettings>();
+            Debug.Log(characterSettings);
         }
 
         private void OnRopeAction(bool createRope, Vector3 mousePosition)
@@ -123,7 +125,7 @@ namespace GrapplingRope
             }
             else
             {
-                //DestroyRope();
+                DestroyRope();
             }
         }
 
@@ -131,6 +133,9 @@ namespace GrapplingRope
         {
             // Enable update
             bShouldUpdate = true;
+
+            // Re-enable the mesh renderer
+            GetComponent<MeshRenderer>().enabled = true;
             
             // Local vars
             Vector2 start = endPointMover.transform.position;
@@ -147,7 +152,7 @@ namespace GrapplingRope
             Debug.Log("start = " + start + ", mousePosition = " + (Vector2)mousePosition + ", dir = " + dir);
 
             // Need to calculate how many nodes to use since it
-            int numNodes = mousePosition == Vector3.zero ? totalNodes : Mathf.CeilToInt(castDistance / nodeDistance);
+            numNodes = mousePosition == Vector3.zero ? totalNodes : Mathf.CeilToInt(castDistance / nodeDistance);
             if (numNodes > MAX_RENDER_POINTS)
             {
                 Debug.LogError("Total nodes is more than MAX_RENDER_POINTS, so won't be able to render the entire rope.");
@@ -218,6 +223,19 @@ namespace GrapplingRope
             GetComponent<MeshFilter>().mesh = mesh;
             material = GetComponent<MeshRenderer>().material;
             material.SetFloat("_Width", drawWidth);
+        }
+
+        private void DestroyRope()
+        {
+            Debug.Log("Destroying rope");
+            // Set should update to false first and foremost
+            bShouldUpdate = false;
+
+            // Now, go ahead and like, delete everything lol
+            numNodes = 0;
+
+            // Remove rope from screen
+            GetComponent<MeshRenderer>().enabled = false;
         }
 
         private void Update()

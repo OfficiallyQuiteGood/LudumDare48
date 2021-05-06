@@ -16,12 +16,15 @@ public class MovementComponent : MonoBehaviour
     // Component references
     private MainCharacter mainCharacter;
     private CharacterController2D characterController;
+    private Rigidbody2D rb;
 
     // Start is called before the first frame update
     void Start()
     {
-        //mainCharacter = GetComponent<MainCharacter>();
-        //characterController = GetComponent<CharacterController2D>();
+        mainCharacter = GetComponent<MainCharacter>();
+        characterController = GetComponent<CharacterController2D>();
+        rb = GetComponent<Rigidbody2D>();
+        Debug.Log(mainCharacter + " " + characterController + " " + rb);
     }
 
     // Update is called once per frame
@@ -57,16 +60,18 @@ public class MovementComponent : MonoBehaviour
         // TODO: need to add events to main character/character controller in order to disable all physics related stuff
         EventManager.Instance.OnRopeAction(true, mousePos);
         isMouseDown = true;
-        //mainCharacter.enabled = false;
-        //characterController.enabled = false;
+        mainCharacter.enabled = false;
+        characterController.enabled = false;
+        rb.simulated = false;
     }
 
     // On mouse up
     void OnMouseUp()
     {
-        EventManager.Instance.OnMouseClicked(false);
+        EventManager.Instance.OnRopeAction(false, Vector3.zero);
         isMouseDown = false;
-        //mainCharacter.enabled = true;
-        //characterController.enabled = true;
+        mainCharacter.enabled = true;
+        characterController.enabled = true;
+        rb.simulated = true;
     }
 }
