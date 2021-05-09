@@ -8,6 +8,7 @@ public class CheckPoint : MonoBehaviour
     MainCharacter mainCharacter;
     public Light2D bonfire;
     bool isLit;
+    bool isTriggered = false;
     public Animator animator;
     Color colorStart = Color.black;
     Color colorEnd = Color.white;
@@ -52,8 +53,19 @@ public class CheckPoint : MonoBehaviour
             gameObject.GetComponent<Renderer>().material.color = Color.black;
             bonfire.intensity = 0;
         }
+        StartCoroutine(TriggerDelay(0.625f));
         setAnimatorParameter("isLit", isLit);
         mainCharacter.setCheckPoint(this);
+    }
+
+    IEnumerator TriggerDelay(float delay)
+    {
+        isTriggered = true;
+        setAnimatorParameter("isTriggered", isTriggered);
+        yield return new WaitForSeconds(delay);
+        isTriggered = false;
+        setAnimatorParameter("isTriggered", isTriggered);
+
     }
 
     protected void setAnimatorParameter(string parameterName, bool val)
