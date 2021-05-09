@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using dateTimeVar = System.DateTime;
 
 public class DefeatImage : MonoBehaviour
 {
@@ -22,13 +23,15 @@ public class DefeatImage : MonoBehaviour
 
     public void DisplayImage(float delay)
     {
+        Debug.Log("display text "+dateTimeVar.Now);
+        
         gameObject.GetComponent<Image>().sprite = images[Random.Range(0, images.Length)];
         StartCoroutine(FadeInImage(true, 5, delay));
     }
 
     public void HideImage(float delay)
     {
-        gameObject.GetComponent<Image>().sprite = images[Random.Range(0, images.Length)];
+        //gameObject.GetComponent<Image>().sprite = images[Random.Range(0, images.Length)];
         StartCoroutine(FadeInImage(false, 5, delay));
     }
 
