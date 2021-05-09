@@ -6,7 +6,7 @@ using UnityEngine.Experimental.Rendering.Universal;
 public class CheckPoint : MonoBehaviour
 {
     MainCharacter mainCharacter;
-    public Light2D bonfire;
+    public List<Light2D> lights;
     bool isLit;
     bool isTriggered = false;
     public Animator animator;
@@ -20,7 +20,10 @@ public class CheckPoint : MonoBehaviour
     {
         isLit = false;
         mainCharacter = GameObject.Find("Player").GetComponent<MainCharacter>();
-        bonfire.intensity = 0;
+        foreach(var light in lights)
+        {
+            light.intensity = 0;
+        }
         setAnimatorParameter("isLit", false);
         worldSettings = GameObject.Find("World Settings").GetComponent<WorldSettings>();
     }
@@ -46,17 +49,14 @@ public class CheckPoint : MonoBehaviour
     void LightFire(float intensity)
     {
         isLit = !isLit;
-        if(bonfire.intensity <= 0)
+
+        gameObject.GetComponent<Renderer>().material.color = Color.white;
+        Debug.Log(gameObject.GetComponent<Renderer>().material.color);
+        foreach(var light in lights)
         {
-            gameObject.GetComponent<Renderer>().material.color = Color.white;
-            Debug.Log(gameObject.GetComponent<Renderer>().material.color);
-            bonfire.intensity = intensity;
+            light.intensity = intensity;
         }
-        else
-        {
-            gameObject.GetComponent<Renderer>().material.color = Color.black;
-            bonfire.intensity = 0;
-        }
+
         StartCoroutine(TriggerDelay(0.625f));
         playNoise(8);
         setAnimatorParameter("isLit", isLit);
