@@ -77,7 +77,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1414676021
-  m_SortingLayer: 5
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: d15f8655dee62764a96c28b43da00a85, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -122,7 +122,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.4969883, y: -0.6838944}
+  m_Offset: {x: -0.25697732, y: -0.47055107}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -133,7 +133,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.16749287, y: 0.9067941}
+  m_Size: {x: 0.07536745, y: 0.48010743}
   m_EdgeRadius: 0
 --- !u!61 &246159801815195478
 BoxCollider2D:
@@ -323,15 +323,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 240917734072291558, guid: 4f6f1d2b3199a15489f3fba41a397b80, type: 3}
       propertyPath: m_Layer
-      value: 12
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 2332645372592166598, guid: 4f6f1d2b3199a15489f3fba41a397b80, type: 3}
       propertyPath: m_Size.x
-      value: 0.7952135
+      value: 0.55762655
+      objectReference: {fileID: 0}
+    - target: {fileID: 2332645372592166598, guid: 4f6f1d2b3199a15489f3fba41a397b80, type: 3}
+      propertyPath: m_Size.y
+      value: 0.17020345
       objectReference: {fileID: 0}
     - target: {fileID: 2332645372592166598, guid: 4f6f1d2b3199a15489f3fba41a397b80, type: 3}
       propertyPath: m_Offset.x
-      value: -0.20332536
+      value: -0.08453187
+      objectReference: {fileID: 0}
+    - target: {fileID: 2332645372592166598, guid: 4f6f1d2b3199a15489f3fba41a397b80, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.00041806698
       objectReference: {fileID: 0}
     - target: {fileID: 2332645372592166598, guid: 4f6f1d2b3199a15489f3fba41a397b80, type: 3}
       propertyPath: m_IsTrigger
