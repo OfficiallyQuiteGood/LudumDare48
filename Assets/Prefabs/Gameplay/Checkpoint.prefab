@@ -215,5 +215,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ede0673ba9085240b8bedd9b5f1fac8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bonfire: {fileID: 1548899377490459224}
+  lights: []
   animator: {fileID: 1548899379410963937}
+  worldSettings: {fileID: 0}
