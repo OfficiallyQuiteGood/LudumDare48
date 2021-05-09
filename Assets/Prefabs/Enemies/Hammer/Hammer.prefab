@@ -180,7 +180,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1414676021
-  m_SortingLayer: 5
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: a064084e56ae31f4195053c50bc5830f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -324,7 +324,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.123696804, y: -0.52447444}
+  m_Offset: {x: -0.123696804, y: -0.6505111}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -335,7 +335,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.1918478, y: 0.55139315}
+  m_Size: {x: 0.1918478, y: 0.29931986}
   m_EdgeRadius: 0
 --- !u!1001 &5885386051671973971
 PrefabInstance:
@@ -347,6 +347,10 @@ PrefabInstance:
     - target: {fileID: 240917734072291558, guid: 4f6f1d2b3199a15489f3fba41a397b80, type: 3}
       propertyPath: m_Name
       value: WallDetection
+      objectReference: {fileID: 0}
+    - target: {fileID: 240917734072291558, guid: 4f6f1d2b3199a15489f3fba41a397b80, type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 2332645372592166598, guid: 4f6f1d2b3199a15489f3fba41a397b80, type: 3}
       propertyPath: m_Size.x
