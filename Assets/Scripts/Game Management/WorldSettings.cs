@@ -11,6 +11,7 @@ public class WorldSettings : MonoBehaviour
 
     public AudioSource audioSource;
     public AudioSource EnemyAudio;
+    public AudioSource SfxAudio;
     public AudioSource endingMusicSource;
     public AudioClip[] audioClipArray;
     // Audio Clips
@@ -26,11 +27,17 @@ public class WorldSettings : MonoBehaviour
     public AudioClip[] hammerNoises;
     public AudioClip[] sproutNoises;
     public AudioClip[] projectileBreak;
+    //10
+    public AudioClip[] checkPointNoises;
     public List<AudioClip[]> noisePacks;
+    
     protected bool[] canPlay;
     public bool reachedEnd = false;
     private AudioClip currClip;
     public AudioClip endingMusic;
+
+    List<AudioSource> audioSources;
+    int[] sourceMapper = {0,0,0,0,0,0,0,0,2};
     GameObject player;
 
 
@@ -44,8 +51,14 @@ public class WorldSettings : MonoBehaviour
 
         //Debug.Log("started");
         noisePacks = new List<AudioClip[]>();
-        
+        audioSources = new List<AudioSource>();
 
+        //add audio sources to array
+        audioSources.Add(EnemyAudio);
+        audioSources.Add(audioSource);
+        audioSources.Add(SfxAudio);
+        
+        //add noise packs to array
         noisePacks.Add(deathNoises);
         noisePacks.Add(attackNoises);
         noisePacks.Add(moveNoises);
@@ -54,6 +67,7 @@ public class WorldSettings : MonoBehaviour
         noisePacks.Add(hammerNoises);
         noisePacks.Add(sproutNoises);
         noisePacks.Add(projectileBreak);
+        noisePacks.Add(checkPointNoises);
 
         canPlay = new bool[noisePacks.Count];
         for(int i = 0; i<canPlay.Length; i++)
@@ -84,13 +98,15 @@ public class WorldSettings : MonoBehaviour
 
     public void PlayNoise(int ind)
     {
+        
+        if(ind>=noisePacks.Count) return;
         if(player!=null)
         {
             if(canPlay[ind])
             {
                 canPlay[ind] = false;
                 AudioClip[] noisePack = noisePacks[ind];
-                if(noisePack!=null && noisePack.Length > 0) EnemyAudio.PlayOneShot(noisePack[Random.Range(0, noisePack.Length)]);
+                if(noisePack!=null && noisePack.Length > 0) audioSources[sourceMapper[ind]].PlayOneShot(noisePack[Random.Range(0, noisePack.Length)]);
                 canPlay[ind] = true;
             }
         }
@@ -102,7 +118,7 @@ public class WorldSettings : MonoBehaviour
         {
             canPlay[ind] = false;
             AudioClip[] noisePack = noisePacks[ind];
-            if(noisePack!=null && noisePack.Length > 0) EnemyAudio.PlayOneShot(noisePack[Random.Range(0, noisePack.Length)]);
+            if(noisePack!=null && noisePack.Length > 0) audioSources[sourceMapper[ind]].PlayOneShot(noisePack[Random.Range(0, noisePack.Length)]);
             yield return new WaitForSeconds(delay);
             canPlay[ind] = true;
         }

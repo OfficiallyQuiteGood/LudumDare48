@@ -8,9 +8,13 @@ public class CheckPoint : MonoBehaviour
     MainCharacter mainCharacter;
     public Light2D bonfire;
     bool isLit;
+    bool isTriggered = false;
     public Animator animator;
     Color colorStart = Color.black;
     Color colorEnd = Color.white;
+    // WorldSettings required to play audio
+    public WorldSettings worldSettings;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +22,7 @@ public class CheckPoint : MonoBehaviour
         mainCharacter = GameObject.Find("Player").GetComponent<MainCharacter>();
         bonfire.intensity = 0;
         setAnimatorParameter("isLit", false);
+        worldSettings = GameObject.Find("World Settings").GetComponent<WorldSettings>();
     }
 
     // Update is called once per frame
@@ -52,8 +57,31 @@ public class CheckPoint : MonoBehaviour
             gameObject.GetComponent<Renderer>().material.color = Color.black;
             bonfire.intensity = 0;
         }
+        StartCoroutine(TriggerDelay(0.625f));
+        playNoise(8);
         setAnimatorParameter("isLit", isLit);
         mainCharacter.setCheckPoint(this);
+    }
+
+    public void playNoise(int ind, float delay)
+    {
+        if(gameObject.GetComponent<Renderer>().isVisible) worldSettings.PlayNoise(ind, delay);
+    }
+
+    //play noise without IEnumerator
+    public void playNoise(int ind)
+    {
+        worldSettings.PlayNoise(ind);
+    }
+
+    IEnumerator TriggerDelay(float delay)
+    {
+        isTriggered = true;
+        setAnimatorParameter("isTriggered", isTriggered);
+        yield return new WaitForSeconds(delay);
+        isTriggered = false;
+        setAnimatorParameter("isTriggered", isTriggered);
+
     }
 
     protected void setAnimatorParameter(string parameterName, bool val)
