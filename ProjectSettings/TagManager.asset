@@ -64,6 +64,9 @@ TagManager:
   - name: Props
     uniqueID: 143371851
     locked: 0
+  - name: Hazards
+    uniqueID: 2890130661
+    locked: 0
   - name: Foreground
     uniqueID: 422391565
     locked: 0
