@@ -128,10 +128,15 @@ public class MainCharacter : MonoBehaviour
 	{
 		if(gameObject.GetComponent<HealthSystem>().GetHealth()<=0) return;
 		
-		GameObject.Find("Follow Camera").GetComponent<Follow>().PausePan(delay);
 		gameObject.GetComponent<HealthSystem>().TakeDamage(1);
-		gameObject.GetComponent<CharacterController2D>().playerWon = false;
-		StartCoroutine(resetPositionWithDelay(0.6f));
+
+		//dont reset position if dead
+		if(gameObject.GetComponent<HealthSystem>().GetHealth()>0)
+		{
+			GameObject.Find("Follow Camera").GetComponent<Follow>().PausePan(delay);
+			gameObject.GetComponent<CharacterController2D>().playerWon = false;
+			StartCoroutine(resetPositionWithDelay(0.6f));
+		}
 	}
 
 	//set position and start iframes with delay

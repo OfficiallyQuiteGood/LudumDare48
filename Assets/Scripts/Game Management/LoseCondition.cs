@@ -27,7 +27,11 @@ public class LoseCondition : MonoBehaviour
         Debug.Log("after loading scene");
 
         // Load game again
+        GameObject player = GameObject.Find("Player");
+        GameObject camera = GameObject.Find("Follow Camera");
+        
         GameObject.Find("Player").GetComponent<MainCharacter>().loadCheckPoint();
+        camera.transform.position = new Vector3(player.transform.position.x, player.transform.position.y, camera.transform.position.z);
         GameObject.Find("Canvas").GetComponent<UIController>().AppearScreen();
         
         //SceneManager.LoadScene("TreeScene");
