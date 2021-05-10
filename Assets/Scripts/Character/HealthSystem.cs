@@ -136,7 +136,7 @@ public class HealthSystem : MonoBehaviour
     {
         if (collider.tag == "Health")
         {
-            gameObject.GetComponent<MainCharacter>().playNoise(7,0);
+            gameObject.GetComponent<MainCharacter>().playNoise(7,0.3f);
             currHealth += 1;
             if (currHealth > totalHealth)
             {

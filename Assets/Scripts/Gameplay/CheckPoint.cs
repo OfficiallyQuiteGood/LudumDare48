@@ -7,6 +7,7 @@ public class CheckPoint : MonoBehaviour
 {
     MainCharacter mainCharacter;
     public List<Light2D> lights;
+    public float[] lightIntensity = {0.28f, 0.15f, 0.15f};
     bool isLit;
     bool isTriggered = false;
     public Animator animator;
@@ -50,13 +51,17 @@ public class CheckPoint : MonoBehaviour
     {
         isLit = !isLit;
 
+        //give sprite natural color
         gameObject.GetComponent<Renderer>().material.color = Color.white;
         Debug.Log(gameObject.GetComponent<Renderer>().material.color);
-        foreach(var light in lights)
+
+        //fade in lights
+        for(int i = 0; i<lights.Count; i++)
         {
-            light.intensity = intensity;
+            StartCoroutine(FadeInLight(lights[i], i, true, 2, i*0.3f));
         }
 
+        //play the lighting up animation in a delay
         StartCoroutine(TriggerDelay(0.625f));
         playNoise(8);
         setAnimatorParameter("isLit", isLit);
@@ -119,6 +124,38 @@ public class CheckPoint : MonoBehaviour
             return true;
         }
         return false;
+    }
+
+    public IEnumerator FadeInLight(Light2D light, int indexOfLight, bool fadeIn = true, int fadeSpeed = 5,float delay = 0)
+    {
+        yield return new WaitForSeconds(delay);
+        
+
+
+        var fadeAmount = light.intensity;
+        if(fadeIn)
+        {
+            while(light.intensity < 1)
+            {
+                fadeAmount = light.intensity + (fadeSpeed * Time.deltaTime);
+
+                light.intensity = fadeAmount;
+                yield return new WaitForSeconds(0.01f);
+            }
+        }
+        else
+        {
+            while(light.intensity > 0)
+            {
+                fadeAmount = light.intensity - (fadeSpeed * Time.deltaTime);
+
+                light.intensity = fadeAmount;
+                yield return new WaitForSeconds(0.005f);
+            }
+        }
+        
+
+        
     }
         
     
