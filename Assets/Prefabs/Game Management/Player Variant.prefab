@@ -81,7 +81,7 @@ SortingGroup:
   m_GameObject: {fileID: 3733720047368090899}
   m_Enabled: 1
   m_SortingLayerID: -1414676021
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
 --- !u!114 &1525657092
 MonoBehaviour:
@@ -108,7 +108,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 662493837640617281, guid: 1e699d1c8f520c149999b894d7d71f4d, type: 3}
       propertyPath: m_SortingLayer
-      value: 6
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 662493837640617281, guid: 1e699d1c8f520c149999b894d7d71f4d, type: 3}
       propertyPath: m_SortingOrder
@@ -186,6 +186,14 @@ PrefabInstance:
       propertyPath: runSpeed
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 6225368444297322146, guid: 1e699d1c8f520c149999b894d7d71f4d, type: 3}
+      propertyPath: healthPickup.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6225368444297322146, guid: 1e699d1c8f520c149999b894d7d71f4d, type: 3}
+      propertyPath: healthPickup.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 65be3156269e29e448a09409c3625201, type: 3}
     - target: {fileID: 6339658937684537148, guid: 1e699d1c8f520c149999b894d7d71f4d, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -238,6 +246,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Untagged
       objectReference: {fileID: 0}
+    - target: {fileID: 7894846783574246937, guid: 1e699d1c8f520c149999b894d7d71f4d, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 492679308426073635, guid: ed47df7d4aea4e647a4a144c7536d3ef, type: 2}
     - target: {fileID: 8232735604548322261, guid: 1e699d1c8f520c149999b894d7d71f4d, type: 3}
       propertyPath: m_IsActive
       value: 0
