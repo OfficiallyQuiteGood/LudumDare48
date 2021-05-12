@@ -22,7 +22,7 @@ public class MapBoundary : MonoBehaviour
         if(player!=null)
         {
             Debug.Log("reset");
-            player.resetPlayerPosition(0f);
+            player.resetPlayerPosition(1f);
         }
     }
 }
