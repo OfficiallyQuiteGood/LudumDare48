@@ -4,6 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Profiling;
 using System.Linq;
+using UnityEngine.Tilemaps;
+
+// LINKS:
+// http://toqoz.fyi/game-rope.html
 
 namespace GrapplingRope
 {
@@ -11,11 +15,20 @@ namespace GrapplingRope
     {
         public Vector2 position;
         public Vector2 oldPosition;
+        public Vector2 acceleration;
 
         public VerletNode(Vector2 position)
         {
             this.position = position;
             this.oldPosition = position;
+            this.acceleration = new Vector2(0.0f, 0.0f);
+        }
+
+        public VerletNode(Vector2 position, Vector2 acceleration)
+        {
+            this.position = position;
+            this.oldPosition = position;
+            this.acceleration = acceleration;
         }
     }
 
@@ -23,6 +36,7 @@ namespace GrapplingRope
     {
         Circle,
         Box,
+        Tilemap,
         None,
     }
 
@@ -81,6 +95,7 @@ namespace GrapplingRope
         public float drawWidth = 0.025f;
         public Vector2 gravity = new Vector2(0, -20f);
         public float collisionRadius = 0.5f;    // Collision radius around each node.  Set high to avoid tunneling.
+        public float speedScale = 2.0f;
 
         private VerletNode[] nodes;
         private float timeAccum;
@@ -92,8 +107,8 @@ namespace GrapplingRope
         private Collider2D[] colliderBuffer;
 
         private Vector4[] renderPositions;
-        [SerializeField] private Transform startPoint;
-        [SerializeField] private MovementComponent endPointMover;
+        [SerializeField] private GrapplingHook hook;
+        [SerializeField] private MovementComponent mover;
         private CharacterSettings characterSettings;
 
         private bool bShouldUpdate = false;
@@ -113,8 +128,7 @@ namespace GrapplingRope
         {
             //OnRopeAction(true, Vector3.zero);
             main = Camera.main;
-            characterSettings = endPointMover.GetComponent<CharacterSettings>();
-            Debug.Log(characterSettings);
+            characterSettings = mover.GetComponent<CharacterSettings>();
         }
 
         private void OnRopeAction(bool createRope, Vector3 mousePosition)
@@ -134,11 +148,12 @@ namespace GrapplingRope
             // Enable update
             bShouldUpdate = true;
 
-            // Re-enable the mesh renderer
+            // Re-enable components
             GetComponent<MeshRenderer>().enabled = true;
+            hook.enabled = true; 
             
             // Local vars
-            Vector2 start = endPointMover.transform.position;
+            Vector2 start = mover.rb.position;//mover.transform.position;
             Vector2 dir = ((Vector2)mousePosition - start).normalized;
             
             // Calculate the cast distance and then determine the end bit
@@ -148,8 +163,8 @@ namespace GrapplingRope
             {
                 castDistance = characterSettings.maxRopeDistance;
             }
-            startPoint.position = start + dir * castDistance;
-            Debug.Log("start = " + start + ", mousePosition = " + (Vector2)mousePosition + ", dir = " + dir);
+            hook.transform.position = start + dir * castDistance;
+            //Debug.Log("start = " + start + ", mousePosition = " + (Vector2)mousePosition + ", dir = " + dir);
 
             // Need to calculate how many nodes to use since it
             numNodes = mousePosition == Vector3.zero ? totalNodes : Mathf.CeilToInt(castDistance / nodeDistance);
@@ -227,7 +242,6 @@ namespace GrapplingRope
 
         private void DestroyRope()
         {
-            Debug.Log("Destroying rope");
             // Set should update to false first and foremost
             bShouldUpdate = false;
 
@@ -236,6 +250,25 @@ namespace GrapplingRope
 
             // Remove rope from screen
             GetComponent<MeshRenderer>().enabled = false;
+            hook.enabled = false;
+
+            // Set the exit acceleration of the player
+            if (nodes[0] != null && nodes[nodes.Length - 1] != null)
+            {
+                // Get first and last node
+                VerletNode firstNode = nodes[0];
+                VerletNode lastNode = nodes[nodes.Length - 1];
+                Vector2 vel = (firstNode.position - firstNode.oldPosition) / stepTime;
+
+                Debug.Log("Velocity of first node = " + vel.ToString("F4"));
+
+                // Need to orient it along the rough perpendicular of the rope
+                Vector2 final = vel;
+                Debug.Log("Final = " + final.ToString("F4"));
+
+                // Submit final force to the movement component                
+                EventManager.Instance.OnReleasedRope(final);
+            }
         }
 
         private void Update()
@@ -245,6 +278,7 @@ namespace GrapplingRope
                 if (shouldSnapshotCollision)
                 {
                     SnapshotCollision();
+                    //SnapshotCollisionMover();
                 }
 
                 // Fixed timestep.
@@ -258,6 +292,7 @@ namespace GrapplingRope
                     {
                         ApplyConstraints();
                         AdjustCollisions();
+                        //AdjustCollisionsMover();
                     }
 
                     timeAccum -= stepTime;
@@ -371,29 +406,31 @@ namespace GrapplingRope
             {
                 VerletNode node = nodes[i];
 
-                Vector2 tempAcc = gravity;
-                if (endPointMover.isMouseDown && i == 0)
+                node.acceleration = gravity;
+                if (mover.isMouseDown && i == 0)
                 {
-                    tempAcc = gravity + endPointMover.force;
+                    node.acceleration = gravity + mover.force;
                 }
 
                 Vector2 temp = node.position;
-                node.position += (node.position - node.oldPosition) + tempAcc * stepTime * stepTime;
+                node.position += (node.position - node.oldPosition) + node.acceleration * stepTime * stepTime;
                 node.oldPosition = temp;
+                //Debug.Log("node velocity = " + ((node.position - node.oldPosition) / stepTime).ToString("F4"));
             }
         }
 
         private void ApplyConstraints()
         {
             // Set start and end constraints
-            nodes[nodes.Length - 1].position = startPoint.transform.position; //main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0f));
-            if (!endPointMover.isMouseDown)
+            nodes[nodes.Length - 1].position = hook.transform.position;
+            //Debug.Log("hook pos = " + hook.transform.position);
+            if (!mover.isMouseDown)
             {
-                nodes[0].position = endPointMover.transform.position;
+                nodes[0].position = mover.rb.position;//mover.transform.position;
             }
             else
             {
-                endPointMover.transform.position = nodes[0].position;
+                mover.rb.MovePosition(nodes[0].position);//mover.transform.position = nodes[0].position;
             }
 
             for (int i = 0; i < nodes.Length - 1; i++)
@@ -418,6 +455,87 @@ namespace GrapplingRope
 
                 node1.position += translate;
                 node2.position -= translate;
+            }
+        }
+
+        void SnapshotCollisionMover()
+        {
+            numCollisions = 0;
+
+            // Loop through each node and get collisions within a radius.
+            int collisions =
+                Physics2D.OverlapCircleNonAlloc(mover.rb.position/*mover.transform.position*/, collisionRadius, colliderBuffer);
+
+            Debug.Log("Num collisions = " + collisions);
+
+            for (int j = 0; j < collisions; j++)
+            {
+                Collider2D col = colliderBuffer[j];
+                int id = col.GetInstanceID();
+                Debug.Log("Collider name = " + col.name);
+
+                int idx = -1;
+                for (int k = 0; k < numCollisions; k++)
+                {
+                    if (collisionInfos[k].id == id)
+                    {
+                        idx = k;
+                        break;
+                    }
+                }
+
+                // If we didn't have the collider, we need to add it.
+                if (idx < 0)
+                {
+                    // Record all the data we need to use into our classes.
+                    CollisionInfo ci = collisionInfos[numCollisions];
+                    ci.id = id;
+                    ci.wtl = col.transform.worldToLocalMatrix;
+                    ci.ltw = col.transform.localToWorldMatrix;
+                    ci.scale.x = ci.ltw.GetColumn(0).magnitude;
+                    ci.scale.y = ci.ltw.GetColumn(1).magnitude;
+                    ci.position = col.transform.position;
+                    ci.numCollisions = 1; // 1 collision, this one.
+                    ci.collidingNodes[0] = 0;
+
+                    switch (col)
+                    {
+                        case CircleCollider2D c:
+                            ci.colliderType = ColliderType.Circle;
+                            ci.colliderSize.x = ci.colliderSize.y = c.radius;
+                            break;
+                        case BoxCollider2D b:
+                            ci.colliderType = ColliderType.Box;
+                            ci.colliderSize = b.size;
+                            break;
+                        case TilemapCollider2D t:
+                            ci.colliderType = ColliderType.Tilemap;
+                            ci.colliderSize = t.bounds.size;
+                            break;
+                        default:
+                            Debug.Log("None type collider found for " + col.name);
+                            ci.colliderType = ColliderType.None;
+                            break;
+                    }
+
+                    numCollisions++;
+                    if (numCollisions >= MAX_ROPE_COLLISIONS)
+                    {
+                        return;
+                    }
+
+                    // If we found the collider, then we just have to increment the collisions and add our node.
+                }
+                else
+                {
+                    CollisionInfo ci = collisionInfos[idx];
+                    if (ci.numCollisions >= 1)
+                    {
+                        continue;
+                    }
+
+                    ci.collidingNodes[ci.numCollisions++] = 0;
+                }
             }
         }
 
@@ -452,7 +570,6 @@ namespace GrapplingRope
                             }
                         }
                         break;
-
                     case ColliderType.Box:
                         {
                             for (int j = 0; j < ci.numCollisions; j++)
@@ -497,27 +614,79 @@ namespace GrapplingRope
                 }
             }
         }
-    
-        // Enable function
-        public void ActivateRope()
+        private void AdjustCollisionsMover()
         {
-            // Set active
-            gameObject.SetActive(true);
+            //Profiler.BeginSample("Collision");
 
-            // Set all nodes to be at player pos for now
-            Vector3 defaultPos = endPointMover.transform.position;
-            foreach (VerletNode v in nodes)
+            for (int i = 0; i < numCollisions; i++)
             {
-                v.position = defaultPos;
-            }
-            
-        }
+                CollisionInfo ci = collisionInfos[i];
 
-        // Disable function
-        public void DeactivateRope()
-        {
-            // Set game object inactive
-            gameObject.SetActive(false);
+                switch (ci.colliderType)
+                {
+                    case ColliderType.Circle:
+                        {
+                            float radius = ci.colliderSize.x * Mathf.Max(ci.scale.x, ci.scale.y);
+
+                            for (int j = 0; j < ci.numCollisions; j++)
+                            {
+                                float distance = Vector2.Distance(ci.position, transform.position);
+
+                                // Early out if we're not colliding.
+                                if (distance - radius > 0)
+                                {
+                                    continue;
+                                }
+
+                                Vector2 dir = ((Vector2)transform.position - ci.position).normalized;
+                                Vector2 hitPos = ci.position + dir * radius;
+                                transform.position = hitPos;
+                            }
+                        }
+                        break;
+                    case ColliderType.Tilemap:
+                    case ColliderType.Box:
+                        {
+                            for (int j = 0; j < ci.numCollisions; j++)
+                            {
+                                Vector2 localPoint = ci.wtl.MultiplyPoint(transform.position);
+
+                                // If distance from center is more than box "radius", then we can't be colliding.
+                                Vector2 half = ci.colliderSize * .5f;
+                                Vector2 scalar = ci.scale;
+                                float dx = localPoint.x;
+                                float px = half.x - Mathf.Abs(dx);
+                                if (px <= 0)
+                                {
+                                    continue;
+                                }
+
+                                float dy = localPoint.y;
+                                float py = half.x - Mathf.Abs(dy);
+                                if (py <= 0)
+                                {
+                                    continue;
+                                }
+
+                                // Need to multiply distance by scale or we'll mess up on scaled box corners.
+                                if (px * scalar.x < py * scalar.y)
+                                {
+                                    float sx = Mathf.Sign(dx);
+                                    localPoint.x = half.x * sx;
+                                }
+                                else
+                                {
+                                    float sy = Mathf.Sign(dy);
+                                    localPoint.y = half.y * sy;
+                                }
+
+                                Vector2 hitPos = ci.ltw.MultiplyPoint(localPoint);
+                                transform.position = hitPos;
+                            }
+                        }
+                        break;
+                }
+            }
         }
     }
 }

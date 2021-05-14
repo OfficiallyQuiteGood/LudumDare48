@@ -145,8 +145,6 @@ public class MainCharacter : MonoBehaviour
 		if(Mathf.Abs(horizontalMove)>0 && controller.m_Grounded) playNoise(2,0.3f);
 		jump = false;
 
-		
-
 		//get vertical speed
 		prevVertical = verticalSpeed;
 		verticalSpeed = (transform.position - prevPos).y*50;

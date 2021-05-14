@@ -20,7 +20,7 @@ namespace GrapplingRope
         /** OBJECT REFS **/
 
         // Reference to hook object
-        public GrapplingHook grapplingHook;
+        //public GrapplingHook grapplingHook;
 
         // Start is called before the first frame update
         void Start()
@@ -42,7 +42,7 @@ namespace GrapplingRope
             if (Input.GetMouseButtonDown(0) && canThrowRope)
             {
                 // Set mouse clicked for hook
-                grapplingHook.OnMouseClick(true);
+                //grapplingHook.OnMouseClick(true);
 
                 // Set can throw rope to false
                 canThrowRope = false;
@@ -55,7 +55,7 @@ namespace GrapplingRope
             if (Input.GetMouseButtonUp(0))
             {
                 // Set mouse unclicked for hook
-                grapplingHook.OnMouseClick(false);
+                //grapplingHook.OnMouseClick(false);
             }
         }
 

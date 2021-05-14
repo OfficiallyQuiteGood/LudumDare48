@@ -10,8 +10,8 @@ public class EventManager : MonoBehaviour
     public static EventManager Instance { get {return _instance; }}
 
     // Delegates
-    public event Action<bool> OnMouseClickedDelegate;
     public event Action<bool, Vector3> OnRopeActionDelegate;
+    public event Action<Vector2> OnReleasedRopeDelegate;
 
     // Create instance?
     private void Awake()
@@ -26,20 +26,19 @@ public class EventManager : MonoBehaviour
         }
     }
 
-    // Delegate functions
-    public void OnMouseClicked(bool isMouseDown)
-    {
-        if (OnMouseClickedDelegate != null)
-        {
-            OnMouseClickedDelegate(isMouseDown);
-        }
-    }
-
     public void OnRopeAction(bool createRope, Vector3 mousePos)
     {
         if (OnRopeActionDelegate != null)
         {
             OnRopeActionDelegate(createRope, mousePos);
+        }
+    }
+
+    public void OnReleasedRope(Vector2 releaseAcc)
+    {
+        if (OnReleasedRopeDelegate != null)
+        {
+            OnReleasedRopeDelegate(releaseAcc);
         }
     }
 }

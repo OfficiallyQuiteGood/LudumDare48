@@ -7,7 +7,7 @@ public class MouseMotion : MonoBehaviour
     // Variables
 
     // Hold a reference to the character controller
-    public CharacterController2D characterController;
+    public SpriteController spriteController;
 
     // Take the character controller as an object
     public Transform pivotPoint;
@@ -88,7 +88,7 @@ public class MouseMotion : MonoBehaviour
         // If smaller, need to flip
         if (cosTheta < 0)
         {
-            characterController.Flip();
+            spriteController.Flip();
         }
     }
 }
