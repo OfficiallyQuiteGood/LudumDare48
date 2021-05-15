@@ -26,6 +26,8 @@ public class EndingCutscene : MonoBehaviour
     // On trigger function
     public void OnWin()
     {
+        // Pause timer
+        GameObject.Find("Timer").GetComponent<Timer>().isPaused = true;
         // Set title location
         endingTitle.transform.position = followCamera.transform.position + offset;
         endingTitle.transform.position = new Vector3(endingTitle.transform.position.x, endingTitle.transform.position.y, 0);

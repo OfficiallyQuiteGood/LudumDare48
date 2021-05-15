@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class Timer : MonoBehaviour
 {
     public Text timeText;
+    public bool isPaused = false;
     float timeToDisplay = 0;
     // Start is called before the first frame update
     void Start()
@@ -17,7 +18,7 @@ public class Timer : MonoBehaviour
     void FixedUpdate()
     {
         timeToDisplay += 1;
-        DisplayTime();
+        if(!isPaused) DisplayTime();
     }
 
     void DisplayTime()
