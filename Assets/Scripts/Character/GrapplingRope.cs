@@ -102,6 +102,7 @@ namespace GrapplingRope
         private CollisionInfo[] collisionInfos;
         private int numCollisions;
         private bool shouldSnapshotCollision;
+        public LayerMask ropeCollisionMask;
 
         private Material material;
         private Collider2D[] colliderBuffer;
@@ -273,6 +274,11 @@ namespace GrapplingRope
 
         private void Update()
         {
+            //RunSimulation();
+        }
+
+        private void RunSimulation()
+        {
             if (bShouldUpdate)
             {
                 if (shouldSnapshotCollision)
@@ -320,6 +326,7 @@ namespace GrapplingRope
         private void FixedUpdate()
         {
             shouldSnapshotCollision = true;
+            RunSimulation();
         }
 
         private void SnapshotCollision()
@@ -330,7 +337,7 @@ namespace GrapplingRope
             for (int i = 0; i < nodes.Length; i++)
             {
                 int collisions =
-                    Physics2D.OverlapCircleNonAlloc(nodes[i].position, collisionRadius, colliderBuffer);
+                    Physics2D.OverlapCircleNonAlloc(nodes[i].position, collisionRadius, colliderBuffer, ropeCollisionMask);
 
                 for (int j = 0; j < collisions; j++)
                 {
@@ -423,15 +430,7 @@ namespace GrapplingRope
         {
             // Set start and end constraints
             nodes[nodes.Length - 1].position = hook.transform.position;
-            //Debug.Log("hook pos = " + hook.transform.position);
-            if (!mover.isMouseDown)
-            {
-                nodes[0].position = mover.rb.position;//mover.transform.position;
-            }
-            else
-            {
-                mover.rb.MovePosition(nodes[0].position);//mover.transform.position = nodes[0].position;
-            }
+            mover.rb.MovePosition(nodes[0].position);//mover.transform.position = nodes[0].position;
 
             for (int i = 0; i < nodes.Length - 1; i++)
             {
@@ -457,88 +456,6 @@ namespace GrapplingRope
                 node2.position -= translate;
             }
         }
-
-        void SnapshotCollisionMover()
-        {
-            numCollisions = 0;
-
-            // Loop through each node and get collisions within a radius.
-            int collisions =
-                Physics2D.OverlapCircleNonAlloc(mover.rb.position/*mover.transform.position*/, collisionRadius, colliderBuffer);
-
-            Debug.Log("Num collisions = " + collisions);
-
-            for (int j = 0; j < collisions; j++)
-            {
-                Collider2D col = colliderBuffer[j];
-                int id = col.GetInstanceID();
-                Debug.Log("Collider name = " + col.name);
-
-                int idx = -1;
-                for (int k = 0; k < numCollisions; k++)
-                {
-                    if (collisionInfos[k].id == id)
-                    {
-                        idx = k;
-                        break;
-                    }
-                }
-
-                // If we didn't have the collider, we need to add it.
-                if (idx < 0)
-                {
-                    // Record all the data we need to use into our classes.
-                    CollisionInfo ci = collisionInfos[numCollisions];
-                    ci.id = id;
-                    ci.wtl = col.transform.worldToLocalMatrix;
-                    ci.ltw = col.transform.localToWorldMatrix;
-                    ci.scale.x = ci.ltw.GetColumn(0).magnitude;
-                    ci.scale.y = ci.ltw.GetColumn(1).magnitude;
-                    ci.position = col.transform.position;
-                    ci.numCollisions = 1; // 1 collision, this one.
-                    ci.collidingNodes[0] = 0;
-
-                    switch (col)
-                    {
-                        case CircleCollider2D c:
-                            ci.colliderType = ColliderType.Circle;
-                            ci.colliderSize.x = ci.colliderSize.y = c.radius;
-                            break;
-                        case BoxCollider2D b:
-                            ci.colliderType = ColliderType.Box;
-                            ci.colliderSize = b.size;
-                            break;
-                        case TilemapCollider2D t:
-                            ci.colliderType = ColliderType.Tilemap;
-                            ci.colliderSize = t.bounds.size;
-                            break;
-                        default:
-                            Debug.Log("None type collider found for " + col.name);
-                            ci.colliderType = ColliderType.None;
-                            break;
-                    }
-
-                    numCollisions++;
-                    if (numCollisions >= MAX_ROPE_COLLISIONS)
-                    {
-                        return;
-                    }
-
-                    // If we found the collider, then we just have to increment the collisions and add our node.
-                }
-                else
-                {
-                    CollisionInfo ci = collisionInfos[idx];
-                    if (ci.numCollisions >= 1)
-                    {
-                        continue;
-                    }
-
-                    ci.collidingNodes[ci.numCollisions++] = 0;
-                }
-            }
-        }
-
         private void AdjustCollisions()
         {
             //Profiler.BeginSample("Collision");
@@ -608,80 +525,6 @@ namespace GrapplingRope
 
                                 Vector2 hitPos = ci.ltw.MultiplyPoint(localPoint);
                                 node.position = hitPos;
-                            }
-                        }
-                        break;
-                }
-            }
-        }
-        private void AdjustCollisionsMover()
-        {
-            //Profiler.BeginSample("Collision");
-
-            for (int i = 0; i < numCollisions; i++)
-            {
-                CollisionInfo ci = collisionInfos[i];
-
-                switch (ci.colliderType)
-                {
-                    case ColliderType.Circle:
-                        {
-                            float radius = ci.colliderSize.x * Mathf.Max(ci.scale.x, ci.scale.y);
-
-                            for (int j = 0; j < ci.numCollisions; j++)
-                            {
-                                float distance = Vector2.Distance(ci.position, transform.position);
-
-                                // Early out if we're not colliding.
-                                if (distance - radius > 0)
-                                {
-                                    continue;
-                                }
-
-                                Vector2 dir = ((Vector2)transform.position - ci.position).normalized;
-                                Vector2 hitPos = ci.position + dir * radius;
-                                transform.position = hitPos;
-                            }
-                        }
-                        break;
-                    case ColliderType.Tilemap:
-                    case ColliderType.Box:
-                        {
-                            for (int j = 0; j < ci.numCollisions; j++)
-                            {
-                                Vector2 localPoint = ci.wtl.MultiplyPoint(transform.position);
-
-                                // If distance from center is more than box "radius", then we can't be colliding.
-                                Vector2 half = ci.colliderSize * .5f;
-                                Vector2 scalar = ci.scale;
-                                float dx = localPoint.x;
-                                float px = half.x - Mathf.Abs(dx);
-                                if (px <= 0)
-                                {
-                                    continue;
-                                }
-
-                                float dy = localPoint.y;
-                                float py = half.x - Mathf.Abs(dy);
-                                if (py <= 0)
-                                {
-                                    continue;
-                                }
-
-                                // Need to multiply distance by scale or we'll mess up on scaled box corners.
-                                if (px * scalar.x < py * scalar.y)
-                                {
-                                    float sx = Mathf.Sign(dx);
-                                    localPoint.x = half.x * sx;
-                                }
-                                else
-                                {
-                                    float sy = Mathf.Sign(dy);
-                                    localPoint.y = half.y * sy;
-                                }
-
-                                Vector2 hitPos = ci.ltw.MultiplyPoint(localPoint);
-                                transform.position = hitPos;
                             }
                         }
                         break;

@@ -58601,6 +58601,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7716262245876855885, guid: 8c03a8597f671974eb9d9530225ebd28, type: 3}
+      propertyPath: m_AirControl
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7881720088691743445, guid: 8c03a8597f671974eb9d9530225ebd28, type: 3}
       propertyPath: m_BodyType
       value: 2

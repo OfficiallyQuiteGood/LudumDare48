@@ -33,6 +33,7 @@ public class MovementComponent : MonoBehaviour
 
     // Component references
     public Rigidbody2D rb;
+    public Vector2 oldPosition;
 
     // Collisions
     int numCollisions = 0;
@@ -60,6 +61,7 @@ public class MovementComponent : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         //InitializeCollisions();
+        oldPosition = rb.position;
     }
 
     // Initializes the physics collisions during swinging
@@ -167,9 +169,9 @@ public class MovementComponent : MonoBehaviour
         // Send it to the event manager
         // TODO: need to add events to main character/character controller in order to disable all physics related stuff
         isMouseDown = true;
-        rb.simulated = false;
+        //rb.simulated = false;
         //rb.isKinematic = true;
-        //rb.interpolation = RigidbodyInterpolation2D.Extrapolate;
+        //rb.useFullKinematicContacts = true;
         EventManager.Instance.OnRopeAction(true, mousePos);
     }
 
@@ -177,9 +179,9 @@ public class MovementComponent : MonoBehaviour
     void OnMouseUp()
     {
         isMouseDown = false;
-        rb.simulated = true;
+        //rb.simulated = true;
         //rb.isKinematic = false;
-        //rb.interpolation = RigidbodyInterpolation2D.None;
+        //rb.useFullKinematicContacts = false;
         rb.velocity = new Vector3(0.0f, 0.0f, 0.0f);
         rb.angularVelocity = 0.0f;
         EventManager.Instance.OnRopeAction(false, Vector3.zero);

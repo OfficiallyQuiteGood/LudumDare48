@@ -465,6 +465,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1608968304516135813, guid: 8c03a8597f671974eb9d9530225ebd28, type: 3}
+      propertyPath: ropeCollisionMask.m_Bits
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1879353737641099310, guid: 8c03a8597f671974eb9d9530225ebd28, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -511,7 +515,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5398681285622791547, guid: 8c03a8597f671974eb9d9530225ebd28, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6845592753587500334, guid: 8c03a8597f671974eb9d9530225ebd28, type: 3}
       propertyPath: maxRopeDistance
@@ -519,7 +523,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7470956863099387893, guid: 8c03a8597f671974eb9d9530225ebd28, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7716262245876855885, guid: 8c03a8597f671974eb9d9530225ebd28, type: 3}
       propertyPath: m_GroundCheck
