@@ -150,6 +150,21 @@ public class WorldSettings : MonoBehaviour
         
     }
 
+    public static void SetSpawnLocation(Vector3 pos)
+	{
+		PlayerPrefs.SetFloat("SpawnX", pos.x);
+		PlayerPrefs.SetFloat("SpawnY", pos.y);
+		PlayerPrefs.SetFloat("SpawnZ", pos.z);
+	}
+
+    public static Vector3 GetSpawnLocation()
+	{
+		float x = PlayerPrefs.GetFloat("SpawnX", 0);
+		float y = PlayerPrefs.GetFloat("SpawnY", 0);
+		float z = PlayerPrefs.GetFloat("SpawnZ", 0);
+		return new Vector3(x,y,z);
+	}
+
     // public void InstantiatePlayer(Vector3 lastpos, int health)
     // {
     //     Debug.Log("instantiae pos: "+lastpos);

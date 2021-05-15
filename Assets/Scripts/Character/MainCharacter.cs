@@ -37,6 +37,9 @@ public class MainCharacter : MonoBehaviour
 
 	void Start()
 	{
+		// set initial spawn loc
+		WorldSettings.SetSpawnLocation(gameObject.transform.position);
+
 		lastLegalPosition = transform.position;
 		prevPos = transform.position;
 
@@ -60,16 +63,19 @@ public class MainCharacter : MonoBehaviour
 	}
 	
 	// Update is called once per frame
+	// Player
 	void Update () {
-
-		horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
-
-		horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
-
-		if (Input.GetButtonDown("Jump"))
+		if(canSetPosition)
 		{
-			playNoise(4,0);
-			jump = true;
+			horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
+			// play running noise
+			if(Mathf.Abs(horizontalMove)>0 && controller.m_Grounded) playNoise(2,0.3f);
+
+			if (Input.GetButtonDown("Jump"))
+			{
+				if(controller.m_Grounded) playNoise(4,0);
+				jump = true;
+			}
 		}
 
 		
@@ -128,32 +134,32 @@ public class MainCharacter : MonoBehaviour
 	{
 		if(gameObject.GetComponent<HealthSystem>().GetHealth()<=0) return;
 		
-		gameObject.GetComponent<HealthSystem>().TakeDamage(1);
+		gameObject.GetComponent<HealthSystem>().TakeDamageReset(1, delay);
 
 		//dont reset position if dead
 		if(gameObject.GetComponent<HealthSystem>().GetHealth()>0)
 		{
 			GameObject.Find("Follow Camera").GetComponent<Follow>().PausePan(delay);
 			gameObject.GetComponent<CharacterController2D>().playerWon = false;
-			StartCoroutine(resetPositionWithDelay(0.6f));
+			StartCoroutine(resetPositionWithDelay(delay));
 		}
 	}
 
 	//set position and start iframes with delay
 	IEnumerator resetPositionWithDelay(float delay)
 	{
-		
+		transform.position = lastLegalPosition;
+		gameObject.GetComponent<SpriteRenderer>().enabled = false;
 		canSetPosition = false;
 		yield return new WaitForSeconds(delay);
-		transform.position = lastLegalPosition;
 		canSetPosition = true;
+		gameObject.GetComponent<SpriteRenderer>().enabled = true;
 	}
 
 	void FixedUpdate ()
 	{
 		// Move our character
 		controller.Move(horizontalMove * Time.fixedDeltaTime, false, jump);
-		if(Mathf.Abs(horizontalMove)>0 && controller.m_Grounded) playNoise(2,0.3f);
 		jump = false;
 
 		
@@ -169,7 +175,7 @@ public class MainCharacter : MonoBehaviour
 
 		//set verticalSpeed;;
 		//fall speed limit
-		if(verticalSpeed<-15) resetPlayerPosition(1f);
+		//if(verticalSpeed<-15) resetPlayerPosition(1f);
 		
 
 		//take damage on fall
@@ -236,5 +242,12 @@ public class MainCharacter : MonoBehaviour
 			gameObject.GetComponent<HealthSystem>().HealHealth(3);
 			gameObject.transform.position = checkPoint.transform.position;
 		}
+		else
+		{
+			gameObject.GetComponent<HealthSystem>().HealHealth(3);
+			gameObject.transform.position = WorldSettings.GetSpawnLocation();
+		}
 	}
+
+	
 }

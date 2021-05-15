@@ -24,5 +24,11 @@ public class MapBoundary : MonoBehaviour
             Debug.Log("reset");
             player.resetPlayerPosition(1f);
         }
+
+        Enemy enemy = collider.GetComponent<Enemy>();
+        if(enemy!= null)
+        {
+            enemy.Die();
+        }
     }
 }

@@ -54,11 +54,31 @@ public class HealthSystem : MonoBehaviour
             }
             else
             {
-                StartCoroutine(PlayIFrames());
+                StartCoroutine(PlayIFrames(iFrameDuration, true));
             }
             
             // Play iFrames
             
+        }
+    }
+
+    public void TakeDamageReset(int damage, float delay)
+    {
+        if (bCanBeDamaged)
+        {
+            // Decrease health and die if necessary
+            gameObject.GetComponent<MainCharacter>().playNoise(3,0);
+            currHealth -= damage;
+            healthUI.OnHealthChanged(currHealth);
+            if (currHealth <= 0)
+            {
+                healthUI.OnHealthChanged(0);
+                Die();
+            }
+            else
+            {
+                StartCoroutine(PlayIFrames(iFrameDuration, false));
+            }
         }
     }
 
@@ -104,15 +124,15 @@ public class HealthSystem : MonoBehaviour
     }
 
 
-    protected IEnumerator PlayIFrames()
+    protected IEnumerator PlayIFrames(float duration, bool playBlinker)
     {
         // Set able to be damaged to false
         bCanBeDamaged = false;
         //to get blinker duration: iframduration/frames/2
-        StartCoroutine(CharacterBlinker(20, 0.05f));
+        if(playBlinker) StartCoroutine(CharacterBlinker((int)(duration*10), 0.05f));
 
         // Wait a certain amount of time
-        yield return new WaitForSeconds(iFrameDuration);
+        yield return new WaitForSeconds(duration);
 
         // Now set it back to true
         bCanBeDamaged = true;

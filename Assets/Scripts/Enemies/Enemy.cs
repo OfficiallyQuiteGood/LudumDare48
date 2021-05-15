@@ -172,7 +172,7 @@ public class Enemy : MonoBehaviour
     }
 
     // Die (virtual) function
-    virtual protected void Die()
+    virtual public void Die()
     {
         playNoise(0, 0);
         Instantiate(deathEffect, transform.position, Quaternion.identity);
