@@ -21,6 +21,10 @@ public class Rope : MonoBehaviour
     // Rigid body (if we want one...)
     private Rigidbody2D rb;
 
+    // Delete if no collider
+    public RaycastHit2D hit;
+    private ThrowRope throwRopeComponent;
+
     // On awake
     void Awake()
     {
@@ -36,7 +40,8 @@ public class Rope : MonoBehaviour
         lastKnownPosition = transform.position;
         Nodes.Add(transform.gameObject);
         lineRenderer = GetComponent<LineRenderer>();
-        rb = player.transform.GetChild(0).GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
+        throwRopeComponent = player.transform.GetComponent<ThrowRope>();
         //StartCoroutine(FixedMovement());
     }
 
@@ -88,6 +93,12 @@ public class Rope : MonoBehaviour
                 dist -= distance;
             }
             lastNode.GetComponent<HingeJoint2D>().connectedBody = player.GetComponent<Rigidbody2D>();
+        
+            // Destroy if necessary
+            if (hit.collider == null)
+            {
+                throwRopeComponent.DestroyRope();
+            }
         }
 
         RenderLine();
