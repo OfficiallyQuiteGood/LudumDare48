@@ -29,12 +29,14 @@ public class PauseMenu : MonoBehaviour
     {
         Time.timeScale = 0;
         setActiveChildren(true);
+        isPaused = true;
     }
 
     void ResumeGame ()
     {
         Time.timeScale = 1;
         setActiveChildren(false);
+        isPaused = false;
     }
 
     void setActiveChildren(bool isActive)
