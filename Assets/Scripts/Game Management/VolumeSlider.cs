@@ -28,7 +28,6 @@ public class VolumeSlider : MonoBehaviour
     private void HandleSliderChanged(float value)
     {
         mixer.SetFloat(volumeParameter, Mathf.Log10(value) * multiplier);
-        Debug.Log(Mathf.Log(value) * multiplier);
     }
 
     // Update is called once per frame
