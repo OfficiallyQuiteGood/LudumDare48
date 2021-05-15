@@ -133,7 +133,7 @@ public class MainCharacter : MonoBehaviour
 	public void resetPlayerPosition(float delay)
 	{
 		if(gameObject.GetComponent<HealthSystem>().GetHealth()<=0) return;
-		
+
 		gameObject.GetComponent<HealthSystem>().TakeDamageReset(1, delay);
 
 		//dont reset position if dead
@@ -213,6 +213,11 @@ public class MainCharacter : MonoBehaviour
             {
                 gameObject.GetComponent<HealthSystem>().TakeDamage(1);
             }
+        }
+
+		if (collider.transform.gameObject.layer == LayerMask.NameToLayer("Hazards"))
+        {
+            resetPlayerPosition(1f);
         }
 	}
 
