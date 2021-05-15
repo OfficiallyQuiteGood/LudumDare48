@@ -114,8 +114,22 @@ public class ThrowRope : MonoBehaviour
             var hit = Physics2D.Raycast(transform.position, aimDirection, ropeMaxCastDistance, ropeLayerMask);
 
             // if hit
-            if (hit.collider != null && !IsLayerInLayerMask(ignoreLayers, hit.collider.gameObject.layer) && !ropeWasCast)
+            //if (hit.collider != null && !IsLayerInLayerMask(ignoreLayers, hit.collider.gameObject.layer) && !ropeWasCast)
+            //{
+            if (!ropeWasCast)
             {
+                // set endpoint
+                Vector2 endPoint;
+
+                if (hit.collider != null && !IsLayerInLayerMask(ignoreLayers, hit.collider.gameObject.layer))
+                {
+                    endPoint = hit.point;
+                }
+                else
+                {
+                    endPoint = transform.position + aimDirection * ropeMaxCastDistance;
+                }
+
                 // Start animation for attack
                 GameObject.Find("Player").GetComponent<MainCharacter>().Attack();
                 GameObject.Find("Player").GetComponent<MainCharacter>().playNoise(6,0);
@@ -124,10 +138,11 @@ public class ThrowRope : MonoBehaviour
                 //crossHair.enabled = false;
                 ropeWasCast = true;
                 characterController.isSwinging = true;
-                Vector2 endPoint = hit.point;
                 currHook = (GameObject) Instantiate(hook, transform.position, Quaternion.identity);
                 currHook.GetComponent<Rope>().endPoint = endPoint;
+                currHook.GetComponent<Rope>().hit = hit;
             }
+            //}
 
             // Start coroutine
             StartCoroutine(WaitToThrowRope(throwFreq));
