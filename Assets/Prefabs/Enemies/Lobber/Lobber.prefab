@@ -86,7 +86,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -105,7 +105,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1414676021
-  m_SortingLayer: 7
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: aa252e4a5a0adbe4b9cf366703f3865a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -207,6 +207,7 @@ MonoBehaviour:
   agroDistance: 6
   bounceY: 0.05
   bounceX: 0.1
+  worldSettings: {fileID: 0}
   FirePoint: {fileID: 1839710664290619373}
   LobProjectile: {fileID: 6287159677699994051, guid: fe33bfebf97e35c43ad35bdb4a99990d, type: 3}
 --- !u!1 &5785888767634728224
@@ -254,9 +255,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_LightType: 3
   m_BlendStyleIndex: 0
-  m_FalloffIntensity: 0.8
-  m_Color: {r: 1, g: 0.504717, b: 0.79645884, a: 1}
-  m_Intensity: 1.4
+  m_FalloffIntensity: 0.81
+  m_Color: {r: 0.8235294, g: 0.892923, b: 1, a: 1}
+  m_Intensity: 1.2
   m_LightVolumeOpacity: 0
   m_ApplyToSortingLayers: 00000000b1fe64220d2f2d194bae8b08cbc1adab
   m_LightCookieSprite: {fileID: 0}
@@ -267,8 +268,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensity: 0
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
-  m_PointLightInnerRadius: 0.16
-  m_PointLightOuterRadius: 1.9
+  m_PointLightInnerRadius: 0.35
+  m_PointLightOuterRadius: 1.69
   m_PointLightDistance: 3
   m_PointLightQuality: 1
   m_ShapeLightParametricSides: 5
