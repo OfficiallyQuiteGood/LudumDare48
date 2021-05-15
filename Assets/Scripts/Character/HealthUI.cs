@@ -25,7 +25,6 @@ public class HealthUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        gameObject.GetComponent<Image>().sprite = renderer.sprite;
     }
 
     // On health changes
