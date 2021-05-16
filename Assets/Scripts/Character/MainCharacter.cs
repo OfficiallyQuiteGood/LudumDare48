@@ -126,12 +126,20 @@ public class MainCharacter : MonoBehaviour
 	//set legal position if valid
 	public void SetLastLegalPosition()
 	{
-		if(verticalSpeed>=0 && canSetPosition) lastLegalPosition = gameObject.transform.position;
+		if(verticalSpeed>=0 && canSetPosition) 
+		{
+			lastLegalPosition = gameObject.transform.position;
+			lastLegalPosition.z = 1;
+		}
 	}
 
 	public void SetLastLegalPosition(Vector3 position)
 	{
-		if(verticalSpeed>=0 && canSetPosition) lastLegalPosition = position;
+		if(verticalSpeed>=0 && canSetPosition && controller.m_Grounded)
+		{
+			lastLegalPosition = position;
+			lastLegalPosition.z = 1;
+		} 
 	}
 	
 

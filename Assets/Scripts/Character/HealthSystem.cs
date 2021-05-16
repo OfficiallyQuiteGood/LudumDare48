@@ -67,7 +67,7 @@ public class HealthSystem : MonoBehaviour
         if (bCanBeDamaged)
         {
             // Decrease health and die if necessary
-            gameObject.GetComponent<MainCharacter>().playNoise(3,0);
+            
             currHealth -= damage;
             healthUI.OnHealthChanged(currHealth);
             if (currHealth <= 0)
@@ -77,6 +77,7 @@ public class HealthSystem : MonoBehaviour
             }
             else
             {
+                gameObject.GetComponent<MainCharacter>().playNoise(3,0);
                 StartCoroutine(PlayIFrames(iFrameDuration, false));
             }
         }
@@ -127,16 +128,19 @@ public class HealthSystem : MonoBehaviour
     protected IEnumerator PlayIFrames(float duration, bool playBlinker)
     {
         // Set able to be damaged to false
-        bCanBeDamaged = false;
-        //to get blinker duration: iframduration/frames/2
-        if(playBlinker) StartCoroutine(CharacterBlinker((int)(duration*10), 0.05f));
+        if(bCanBeDamaged)
+        {
+            bCanBeDamaged = false;
+            //to get blinker duration: iframduration/frames/2
+            if(playBlinker) StartCoroutine(CharacterBlinker((int)(duration*10), 0.05f));
 
-        // Wait a certain amount of time
-        yield return new WaitForSeconds(duration);
+            // Wait a certain amount of time
+            yield return new WaitForSeconds(duration);
 
-        // Now set it back to true
-        bCanBeDamaged = true;
-        GameObject.Find("Player").GetComponent<Renderer>().enabled = true;
+            // Now set it back to true
+            bCanBeDamaged = true;
+            GameObject.Find("Player").GetComponent<Renderer>().enabled = true;
+        }
     }
 
     //display IFrames as character blinking in and out of view
