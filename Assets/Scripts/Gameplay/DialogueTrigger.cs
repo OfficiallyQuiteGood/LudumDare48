@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class DialogueTrigger : MonoBehaviour
 {
-    public GameObject interactButton;
     public GameObject textToDisplay;
+    public Animator animator;
+
     // Start is called before the first frame update
     void Start()
     {
-        textToDisplay.GetComponent<SpriteRenderer>().enabled = false;
+        //textToDisplay.GetComponent<SpriteRenderer>().enabled = false;
     }
 
     // Update is called once per frame
@@ -20,12 +21,20 @@ public class DialogueTrigger : MonoBehaviour
 
     void displayText()
     {
-        textToDisplay.GetComponent<SpriteRenderer>().enabled = true;
+        //textToDisplay.GetComponent<SpriteRenderer>().enabled = true;
+        if (!animator.GetBool("makeTextAppear"))
+        {
+            animator.SetBool("makeTextAppear", true);
+        }
     }
 
     void hideText()
     {
-        textToDisplay.GetComponent<SpriteRenderer>().enabled = false;
+        //textToDisplay.GetComponent<SpriteRenderer>().enabled = false;
+        if (animator.GetBool("makeTextAppear"))
+        {
+            animator.SetBool("makeTextAppear", false);
+        }
     }
 
     void OnTriggerEnter2D(Collider2D hitInfo)
