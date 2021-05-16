@@ -43,7 +43,7 @@ public class NPC : MonoBehaviour
     void OnCollisionEnter2D(Collision2D other)
     {
         Debug.Log("layer: "+other.collider.transform.gameObject.layer);
-        if (other.collider.transform.gameObject.layer == 17)
+        if (other.collider.transform.gameObject.layer == 17 && !isBouncing)
         {
             playNoise(9, 0);
             isBouncing = true;

@@ -129,6 +129,12 @@ public class MainCharacter : MonoBehaviour
 		if(verticalSpeed>=0 && canSetPosition) lastLegalPosition = gameObject.transform.position;
 	}
 
+	public void SetLastLegalPosition(Vector3 position)
+	{
+		if(verticalSpeed>=0 && canSetPosition) lastLegalPosition = position;
+	}
+	
+
 	//reset position (if player falls too fast)
 	public void resetPlayerPosition(float delay)
 	{
@@ -148,19 +154,22 @@ public class MainCharacter : MonoBehaviour
 	//set position and start iframes with delay
 	IEnumerator resetPositionWithDelay(float delay)
 	{
+		canSetPosition = false;
 		transform.position = lastLegalPosition;
 		gameObject.GetComponent<SpriteRenderer>().enabled = false;
-		canSetPosition = false;
+		
 		// add extra delay to input
-		yield return new WaitForSeconds(delay+0.5f);
-		canSetPosition = true;
+		yield return new WaitForSeconds(delay);
+		
 		gameObject.GetComponent<SpriteRenderer>().enabled = true;
+		yield return new WaitForSeconds(0.1f);
+		canSetPosition = true;
 	}
 
 	void FixedUpdate ()
 	{
 		// Move our character
-		controller.Move(horizontalMove * Time.fixedDeltaTime, false, jump);
+		if(canSetPosition) controller.Move(horizontalMove * Time.fixedDeltaTime, false, jump);
 		jump = false;
 
 		

@@ -136,6 +136,7 @@ public class HealthSystem : MonoBehaviour
 
         // Now set it back to true
         bCanBeDamaged = true;
+        GameObject.Find("Player").GetComponent<Renderer>().enabled = true;
     }
 
     //display IFrames as character blinking in and out of view
