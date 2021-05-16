@@ -26,7 +26,7 @@ TagManager:
   - Rocks
   - Hook
   - Hazards
-  - 
+  - NPC
   - 
   - 
   - 
@@ -72,4 +72,7 @@ TagManager:
     locked: 0
   - name: Reticle
     uniqueID: 2927441011
+    locked: 0
+  - name: Dialogue
+    uniqueID: 3886864035
     locked: 0
