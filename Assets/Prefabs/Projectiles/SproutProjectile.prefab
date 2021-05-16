@@ -45,9 +45,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_LightType: 3
   m_BlendStyleIndex: 0
-  m_FalloffIntensity: 0.5
-  m_Color: {r: 1, g: 0.5330188, b: 0.5330188, a: 1}
-  m_Intensity: 1.5
+  m_FalloffIntensity: 0.679
+  m_Color: {r: 0.9817912, g: 1, b: 0.53333336, a: 1}
+  m_Intensity: 1.8
   m_LightVolumeOpacity: 0
   m_ApplyToSortingLayers: 00000000b1fe64220d2f2d194bae8b08cbc1adab
   m_LightCookieSprite: {fileID: 0}
@@ -58,8 +58,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensity: 0
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
-  m_PointLightInnerRadius: 0.1
-  m_PointLightOuterRadius: 1.5
+  m_PointLightInnerRadius: 0
+  m_PointLightOuterRadius: 0.52
   m_PointLightDistance: 3
   m_PointLightQuality: 1
   m_ShapeLightParametricSides: 5
@@ -227,9 +227,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d78a6cda549dd2a489c534ccdff946d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  projectileDeath: {fileID: 4495568155693589128, guid: 8cf5975617f766b4e94040abaf323902, type: 3}
   direction: -1
   movementSpeed: 3
   timeInterval: 4
   m_Thrust: 0.5
-  projectileDeath: {fileID: 4495568155693589128, guid: 8cf5975617f766b4e94040abaf323902, type: 3}
   difficulty: 0.1
