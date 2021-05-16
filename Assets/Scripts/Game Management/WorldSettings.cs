@@ -30,6 +30,8 @@ public class WorldSettings : MonoBehaviour
     //10
     public AudioClip[] checkPointNoises;
     public List<AudioClip[]> noisePacks;
+
+    public AudioClip[] grandpaShroomNoise;
     
     protected bool[] canPlay;
     public bool reachedEnd = false;
@@ -37,7 +39,8 @@ public class WorldSettings : MonoBehaviour
     public AudioClip endingMusic;
 
     List<AudioSource> audioSources;
-    int[] sourceMapper = {0,0,0,0,0,0,0,0,2};
+    //map a noise pack to an audio source
+    int[] sourceMapper = {0,0,0,0,0,0,0,0,2,2};
     GameObject player;
 
 
@@ -68,6 +71,7 @@ public class WorldSettings : MonoBehaviour
         noisePacks.Add(sproutNoises);
         noisePacks.Add(projectileBreak);
         noisePacks.Add(checkPointNoises);
+        noisePacks.Add(grandpaShroomNoise);
 
         canPlay = new bool[noisePacks.Count];
         for(int i = 0; i<canPlay.Length; i++)

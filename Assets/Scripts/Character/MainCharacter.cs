@@ -151,7 +151,8 @@ public class MainCharacter : MonoBehaviour
 		transform.position = lastLegalPosition;
 		gameObject.GetComponent<SpriteRenderer>().enabled = false;
 		canSetPosition = false;
-		yield return new WaitForSeconds(delay);
+		// add extra delay to input
+		yield return new WaitForSeconds(delay+0.5f);
 		canSetPosition = true;
 		gameObject.GetComponent<SpriteRenderer>().enabled = true;
 	}
