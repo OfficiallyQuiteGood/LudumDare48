@@ -21,12 +21,46 @@ public class FlatSurfaceSave : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D hitInfo)
     {
-        // if exiting tile
-        if(hitInfo is TilemapCollider2D) player.SetLastLegalPosition(gameObject.transform.position);
+        if(hitInfo is TilemapCollider2D) 
+        {
+            if(GameObject.Find("Player").GetComponent<MainCharacter>().horizontalMove > 0)
+            {
+                Vector3 posBack = gameObject.transform.position + new Vector3(-1f,0,0);
+                Debug.Log("new posback at: "+posBack);
+                player.SetLastLegalPosition(posBack);
+            }
+            else if(GameObject.Find("Player").GetComponent<MainCharacter>().horizontalMove <0)
+            {
+                Vector3 posForward = gameObject.transform.position + new Vector3(1f,0,0);
+                Debug.Log("new posForward at: "+posForward);
+                player.SetLastLegalPosition(posForward);
+            }
+            
+            // set legal position backwards or forwards if its valid
+            // Vector3 posBack = gameObject.transform.position + new Vector3(-1,-0.5f,0);
+            // Vector3 posForward = gameObject.transform.position + new Vector3(1,-0.5f,0);
+            // posBack.z = hitInfo.transform.position.z;
+            // posForward.z = hitInfo.transform.position.z;
+            // if(hitInfo.bounds.Contains(posBack))
+            // {
+            //     posBack.y = gameObject.transform.position.y;
+            //     posBack.z = gameObject.transform.position.z;
+            //     Debug.Log("new posback at: "+posBack);
+            //     player.SetLastLegalPosition(posBack);
+            // } 
+            // else if(hitInfo.bounds.Contains(posForward))
+            // {
+            //     posForward.y = gameObject.transform.position.y;
+            //     posForward.z = gameObject.transform.position.z;
+            //     Debug.Log("new posforward at: "+posForward);
+            //     player.SetLastLegalPosition(posForward);
+            // }
+        }
     }
 
     void OnTriggerEnter2D(Collider2D hitInfo)
     {
+        
         //if exiting tile
         //if(hitInfo is TilemapCollider2D) player.SetLastLegalPosition(gameObject.transform.position);
         //if(hitInfo is TilemapCollider2D) player.SetLastLegalPosition(gameObject.transform.position);

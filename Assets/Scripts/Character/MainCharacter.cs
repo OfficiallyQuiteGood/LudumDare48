@@ -7,7 +7,7 @@ public class MainCharacter : MonoBehaviour
 	public CharacterController2D controller;
 	public Animator animator;
 	public float runSpeed = 40f;
-	float horizontalMove = 0f;
+	public float horizontalMove = 0f;
 	bool jump = false;
 
 	public float verticalSpeed;
