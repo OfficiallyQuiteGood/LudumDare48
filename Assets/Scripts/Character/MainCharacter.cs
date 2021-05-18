@@ -135,7 +135,7 @@ public class MainCharacter : MonoBehaviour
 
 	public void SetLastLegalPosition(Vector3 position)
 	{
-		if(verticalSpeed>=0 && canSetPosition && controller.m_Grounded)
+		if(verticalSpeed>=0 && canSetPosition && controller.m_Grounded && !controller.isSwinging)
 		{
 			lastLegalPosition = position;
 			lastLegalPosition.z = 1;
